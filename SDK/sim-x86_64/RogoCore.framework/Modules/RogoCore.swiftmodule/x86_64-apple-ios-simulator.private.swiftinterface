@@ -1,0 +1,2419 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name RogoCore
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import CocoaMQTT
+import CoreBluetooth
+import CryptoSwift
+import Foundation
+import Network
+@_exported import RogoCore
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import os.log
+import nRFMeshProvision
+import os
+public class RGBLocation : Swift.Codable, Swift.Hashable {
+  final public let label: Swift.String?, desc: Swift.String?, userID: Swift.String?
+  final public let extraInfo: RogoCore.RGBLocationExtraInfo?
+  final public let createdAt: Swift.String?, updatedAt: Swift.String?, uuid: Swift.String?
+  public var groups: [RogoCore.RGBGroup]
+  public var allDevicesInLocation: [RogoCore.RGBDevice]
+  public var allAutomationsInLocation: [RogoCore.RGBAutomation]
+  public var allScenarioInLocation: [RogoCore.RGBScenario]
+  public var allScheduleInLocation: [RogoCore.RGBSchedule]
+  public var allGroupMemberInLocation: [RogoCore.RGBGroupMember]
+  public var allSmartInLocation: [RogoCore.RGBSmart]
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: RogoCore.RGBLocation, rhs: RogoCore.RGBLocation) -> Swift.Bool
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBLocationExtraInfo : Swift.Codable {
+  public let bleMesh: RogoCore.RGBbleMeshInfo?
+  public let groupElementIds: RogoCore.RGBGroupElementIDS?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBbleMeshInfo : Swift.Codable {
+  public let uuid: Swift.String?
+  public let networkKeys: [Swift.String]?, appKeys: [Swift.String]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBGroupElementIDS : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBUser : Swift.Codable {
+  public var userId: Swift.String?
+  public var name: Swift.String?
+  public var email: Swift.String?
+  public var phone: Swift.String?
+  public var photoURL: Swift.String?
+  public var token: Swift.String?
+  public init(userId: Swift.String?, name: Swift.String?, email: Swift.String?, phone: Swift.String?, photoURL: Swift.String?, token: Swift.String?)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBDisableAccountResponse : Swift.Codable {
+  public let success: Swift.Bool?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class RGIrRemoteAcProtocolCmdMessage : RogoCore.RGBMsgBytes {
+  @objc deinit
+}
+extension RogoCore.RGBDeviceServices {
+  public func scanAvailableWileDevice(timeout: Swift.Int = 30, completion: RogoCore.RGBCompletionObject<RogoCore.RGBMeshScannedDevice?>?)
+  public func startConfigWileDevice(device: RogoCore.RGBMeshScannedDevice, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())?, wifiScanCompletedHandler: ((_ listSSID: [Swift.String]) -> ())?, wifiSelectionHandler: inout ((_ ssid: Swift.String, _ pwd: Swift.String) -> ())?, wifiConnectErrorHandler: ((_ ssid: Swift.String?, _ password: Swift.String?, _ wifiConnectionState: RogoCore.RGBWifiConnectionErrorType) -> ())?, didCompletedHandler: ((_ deviceInfo: RogoCore.RGBDevice?) -> ())?)
+  public func stopScanWileDevice()
+  public func cancelWileConfig()
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class RGBIrProtocolDetectedInfoMessage : RogoCore.RGBIrRemoteMessage {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBProductServices : RogoCore.RGBiProductServices {
+  public var products: [RogoCore.RGBProductModel] {
+    get
+  }
+  public var allDevices: [RogoCore.RGBDevice] {
+    get
+  }
+  public func getProductModelsList(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBProductModel]?>? = nil)
+  @objc deinit
+}
+public struct RGBDeviceElementState {
+  public var deviceUUID: Swift.String? {
+    get
+  }
+  public var element: Swift.Int?
+  public var commandValues: [RogoCore.RGBCmdValue]
+}
+public protocol RGBiAutomationServices {
+  func getListAutomationSupportFor(devices: [RogoCore.RGBDevice]) -> [RogoCore.RGBAutomationEventType]
+  func getListDevicesSupport(animationType: RogoCore.RGBAutomationEventType, from devices: [RogoCore.RGBDevice]) -> [RogoCore.RGBDevice]
+  func getListEventStateSupportOf(device: RogoCore.RGBDevice, automationType: RogoCore.RGBAutomationEventType) -> [RogoCore.RGBEventStateType]
+  func getListTriggerCmdValueTypesSupportOf(device: RogoCore.RGBDevice, automationType: RogoCore.RGBAutomationEventType, smartSubType: RogoCore.RGBSmartAutomationType?) -> [RogoCore.RGBSmartTriggerEventType]
+  func getAllAutomation(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBAutomation]?>?)
+  func getAutomationDetailWith(automationId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBAutomation?>?)
+  func addAutomation(automation: RogoCore.RGBAutomation, completion: RogoCore.RGBCompletionObject<RogoCore.RGBAutomation?>?)
+  func updateAutomation(automation: RogoCore.RGBAutomation, completion: RogoCore.RGBCompletionObject<RogoCore.RGBAutomation?>?)
+  func deleteAutomationWith(automation: RogoCore.RGBAutomation, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  func addSmartTrigger(toSmart smart: RogoCore.RGBSmart, automationType: RogoCore.RGBAutomationEventType, triggers: [RogoCore.RGBSmartTrigger], completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  func updateSmartTrigger(toSmart smart: RogoCore.RGBSmart, automationType: RogoCore.RGBAutomationEventType, triggers: [RogoCore.RGBSmartTrigger], completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+}
+public struct RGBPartnerAuthenResponse : Swift.Decodable {
+  public var code: Swift.Int?
+  public var e: Swift.String?
+  public var msg: Swift.String?
+  public var loginToken: Swift.String?
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBUserExtraInfo : Swift.Codable {
+  public let userMode: Swift.Int?
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct RGBSUserExtraInfo : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum RGBSimulatorRemoteCommandType : Swift.Int, Swift.Codable {
+  case POWER
+  case ALLAPP
+  case MUTE
+  case PAUSE
+  case VOL_UP
+  case VOL_DOWN
+  case BACK
+  case HOME
+  case CENTER
+  case LEFT
+  case UP
+  case RIGH
+  case DOWN
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class RGBValueSimulateRemoteDevice : RogoCore.RGBCmdValue {
+  public var remote: RogoCore.RGBSimulatorRemoteCommandType
+  public init()
+  public init(remote: RogoCore.RGBSimulatorRemoteCommandType)
+  @objc deinit
+}
+public struct RGBSmart : Swift.Codable, Swift.Hashable {
+  public let fav: Swift.Bool?
+  public var label: Swift.String?
+  public let locID: Swift.String?
+  public var subType: Swift.Int?, type: Swift.Int?
+  public let userID: Swift.String?, createdAt: Swift.String?, updatedAt: Swift.String?, uuid: Swift.String?
+  public var lstSchedule: [RogoCore.RGBSchedule]?
+  public var cmds: [RogoCore.RGBSmartCmd]?
+  public var triggers: [RogoCore.RGBSmartTrigger]?
+  public var smartType: RogoCore.RGBSmartType? {
+    get
+  }
+  public var smartSubType: RogoCore.RGBSmartSubType? {
+    get
+  }
+  public var t_schedule: RogoCore.RGBSchedule?
+  public var t_scenario: RogoCore.RGBScenario?
+  public var t_automation: RogoCore.RGBAutomation?
+  public var t_smartType: RogoCore.RGBSmartType? {
+    get
+  }
+  public init(smid: Swift.Int? = nil, fav: Swift.Bool? = nil, label: Swift.String? = nil, locID: Swift.String? = nil, subType: Swift.Int? = nil, type: Swift.Int? = nil, userID: Swift.String? = nil, createdAt: Swift.String? = nil, updatedAt: Swift.String? = nil, uuid: Swift.String? = nil, lstSchedule: [RogoCore.RGBSchedule]? = nil, cmds: [RogoCore.RGBSmartCmd]? = nil, triggers: [RogoCore.RGBSmartTrigger]? = nil, t_schedule: RogoCore.RGBSchedule? = nil, t_scenario: RogoCore.RGBScenario? = nil, t_automation: RogoCore.RGBAutomation? = nil)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: RogoCore.RGBSmart, rhs: RogoCore.RGBSmart) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum RGBSmartType : Swift.Int, Swift.CaseIterable {
+  case scenario
+  case schedule
+  case automation
+  case other
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBSmartType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBSmartType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum RGBSmartSubType {
+  case scene(sceneType: RogoCore.RGBSmartSceneType)
+  case automation(automationType: RogoCore.RGBSmartAutomationType)
+  case defaultType
+}
+public enum RGBSmartSceneType : Swift.Int {
+  case DEFAULT
+  case AT_WORK
+  case AT_HOME
+  case SLEEP
+  case MOVIE
+  case PARTY
+  case HOLIDAY
+  case GROUP
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum RGBEventStateType : Swift.Int, Swift.Codable {
+  case OnOff
+  case On
+  case Off
+  case DoorOpenClose
+  case DoorOpen
+  case DoorClose
+  case BatteryLE
+  case BatteryGE
+  case SinglePress
+  case DoublePress
+  case LongPress
+  case FireAlarm
+  case Motion
+  case NoMotion
+  case LightCondLE
+  case LightCondGE
+  case TempIN
+  case TempLE
+  case TempGE
+  case HumidIN
+  case HumidLE
+  case HumidGE
+  case NoMotionFromMotion
+  case AcControl
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class RGBDeviceLogResponse : RogoCore.RGBIotMessage {
+  public var deviceUUID: Swift.String?
+  public var deviceEID: Swift.Int?
+  public var element: Swift.Int?
+  public var attr: Swift.Int?
+  public var year: Swift.Int?
+  public var dayOfYear: Swift.Int?
+  public var currentPart: Swift.Int?
+  public var previousPart: Swift.Int?
+  public var deviceLogParts: [RogoCore.RGBLogPart]
+  @objc deinit
+}
+public struct RGBDevice : Swift.Codable, Swift.Hashable {
+  public var label: Swift.String?, desc: Swift.String?
+  public let features: [Swift.Int]?
+  public let firmCode: Swift.Int?
+  public let firmVer: Swift.String?
+  public var elementIDS: [Swift.Int]?, productInfos: [Swift.Int]?
+  public var elementInfos: [Swift.String : RogoCore.RGBDeviceElementInfo]?
+  public let locationID: Swift.String?, mac: Swift.String?, productID: Swift.String?, userID: Swift.String?
+  public let createdAt: Swift.String?, updatedAt: Swift.String?, uuid: Swift.String?, groupID: Swift.String?
+  public let cid: Swift.Int
+  public let cdev: Swift.Int?
+  public var linkInfo: RogoCore.RGBLinkingInfo? {
+    get
+  }
+  public var rootUUID: Swift.String? {
+    get
+  }
+  public var linkedDeviceIds: [Swift.String]? {
+    get
+    set
+  }
+  public var rtspURL: Swift.String? {
+    get
+  }
+  public var serial: Swift.String? {
+    get
+  }
+  public var powerType: RogoCore.RGBPowerType {
+    get
+  }
+  public var productInfo: RogoCore.RGBProductModel?
+  public var meshStatus: RogoCore.RGBNetworkStatusMessage?
+  public var productType: RogoCore.RGBProductType? {
+    get
+  }
+  public var menufacture: RogoCore.RGBManufacturer? {
+    get
+  }
+  public var learnedIrRemoteCommands: [RogoCore.RGBIrRemoteCmdZipData]?
+  public let link: Swift.Int?
+  public let linkID: Swift.String?
+  public var irRemote: RogoCore.RGBIrRemoteInfo? {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: RogoCore.RGBDevice, rhs: RogoCore.RGBDevice) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBDeviceExtraInfo : Swift.Codable {
+  public let hostID: Swift.String?, seriesNo: Swift.String?
+  public let bleMesh: RogoCore.BleMesh?
+  public let eventSupport: [Swift.Int]?
+  public let meshDkey: [Swift.Int8?]?
+  public let mDkey: Swift.String?
+  public var elementInfos: [Swift.String : RogoCore.RGBDeviceElementInfo]?
+  public let zbPaireds: [Swift.String : RogoCore.ZbPairedDevice]?
+  public var linkedDeviceIds: [Swift.String]?
+  public let ipCamInf: RogoCore.RGBCameraInfo?
+  public let irRemote: RogoCore.RGBIrRemoteInfo?
+  public init(hostID: Swift.String? = nil, seriesNo: Swift.String? = nil, bleMesh: RogoCore.BleMesh? = nil, eventSupport: [Swift.Int]? = nil, meshDkey: [Swift.Int8?]? = nil, mDkey: Swift.String? = nil, elementInfos: [Swift.String : RogoCore.RGBDeviceElementInfo]? = nil, zbPaireds: [Swift.String : RogoCore.ZbPairedDevice]? = nil, ipCamInf: RogoCore.RGBCameraInfo? = nil, irRemote: RogoCore.RGBIrRemoteInfo? = nil, linkedDeviceIds: [Swift.String]? = nil)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct BleMesh : Swift.Codable {
+  public let appKeys: [Swift.String]?, networkKeys: [Swift.String]?
+  public let uuid: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBDeviceElementInfo : Swift.Codable {
+  public let feature: Swift.Int?
+  public let label: Swift.String?
+  public let zigbeeData: RogoCore.ZigbeeData?
+  public let attrs: [Swift.Int]?
+  public let attrInfos: [[Swift.Int]]?
+  public init(feature: Swift.Int?, label: Swift.String?, zigbeeData: RogoCore.ZigbeeData?, attrs: [Swift.Int]?, attrInfos: [[Swift.Int]]?)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ZbPairedDevice : Swift.Codable {
+  public let productID: Swift.String
+  public let srcAddr: Swift.Int
+  public let zbDatas: [Swift.String : RogoCore.ZigbeeData]
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ZigbeeData : Swift.Codable {
+  public let data: Swift.Int?, deviceType: Swift.Int?, feature: Swift.Int?, lqi: Swift.Int?
+  public let modelID: Swift.String?, name: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum RGBPowerType {
+  case battery
+  case electric
+  case peripheral
+  public static func == (a: RogoCore.RGBPowerType, b: RogoCore.RGBPowerType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class RGBMeshRogo {
+  public static let GROUP_ALL: Swift.UInt16
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBSetIRLearningModeMessage : RogoCore.RGBMsgBytes {
+  @objc deinit
+}
+extension RogoCore.RGBAutomationServices {
+  public func addSmartTrigger(toSmart smart: RogoCore.RGBSmart, automationType: RogoCore.RGBAutomationEventType, triggers: [RogoCore.RGBSmartTrigger], completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  public func updateSmartTrigger(toSmart smart: RogoCore.RGBSmart, automationType: RogoCore.RGBAutomationEventType, triggers: [RogoCore.RGBSmartTrigger], completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+}
+@_hasMissingDesignatedInitializers public class RGBIrRemoteZipControlMessage : RogoCore.RGBMsgBytes {
+  @objc deinit
+}
+extension RogoCore.RGBDeviceServices {
+  public func generatePlayboxActiveCode(locationId: Swift.String, didGetCodeCompletion: RogoCore.RGBCompletionObject<RogoCore.RGBActiveCode?>?, didAddDeviceCompletion: RogoCore.RGBCompletionObject<Swift.Bool?>?)
+  public func removePlayboxActiveCode(code: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Bool?>?)
+  public func getHubsStatus(hubs: [RogoCore.RGBDevice], observer: Swift.AnyObject?, timeout: Swift.Int = 5, completion: RogoCore.RGBCompletionObject<RogoCore.RGBNetworkStatusMessage?>?)
+}
+public enum RGBProtocolType {
+  case SMARTHUB
+  case BLUETOOTH_MESH
+  case ZIGBEE
+  case IR
+  case Unknow
+  public static func == (a: RogoCore.RGBProtocolType, b: RogoCore.RGBProtocolType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class RGBUsbZigbeeStatus : RogoCore.RGBIotMessage {
+  public var deviceUUID: Swift.String?
+  public var isAvailable: Swift.Bool
+  public var eid: Swift.Int?
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBSmartServices : RogoCore.RGBiSmartServices {
+  public func addSmart(with label: Swift.String, locationId: Swift.String, type: RogoCore.RGBSmartType, subType: RogoCore.RGBSmartSubType, ownerId: Swift.String? = nil, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  public func getAllSmart(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBSmart]?>?)
+  public func updateSmartTitle(withSmartId smartUuid: Swift.String, label: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  public func getSmartDetail(with smartUuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  public func deleteSmart(uuid smartUUID: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  public func activeSmart(smart: RogoCore.RGBSmart, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  public func refreshSmartData(completion: (() -> ())?)
+  @objc deinit
+}
+extension RogoCore.RGBSmartServices {
+  public func addSmartAutomation(smartTitle: Swift.String?, automationType: RogoCore.RGBSmartAutomationType, trigger: RogoCore.RGBSmartTrigger, commands: [RogoCore.RGBSmartCmd], initSmartCompletionHandler: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?, addTriggerCompletionHandler: RogoCore.RGBCompletionObject<RogoCore.RGBSmartTrigger?>?, addCommandCompletionHandler: ((_ index: Swift.Int, _ response: RogoCore.RGBSmartCmd?, (any Swift.Error)?) -> Swift.Void)?, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+}
+@_hasMissingDesignatedInitializers public class RGBIrRemoteMessage : RogoCore.RGBIotMessage {
+  public var manufacturer: RogoCore.RGBManufacturer?
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBValueEventLux : RogoCore.RGBCmdValue {
+  public var luxValue: Swift.Int
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+public enum RGBGroupType : Swift.Int {
+  case Room
+  case VirtualGroup
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public class RGBGroup : Swift.Codable, Swift.Hashable {
+  final public let desc: Swift.String?
+  final public let label: Swift.String?, locationID: Swift.String?, userID: Swift.String?
+  final public let elementID: Swift.Int?
+  final public let createdAt: Swift.String?, updatedAt: Swift.String?, uuid: Swift.String?
+  public var devices: [RogoCore.RGBDevice]
+  public var groupType: RogoCore.RGBGroupType? {
+    get
+  }
+  public var groupMembers: [RogoCore.RGBGroupMember]?
+  public init(desc: Swift.String? = nil, type: Swift.Int? = nil, label: Swift.String? = nil, locationID: Swift.String? = nil, userID: Swift.String? = nil, elementID: Swift.Int? = nil, createdAt: Swift.String? = nil, updatedAt: Swift.String? = nil, uuid: Swift.String? = nil, devices: [RogoCore.RGBDevice] = [])
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: RogoCore.RGBGroup, rhs: RogoCore.RGBGroup) -> Swift.Bool
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBIrRemoteCmdZipData : Swift.Codable {
+  public var cmdType: RogoCore.RGBIrLearningCmdType? {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum RGBAuthMethod {
+  case withCredential(credential: Any = "")
+  case withEmail(email: Swift.String = "", password: Swift.String = "")
+  case withParnerToken(token: Swift.String = "")
+  case verifySmsMethod(code: Swift.String = "")
+  case withPartnerAuthenticateMethod
+}
+@_hasMissingDesignatedInitializers public class RGBGroupServices : RogoCore.RGBiGroupServices {
+  public func getUserGroups(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBGroup]>? = nil)
+  public func getUserGroupDetailWith(groupdId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBGroup?>?)
+  public func createGroup(label: Swift.String, desc: Swift.String, type: RogoCore.RGBGroupType, locationId: Swift.String, completion: ((RogoCore.RGBGroup?, (any Swift.Error)?) -> ())?)
+  public func updateGroup(id: Swift.String, label: Swift.String, desc: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBGroup?>?)
+  public func deletedGroup(id: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+  public func getAllUserGroupMember(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBGroupMember]>? = nil)
+  public func getAllGroupMemberAt(location: RogoCore.RGBLocation, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBGroupMember]>? = nil)
+  public func updateGroupMemberElement(elementIds: [Swift.Int], of device: RogoCore.RGBDevice, to group: RogoCore.RGBGroup, observer: Swift.AnyObject?, completion: RogoCore.RGBCompletionObject<RogoCore.RGBGroupMember?>?)
+  public func getGroupMemberDetailWith(groupMemberUuid: Swift.String, completion: ((_ info: RogoCore.RGBGroupMember?, _ error: (any Swift.Error)?) -> ())?)
+  public func removeGroupMember(device: RogoCore.RGBDevice, from group: RogoCore.RGBGroup, observer: Swift.AnyObject?, completion: RogoCore.RGBCompletionObject<RogoCore.RGBGroupMember?>?)
+  @objc deinit
+}
+public enum RGBNetworkEnvironment {
+  case development
+  case production
+  public static func == (a: RogoCore.RGBNetworkEnvironment, b: RogoCore.RGBNetworkEnvironment) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension RogoCore.RGBSmartServices {
+  public func convertToSmartAutomationFrom(automation: RogoCore.RGBAutomation, smartTitle: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+}
+@_hasMissingDesignatedInitializers public class RGBFptCameraServices : RogoCore.RGBiFptCameraServices {
+  public var clientID: Swift.String?
+  public func config(clientId: Swift.String)
+  public func authenticateWith(code: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLinkingInfo?>?)
+  public func getListCamera(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBFptCameraDetail]?>? = nil)
+  public func getCameraDetailWith(authenticateInfo: RogoCore.RGBLinkingAuthenticateData, cameraSerial: Swift.String)
+  public func refreshTokenWith(linkingUuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLinkingAuthenticateData?>?)
+  public func unlinkCurrentFPTCameraAccount(completion: RogoCore.RGBCompletionObject<Swift.Bool?>?)
+  public func addCameraWith(deviceInfo: RogoCore.RGBFptCameraDetail, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  @objc deinit
+}
+public protocol RGBiDeviceServices {
+  func getAllDevices(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBDevice]?>?)
+  func getDeviceWith(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>?)
+  func addDevices(devices: [RogoCore.RGBDevice], completion: RogoCore.RGBCompletionObject<[RogoCore.RGBDevice]?>?)
+  func reloadDeviceList(completion: RogoCore.RGBCompletionObject<Swift.Bool?>?)
+  func generatePlayboxActiveCode(locationId: Swift.String, didGetCodeCompletion: RogoCore.RGBCompletionObject<RogoCore.RGBActiveCode?>?, didAddDeviceCompletion: RogoCore.RGBCompletionObject<Swift.Bool?>?)
+  func removePlayboxActiveCode(code: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Bool?>?)
+  func getHubsStatus(hubs: [RogoCore.RGBDevice], observer: Swift.AnyObject?, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<RogoCore.RGBNetworkStatusMessage?>?)
+  func requestBluetoothPermission(statusChangedHandler: ((CoreBluetooth.CBManagerState) -> ())?)
+  func getZigbeeDongleStatus(at location: RogoCore.RGBLocation, observer: Swift.AnyObject?, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<RogoCore.RGBUsbZigbeeStatus?>?)
+  func startScanZigbeeDevice(deviceType: RogoCore.RGBProductType, gateWay: RogoCore.RGBDevice, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBMeshScannedDevice]?>?)
+  func stopScanZigbeeDevice(gateWay: RogoCore.RGBDevice)
+  func addZigbeeDevice(device: RogoCore.RGBMeshScannedDevice, toHub hub: RogoCore.RGBDevice, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())?, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  func scanAvailableBleDevices(deviceType: RogoCore.RGBProductType?, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBMeshScannedDevice]?>?)
+  func scanAvailableBleDevice(timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<RogoCore.RGBMeshScannedDevice?>?)
+  func scanMeshBleDeviceWith(productId: Swift.String?, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<RogoCore.RGBMeshScannedDevice?>?)
+  func stopScanBleDevice()
+  func locateMeshDevice(device: RogoCore.RGBMeshScannedDevice, hub: RogoCore.RGBDevice, didStartLocating: (() -> ())?, didFinishLocating: (() -> ())?)
+  func stopLocateDevice()
+  func addMeshDevice(device: RogoCore.RGBMeshScannedDevice, toHub hub: RogoCore.RGBDevice, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())?, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  func stopMeshAddProcess()
+  func resumeMeshAddProcess()
+  func cancelMeshAddProcess()
+  func scanOTADeviceWith(device: RogoCore.RGBDevice, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())?, completion: RogoCore.RGBCompletionObject<CoreBluetooth.CBPeripheral?>?)
+  func startOTAFor(device: RogoCore.RGBDevice, with detectedInfo: CoreBluetooth.CBPeripheral, otaData: Foundation.Data, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())?, completion: ((_ success: Swift.Bool) -> ())?)
+  func cancelOTAProgress()
+  func sendControlMessage(_ device: RogoCore.RGBDevice, value: RogoCore.RGBCmdValue, elements: [Swift.Int])
+  func sendControlMessage(_ group: RogoCore.RGBGroup, productType: RogoCore.RGBProductCategoryType, value: RogoCore.RGBCmdValue)
+  func sendRemoteSimulatorControlMessage(_ device: RogoCore.RGBDevice, value: RogoCore.RGBValueSimulateRemoteDevice)
+  func updateDevice(_ deviceInfo: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>?)
+  func deleteDevice(_ device: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>?)
+  func setGroupForDeviceWith(_ deviceInfo: RogoCore.RGBDevice, _ groupId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>?)
+  func subscribeStateChangeOf(device: RogoCore.RGBDevice, observer: Swift.AnyObject?, statusChangedHandler: RogoCore.RGBCompletionObject<RogoCore.RGBDeviceState?>?)
+  func subscribeStateChangeOf(devices: [RogoCore.RGBDevice], observer: Swift.AnyObject?, statusChangedHandler: RogoCore.RGBCompletionObject<RogoCore.RGBDeviceState?>?)
+  func unSubscribeDeviceStateChangeOf(observer: Swift.AnyObject?)
+  func requestStateOf(device: RogoCore.RGBDevice)
+  func getSensorLogOf(device: RogoCore.RGBDevice, dayToGetLog: Foundation.Date, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDeviceLogResponse?>?)
+  func getCameraInfoWithType(manufacturer: RogoCore.RGBCameraManufacturer, ip: Swift.String, httpPort: Swift.String, username: Swift.String, password: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBCameraInfo?>?)
+  func getCameraStreamUrlOf(manufacturer: RogoCore.RGBCameraManufacturer, with url: Swift.String, port: Swift.Int, username: Swift.String, password: Swift.String) -> Swift.String
+  func addCameraWith(deviceInfo: RogoCore.RGBCameraInfo, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())?, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  func getIRHubAvailable(observer: Swift.AnyObject?, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<RogoCore.RGBNetworkStatusMessage?>?)
+  func getListIrRemotesInfoOf(manufacturer: RogoCore.RGBManufacturer, deviceType: RogoCore.RGBProductCategoryType, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBIrRemoteInfo]?>?)
+  func getIrRemoteInfoDetailOf(device: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<RogoCore.RGBIrRemoteInfo?>?)
+  func getIrRemoteCommandDataOf(manufacturer: RogoCore.RGBManufacturer, deviceType: RogoCore.RGBProductCategoryType, remoteId: Swift.Int, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBIrRemoteCmdZipData]?>?)
+  func sendVerifyIrAcRemoteCommand(hub: RogoCore.RGBDevice, isSetPowerOn: Swift.Bool?, mode: RogoCore.RGBIrAcModeType?, temperature: Swift.Int?, fanSpeed: RogoCore.RGBIrAcFanType?, remoteInfo: RogoCore.RGBIrRemoteInfo)
+  func sendVerifyIrTVCommand(hub: RogoCore.RGBDevice, commandValue: RogoCore.RGBIrRemoteCmdType, remoteInfo: RogoCore.RGBIrRemoteInfo)
+  func addIrRemote(protocolType: RogoCore.RGBIrProtocolCtlType, remoteInfo: RogoCore.RGBIrRemoteInfo, manufacturer: RogoCore.RGBManufacturer, label: Swift.String, productType: RogoCore.RGBProductType, group: RogoCore.RGBGroup?, toHub hub: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  func setIRRemoteLearningModeFor(deviceType: RogoCore.RGBProductCategoryType, hub: RogoCore.RGBDevice, observer: Swift.AnyObject?, isEnable: Swift.Bool, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<Any?>?)
+  func addIrFanRemote(remoteInfos: [RogoCore.RGBIrFanRemoteInfoMessage], label: Swift.String, group: RogoCore.RGBGroup?, toHub hub: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>?)
+  func getLearnedIrRemoteCommandDataOf(device: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBIrRemoteCmdZipData]?>?)
+  func scanAvailableWileDevice(timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<RogoCore.RGBMeshScannedDevice?>?)
+  func startConfigWileDevice(device: RogoCore.RGBMeshScannedDevice, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())?, wifiScanCompletedHandler: ((_ listSSID: [Swift.String]) -> ())?, wifiSelectionHandler: inout ((_ ssid: Swift.String, _ pwd: Swift.String) -> ())?, wifiConnectErrorHandler: ((_ ssid: Swift.String?, _ password: Swift.String?, _ wifiConnectionState: RogoCore.RGBWifiConnectionErrorType) -> ())?, didCompletedHandler: ((_ deviceInfo: RogoCore.RGBDevice?) -> ())?)
+  func cancelWileConfig()
+}
+extension RogoCore.RGBiDeviceServices {
+  public func reloadDeviceList(completion: RogoCore.RGBCompletionObject<Swift.Bool?>? = nil)
+  public func getHubsStatus(hubs: [RogoCore.RGBDevice], observer: Swift.AnyObject?, timeout: Swift.Int = 5, completion: RogoCore.RGBCompletionObject<RogoCore.RGBNetworkStatusMessage?>?)
+  public func getZigbeeDongleStatus(at location: RogoCore.RGBLocation, observer: Swift.AnyObject? = nil, timeout: Swift.Int = 5, completion: RogoCore.RGBCompletionObject<RogoCore.RGBUsbZigbeeStatus?>?)
+}
+@_hasMissingDesignatedInitializers public class RGBIrTVRemoteCommand : RogoCore.RGBCmdValue {
+  public var cmd: RogoCore.RGBIrRemoteCmdType
+  public init()
+  public init(command: RogoCore.RGBIrRemoteCmdType)
+  @objc deinit
+}
+public enum RGBOpenCloseValue : Swift.Int {
+  case close
+  case open
+  case stop
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class RGBValueOpenClose : RogoCore.RGBCmdValue {
+  public var open: Swift.Int
+  public init()
+  public init(command: RogoCore.RGBOpenCloseValue)
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+public enum RGBCommandType : Swift.Int, Swift.Codable {
+  case NONE
+  case ONOFF
+  case OPEN_CLOSE
+  case LOCK_UNLOCK
+  case BATTERY
+  case FIRE_ALARM
+  case MODE
+  case FAN_SWING
+  case FAN_SPEED
+  case TEMP_SET
+  case CAMERA_STREAMING
+  case BRIGHTNESS
+  case KELVIN
+  case BRIGHTNESS_KELVIN
+  case COLOR_HSV
+  case COLOR_HSL
+  case COLOR_LIST_HSV
+  case EVENT_HUMID
+  case EVENT_TEMP
+  case EVENT_TEMP_HUMID
+  case EVENT_DOOR
+  case EVENT_MOTION_LUX
+  case EVENT_MOTION
+  case EVENT_LUX
+  case EVENT_SMOKE
+  case EVENT_BUTTON_PRESS
+  case SMART_TV
+  case IR_RE
+  case IR_SE
+  case SIG_MESH_SEQ
+  case SINGLE_PRESS
+  case LONG_PRESS
+  case DOUBLE_PRESS
+  case SENSOR_TEMP_LOG
+  case SENSOR_DOOR_LOG
+  case SENSOR_MOTION_LIGHT_LOG
+  case SENSOR_MOTION_LOG
+  case SENSOR_LIGHT_LOG
+  case SENSOR_SMOKE_LOG
+  case STATE_IOT
+  case SWITCHING_ONOFF
+  case SYNC_ONOFF_STATE
+  case ONOFF_SWITCH_ROGO_V1
+  case ONOFF_SWITCH_ROGO_V2
+  case BRIGHTNESS_UP
+  case BRIGHTNESS_DOWN
+  case KELVIN_WARM_UP
+  case KELVIN_WARM_DOWN
+  case LIST_COLOR
+  case NOTIFICATION
+  case SIG_MESH_RESET
+  case SIMULATOR_REMOTE_SMART_TV
+  case CMD_IM_ONLINE
+  case CMD_CONTROL_BYTE
+  case CMD_CONTROL
+  case CMD_ADD_ROGO_GATEWAY
+  case CMD_ADD_DEVICE
+  case CMD_DELETE_DEVICE
+  case CMD_ADD_AUTOMATION
+  case CMD_DELETE_AUTOMATION
+  case CMD_UPDATE_AUTOMATION
+  case CMD_CHANGE_GROUP
+  case CMD_ENABLE_ZIGBEE_PAIRING
+  case CMD_STOP_ZIGBEE_PAIRING
+  case CMD_RESET_ZIGBEE_NETWORK
+  case CMD_RESTART_MESH_NETWORK
+  case CMD_SIG_UNSUBCRIBE
+  case CMD_SIG_SUBCRIBE
+  case CMD_GET_DEVICES_STATE
+  case CMD_GET_MESH_NETWORK_STATUS
+  case CMD_GET_USB_DONGLE_STATUS
+  case CMD_GET_ZIGBEE_NETWORK_STATUS
+  case CMD_FORCE_RESET_MESH_DEVICE
+  case CMD_ZIGBEE_ENABLE_PAIRING_MODE
+  case CMD_UPDATE_MESH_DEVICE_KEY
+  case NOTIFY_EVENT
+  case NOTIFY_SUCCESS_STATUS
+  case NOTIFY_PROCESS_STATUS
+  case NOTIFY_DEVICE_STATE
+  case NOTIFY_MESH_NETWORK_STATUS
+  case NOTIFY_USB_DONGLE_STATUS
+  case NOTIFY_ZIGBEE_NETWORK_STATUS
+  case NOTIFY_ZIGBEE_DQ_DEVICES_PAIRED
+  case NOTIFY_DEVICE_STATES
+  case NOTIFY_STATES_EVENT
+  case NOTIFY_STATE_VALUE
+  case CMD_ENABLE_LOG
+  case NOTIFY_ELEMENT_STATE_CHANGE
+  case EVENT_CLOUD_CHANGE
+  case AC_CONTROL
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class RGBCameraInfo : ObjectiveC.NSObject, Swift.Codable {
+  public var deviceName: Swift.String?
+  public var model: Swift.String?
+  public var deviceID: Swift.String?
+  public var deviceDescription: Swift.String?
+  public var deviceLocation: Swift.String?
+  public var systemContact: Swift.String?
+  public var serialNumber: Swift.String?
+  public var macAddress: Swift.String?
+  public var firmwareVersion: Swift.String?
+  public var firmwareReleasedDate: Swift.String?
+  public var encoderVersion: Swift.String?
+  public var encoderReleasedDate: Swift.String?
+  public var bootVersion: Swift.String?
+  public var bootReleasedDate: Swift.String?
+  public var hardwareVersion: Swift.String?
+  public var deviceType: Swift.String?
+  public var telecontrolID: Swift.String?
+  public var supportBeep: Swift.Bool?
+  public var supportVideoLoss: Swift.Bool?
+  public var firmwareVersionInfo: Swift.String?
+  public var product: RogoCore.RGBProductModel? {
+    get
+  }
+  public var deviceLabel: Swift.String?
+  public var group: RogoCore.RGBGroup?
+  public var port: Swift.Int?
+  public var pwd: Swift.String?
+  public var url: Swift.String?
+  public var usrId: Swift.String?
+  public var linkingInfo: RogoCore.RGBLinkingInfo?
+  @objc override dynamic public init()
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+extension RogoCore.RGBCameraInfo : Foundation.XMLParserDelegate {
+  @objc dynamic public func parser(_ parser: Foundation.XMLParser, foundCharacters string: Swift.String)
+  @objc dynamic public func parser(_ parser: Foundation.XMLParser, didEndElement elementName: Swift.String, namespaceURI: Swift.String?, qualifiedName qName: Swift.String?)
+}
+@_hasMissingDesignatedInitializers public class RGBLinkingServices : RogoCore.RGBiLinkingServices {
+  public func getAllUserLinking(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBLinkingInfo]>? = nil)
+  public func addLinking(service: RogoCore.RGBLinkingServiceType, authenCode: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLinkingInfo?>?)
+  public func deletedLinking(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+  @objc deinit
+}
+public enum RGBProductCategoryType : Swift.Int, Swift.CaseIterable {
+  case OTHER
+  case ALL
+  case LIGHT
+  case SWITCH
+  case PLUG
+  case CURTAINS
+  case DOORLOCK
+  case MEDIA_BOX
+  case USB_DONGLE
+  case GATEWAY
+  case CAMERA
+  case AC
+  case TV
+  case FAN
+  case MOTOR_CONTROLLER
+  case BUTTON_DASH
+  case SWITCH_SCENE
+  case TEMP_SENSOR
+  case DOOR_SENSOR
+  case SMOKE_SENSOR
+  case MOTION_LUX_SENSOR
+  case MOTION_SENSOR
+  case LUX_SENSOR
+  case DUST_SENSOR
+  case IR_DEVICE_CONTROLLER
+  case GATE
+  case FIRE_ALARM
+  case OTHER_DEVICE_CONTROL
+  case SENSOR_DEVICE
+  case IR_DEVICE_OLD
+  public static func getProductTypeOf(device: RogoCore.RGBDevice) -> RogoCore.RGBProductCategoryType
+  public static func getProductTypeWith(id: Swift.Int) -> RogoCore.RGBProductCategoryType
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBProductCategoryType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBProductCategoryType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension RogoCore.RGBSmartServices {
+  public func getAllSmartTrigger(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBSmartTrigger]?>?)
+  @available(*, deprecated, message: "replaced by  ")
+  public func addSmartTrigger(to smart: RogoCore.RGBSmart, trigger: RogoCore.RGBSmartTrigger, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartTrigger?>?)
+  public func getSmartTriggerDetail(with smartTriggerUuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartTrigger?>?)
+  public func updateSmartTrigger(to smart: RogoCore.RGBSmart, trigger: RogoCore.RGBSmartTrigger, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartTrigger?>?)
+  public func deleteSmartTrigger(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartTrigger?>?)
+}
+extension RogoCore.RGBSmartServices {
+  public func addSmartTrigger(toSmartWithId smartId: Swift.String, triggerEventType: RogoCore.RGBAutomationEventType, triggerCommandEvents: [RogoCore.RGBSmartTriggerEventType], deviceId: Swift.String, elementId: Swift.Int, locationId: Swift.String, timeJob: [Swift.Int]?, timeConfig: Swift.Int?, triggerType: RogoCore.RGBSmartTriggerType, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartTrigger?>?)
+}
+@_hasMissingDesignatedInitializers public class RGBAcTempSet : RogoCore.RGBCmdValue {
+  public var temperature: Swift.Int
+  public init(temperature: Swift.Int)
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+public struct RGBLog {
+  public var dateTimeSecondOfNextLog: Swift.Int?
+  public var logDateTime: Foundation.Date?
+  public var logValue: RogoCore.RGBCmdValue?
+  public init(logDateTime: Foundation.Date?, logValue: RogoCore.RGBCmdValue?)
+}
+public struct RGBScenarioTarget : Swift.Codable, Swift.Hashable {
+  public var elements: [Swift.Int]?
+  public var id: Swift.String?
+  public var pci: Swift.Int?, _protocol: Swift.Int?, srcAddr: Swift.Int?
+  public var cinf: Swift.String?
+  public init(id: Swift.String, elements: [Swift.Int]? = nil, pci: Swift.Int?, _protocol: Swift.Int? = 0, srcAddr: Swift.Int? = 0, device: RogoCore.RGBDevice)
+  public init(id: Swift.String, elements: [Swift.Int]? = nil, pci: Swift.Int?, _protocol: Swift.Int? = 0, srcAddr: Swift.Int? = 0, group: RogoCore.RGBGroup)
+  public init(id: Swift.String, elements: [Swift.Int]? = nil, pci: Swift.Int?, _protocol: Swift.Int? = 0, srcAddr: Swift.Int? = 0, location: RogoCore.RGBLocation?)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: RogoCore.RGBScenarioTarget, b: RogoCore.RGBScenarioTarget) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class RGBValueOnOff : RogoCore.RGBCmdValue {
+  public var on: Swift.Int
+  public init(on: Swift.Int)
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBAutomationServices : RogoCore.RGBiAutomationServices {
+  public func getListAutomationSupportFor(devices: [RogoCore.RGBDevice]) -> [RogoCore.RGBAutomationEventType]
+  public func getListDevicesSupport(animationType: RogoCore.RGBAutomationEventType, from devices: [RogoCore.RGBDevice]) -> [RogoCore.RGBDevice]
+  public func getListEventStateSupportOf(device: RogoCore.RGBDevice, automationType: RogoCore.RGBAutomationEventType) -> [RogoCore.RGBEventStateType]
+  public func getListTriggerCmdValueTypesSupportOf(device: RogoCore.RGBDevice, automationType: RogoCore.RGBAutomationEventType, smartSubType: RogoCore.RGBSmartAutomationType? = nil) -> [RogoCore.RGBSmartTriggerEventType]
+  public func getAllAutomation(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBAutomation]?>?)
+  public func getAutomationDetailWith(automationId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBAutomation?>?)
+  public func deleteAutomationWith(automation: RogoCore.RGBAutomation, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  public func addAutomation(automation: RogoCore.RGBAutomation, completion: RogoCore.RGBCompletionObject<RogoCore.RGBAutomation?>?)
+  public func updateAutomation(automation: RogoCore.RGBAutomation, completion: RogoCore.RGBCompletionObject<RogoCore.RGBAutomation?>?)
+  @objc deinit
+}
+public enum RGBSmartTriggerType : Swift.Int, Swift.CaseIterable {
+  case OWNER
+  case EXT
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBSmartTriggerType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBSmartTriggerType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class RGCore {
+  public static let shared: RogoCore.RGCore
+  public var auth: RogoCore.RGBAuthServices!
+  public var user: any RogoCore.RGBiUserServices
+  public var product: any RogoCore.RGBiProductServices
+  public var device: any RogoCore.RGBiDeviceServices
+  public var scenario: any RogoCore.RGBiScenarioServices
+  public var schedule: any RogoCore.RGBiScheduleServices
+  public var automation: any RogoCore.RGBiAutomationServices
+  public var smart: any RogoCore.RGBiSmartServices
+  public var group: any RogoCore.RGBiGroupServices
+  public var fptCamera: (any RogoCore.RGBiFptCameraServices)?
+  public var linking: (any RogoCore.RGBiLinkingServices)?
+  public var accessToken: Swift.String?
+  public func config(appKey: Swift.String, appSecret: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+  public func setCustomAuthenticate(authMethod: RogoCore.RGBAuthMethod = .withPartnerAuthenticateMethod, customAuth: any RogoCore.RGBiAuth)
+  public func setTargetEnviroment(environment: RogoCore.RGBNetworkEnvironment)
+  public func refreshUserData(completion: @escaping ((_ error: (any Swift.Error)?) -> Swift.Void))
+  public func version() -> Swift.String
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBMsgBytes {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBCommandControl : RogoCore.RGBMsgBytes {
+  @objc deinit
+}
+public enum RGBSmartCmdType : Swift.Hashable {
+  case openClose(value: RogoCore.RGBOpenCloseValue)
+  case onOff(isOn: Swift.Bool)
+  case brightnessKelvin(b: Swift.Int?, k: Swift.Int?)
+  case color(h: Swift.Double?, s: Swift.Double?, v: Swift.Double?)
+  case switchingOnOff
+  case syncOnOffState
+  case syncReverseOnOffState
+  case changeBrightness(isIncrease: Swift.Bool)
+  case changeKelvin(isIncrease: Swift.Bool)
+  case controlAirConditioner(isOn: Swift.Bool?, mode: RogoCore.RGBIrAcModeType?, temperature: Swift.Int?, fan: RogoCore.RGBIrAcFanType?, swing: RogoCore.RGBIrAcSwingType?, other: Swift.Int?)
+  public static func getListCmdTypesSupportFor(eventStateType: RogoCore.RGBEventStateType) -> [RogoCore.RGBSmartCmdType]
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: RogoCore.RGBSmartCmdType, b: RogoCore.RGBSmartCmdType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum RGBLockUnlockValue : Swift.Int {
+  case lock
+  case unlock
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class RGBValueLockUnlock : RogoCore.RGBCmdValue {
+  public var isUnlock: Swift.Int
+  public init()
+  public init(command: RogoCore.RGBLockUnlockValue)
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBScheduleServices : RogoCore.RGBiScheduleServices {
+  public func getAllSchedules(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBSchedule]?>?)
+  public func getListSchedulesAt(location: RogoCore.RGBLocation, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBSchedule]?>?)
+  public func deleteScheduleWith(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  public func addSchedule(schedule: RogoCore.RGBSchedule, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSchedule?>?)
+  public func addSchedule(toSmart smart: RogoCore.RGBSmart, time: Swift.Int, weekdays: [Swift.Int], completion: RogoCore.RGBCompletionObject<RogoCore.RGBSchedule?>?)
+  public func updateSchedule(schedule: RogoCore.RGBSchedule, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSchedule?>?)
+  public func getScheduleDetailWith(scheduleId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSchedule?>?)
+  @objc deinit
+}
+public struct RGB {
+}
+@_hasMissingDesignatedInitializers public class RGBDeviceState : RogoCore.RGBIotMessage {
+  public var deviceUUID: Swift.String?
+  public var cid: Swift.Int?
+  public var stateValues: [RogoCore.RGBDeviceElementState]
+  @objc deinit
+}
+public protocol RGBiLinkingServices {
+  func addLinking(service: RogoCore.RGBLinkingServiceType, authenCode: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLinkingInfo?>?)
+  func getAllUserLinking(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBLinkingInfo]>?)
+  func deletedLinking(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+}
+public struct RGBIrRemoteInfo : Swift.Codable {
+  public let rid: Swift.Int?, mrf: Swift.Int?, type: Swift.Int?
+  public var tempRange: [Swift.Int]?
+  public var availableFanValues: [RogoCore.RGBIrAcFanType]? {
+    get
+  }
+  public var acModes: [RogoCore.RGBIrAcModeType]? {
+    get
+  }
+  public var tempAllowInModes: [RogoCore.RGBIrAcModeType]? {
+    get
+  }
+  public var fanpAllowInModes: [RogoCore.RGBIrAcModeType]? {
+    get
+  }
+  public var remoteCmdData: [RogoCore.RGBIrRemoteCmdZipData]?
+  public var protocolCtlType: RogoCore.RGBIrProtocolCtlType?
+  public let acProtocol: RogoCore.RGBIrProtocolType?
+  public init(tempRange: [Swift.Int], acModes: [RogoCore.RGBIrAcModeType], availableFanValues: [RogoCore.RGBIrAcFanType], tempAllowInModes: [RogoCore.RGBIrAcModeType], fanAllowInModes: [RogoCore.RGBIrAcModeType])
+  public mutating func setValueInfo(tempRange: [Swift.Int], acModes: [RogoCore.RGBIrAcModeType], availableFanValues: [RogoCore.RGBIrAcFanType], tempAllowInModes: [RogoCore.RGBIrAcModeType], fanAllowInModes: [RogoCore.RGBIrAcModeType])
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class RGBIotMessage {
+  public var tId: [Swift.UInt8]?
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBDeviceEventChangeMessage : RogoCore.RGBIotMessage {
+  public var deviceUUID: Swift.String?
+  public var cid: Swift.Int?
+  public var numberEvent: Swift.Int
+  public var stateValues: [RogoCore.RGBDeviceElementState]
+  @objc deinit
+}
+public struct RGBProductExtraInfo : Swift.Codable {
+  public let year: Swift.String?
+  public let features: [Swift.Int]?, eventFeatures: [Swift.Int]?
+  public let model: Swift.String?
+  public let elementInfos: [Swift.String : RogoCore.RGBDeviceElementInfo]?
+  public let orientation: Swift.Int?
+  public let switchlayout: [Swift.Int]?
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct RGBSmartCmd : Swift.Codable, Swift.Hashable {
+  public static func == (lhs: RogoCore.RGBSmartCmd, rhs: RogoCore.RGBSmartCmd) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public let extra: [Swift.String]?
+  public let cmds: [Swift.String : RogoCore.RGBSmartCmdValue]?
+  public let filter: Swift.Int?
+  public let smartID: Swift.String?
+  public let target: Swift.Int?
+  public let targetID: Swift.String?
+  public let type: Swift.Int?
+  public let userID: Swift.String?, createdAt: Swift.String?, updatedAt: Swift.String?, uuid: Swift.String?
+  public init(extra: [Swift.String]? = nil, cmds: [Swift.String : RogoCore.RGBSmartCmdValue]? = nil, filter: Swift.Int? = nil, smartID: Swift.String? = nil, target: Swift.Int? = nil, targetID: Swift.String? = nil, type: Swift.Int? = nil, userID: Swift.String? = nil, createdAt: Swift.String? = nil, updatedAt: Swift.String? = nil, uuid: Swift.String? = nil)
+  public init(deviceId: Swift.String, elementIds: [Swift.String], cmdValue: RogoCore.RGBSmartCmdValue?)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBSmartCmdValue : Swift.Codable {
+  public var cmd: [Swift.Int]?
+  public var delay: Swift.Int?, reversing: Swift.Int?
+  public init(cmdType: RogoCore.RGBSmartCmdType, delay: Swift.Int? = 0, reversing: Swift.Int? = 0)
+  public var cmdType: RogoCore.RGBSmartCmdType? {
+    get
+    set
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBObjectDeleteResponse : Swift.Codable {
+  public let success: Swift.Bool?
+  public let uuid: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class RGBIRHubAvailableInfo : RogoCore.RGBIotMessage {
+  public var detectedEids: [Swift.Int]
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBUserServices : RogoCore.RGBiUserServices {
+  public var locations: [RogoCore.RGBLocation] {
+    get
+  }
+  public var selectedLocation: RogoCore.RGBLocation? {
+    get
+  }
+  public var userInfo: RogoCore.RGBUser? {
+    get
+  }
+  public var linkings: [RogoCore.RGBLinkingInfo] {
+    get
+  }
+  public func getUserExtraInfo(completion: RogoCore.RGBCompletionObject<RogoCore.RGBUserExtraInfo?>? = nil)
+  public func getAuthenCode(completion: RogoCore.RGBCompletionObject<RogoCore.RGBActiveCode?>? = nil)
+  public func setSelectedLocation(location: RogoCore.RGBLocation)
+  public func createLocation(label: Swift.String, desc: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLocation?>?)
+  public func getUserLocations(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBLocation]>? = nil)
+  public func getUserLocationDetailWith(locationId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLocation?>?)
+  public func updateLocations(id: Swift.String, label: Swift.String, desc: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLocation?>?)
+  public func deletedLocations(id: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+  public func disableAccount(completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+  public func reActiveAccount(completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+  @objc deinit
+}
+public struct RGBMeshScannedDevice : Swift.Hashable {
+  public var id: Swift.String?
+  public var device: nRFMeshProvision.UnprovisionedDevice?
+  public var peripheral: CoreBluetooth.CBPeripheral?
+  public var rssi: Swift.Int?
+  public var product: RogoCore.RGBProductModel? {
+    get
+  }
+  public var productType: RogoCore.RGBProductType?
+  public var mac: Swift.String?
+  public var deviceLabel: Swift.String?
+  public var group: RogoCore.RGBGroup?
+  public var nwkAddr: Swift.Int?
+  public var isAddFailed: Swift.Bool
+  public var isAdded: Swift.Bool
+  public var lstWifiSsidScanned: [Swift.String]
+  public var firmVersion: Swift.String?
+  public var firmCode: Swift.Int?
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: RogoCore.RGBMeshScannedDevice, rhs: RogoCore.RGBMeshScannedDevice) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum RGBErrorCode : Swift.Int {
+  case unknow
+  case requestTimeOut
+  case serverNotResponse
+  case meshNodeDisconnected
+  case getDeviceFailed
+  case addDeviceFailed
+  case meshInvalidUnicastAddress
+  case tokenExpired
+  case bleDeviceUnSupportForAdd
+  case bluetoothUnAvailable
+  case accountDisabled
+  case bindGroupForDeviceFailed
+  case bindSmartTriggerFailed
+  case bindSmartCmdFailed
+  case convert_smart_automation_init_smart_failed
+  case convert_smart_automation_init_trigger_failed
+  case convert_smart_automation_init_cmd_failed
+  case deviceNotFoundOrDeleted
+  case locationNotFoundOrDeleted
+  case groupNotFoundOrDeleted
+  case smartNotFound
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension Foundation.LocalizedError where Self : Swift.CustomStringConvertible {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public enum RGBError : Foundation.LocalizedError {
+  case undefinedAuthMethod
+  case unAuthenticated
+  case custom(message: Swift.String, code: RogoCore.RGBErrorCode = .unknow)
+}
+extension RogoCore.RGBError : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var errorCode: RogoCore.RGBErrorCode {
+    get
+  }
+}
+public struct RGBAutomation : Swift.Codable {
+  public var userID: Swift.String?
+  public var locationID: Swift.String?
+  public var cmds: [Swift.String : RogoCore.RGBCmd]?
+  public var eventEXT: RogoCore.RGBAutomationEventEXT?
+  public var deviceID: Swift.String?
+  public var element: Swift.Int?, event: Swift.Int?, val1: Swift.Int?, val2: Swift.Int?
+  public var createdAt: Swift.String?, updatedAt: Swift.String?, uuid: Swift.String?
+  public init(userID: Swift.String? = nil, locationID: Swift.String? = nil, cmds: [Swift.String : RogoCore.RGBCmd]? = nil, eventEXT: RogoCore.RGBAutomationEventEXT? = nil, deviceID: Swift.String? = nil, element: Swift.Int? = nil, event: Swift.Int? = nil, val1: Swift.Int? = nil, val2: Swift.Int? = nil, createdAt: Swift.String? = nil, updatedAt: Swift.String? = nil, uuid: Swift.String? = nil)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBAutomationEventEXT : Swift.Codable {
+  public var mac: Swift.String?, deviceID: Swift.String?
+  public var element: Swift.Int?, event: Swift.Int?, val1: Swift.Int?, val2: Swift.Int?
+  public var val3: Swift.Int?
+  public init(mac: Swift.String? = nil, deviceID: Swift.String? = nil, element: Swift.Int? = nil, event: Swift.Int? = nil, val1: Swift.Int? = nil, val2: Swift.Int? = nil, val3: Swift.Int? = nil)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum RGBSmartTriggerCondition : Swift.Int, Swift.CaseIterable {
+  case ANY
+  case EQUAL
+  case IN
+  case BETWEEN
+  case LESS_THAN
+  case LESS_EQUAL
+  case GREATER_THAN
+  case GREATER_EQUAL
+  case RULE_TO_VALUE
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBSmartTriggerCondition]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBSmartTriggerCondition] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class RGBIrFanRemoteInfoMessage : RogoCore.RGBIrRemoteMessage {
+  public var remoteCmdType: RogoCore.RGBIrLearningCmdType?
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBIRLearnedModeControlMessage : RogoCore.RGBCmdValue {
+  public init(cmd: RogoCore.RGBIrRemoteCmdZipData)
+  @objc deinit
+}
+public enum RGBIrProtocolDecode : Swift.Int {
+  case UNKNOWN
+  case UNUSED
+  case RC5
+  case RC6
+  case NEC
+  case SONY
+  case PANASONIC
+  case JVC
+  case SAMSUNG
+  case WHYNTER
+  case AIWA_RC_T501
+  case LG
+  case SANYO
+  case MITSUBISHI
+  case DISH
+  case SHARP
+  case COOLIX
+  case DAIKIN
+  case DENON
+  case KELVINATOR
+  case SHERWOOD
+  case MITSUBISHI_AC
+  case RCMM
+  case SANYO_LC7461
+  case RC5X
+  case GREE
+  case PRONTO
+  case NEC_LIKE
+  case ARGO
+  case TROTEC
+  case NIKAI
+  case RAW
+  case GLOBALCACHE
+  case TOSHIBA_AC
+  case FUJITSU_AC
+  case MIDEA
+  case MAGIQUEST
+  case LASERTAG
+  case CARRIER_AC
+  case HAIER_AC
+  case MITSUBISHI2
+  case HITACHI_AC
+  case HITACHI_AC1
+  case HITACHI_AC2
+  case GICABLE
+  case HAIER_AC_YRW02
+  case WHIRLPOOL_AC
+  case SAMSUNG_AC
+  case LUTRON
+  case ELECTRA_AC
+  case PANASONIC_AC
+  case PIONEER
+  case LG2
+  case MWM
+  case DAIKIN2
+  case VESTEL_AC
+  case TECO
+  case SAMSUNG36
+  case TCL112AC
+  case LEGOPF
+  case MITSUBISHI_HEAVY_88
+  case MITSUBISHI_HEAVY_152
+  case DAIKIN216
+  case SHARP_AC
+  case GOODWEATHER
+  case INAX
+  case DAIKIN160
+  case NEOCLIMA
+  case DAIKIN176
+  case DAIKIN128
+  case AMCOR
+  case DAIKIN152
+  case MITSUBISHI136
+  case MITSUBISHI112
+  case HITACHI_AC424
+  case SONY_38K
+  case EPSON
+  case SYMPHONY
+  case HITACHI_AC3
+  case DAIKIN64
+  case AIRWELL
+  case DELONGHI_AC
+  case DOSHISHA
+  case MULTIBRACKETS
+  case CARRIER_AC40
+  case CARRIER_AC64
+  case HITACHI_AC344
+  case CORONA_AC
+  case MIDEA24
+  case ZEPEAL
+  case SANYO_AC
+  case VOLTAS
+  case METZ
+  case TRANSCOLD
+  case TECHNIBEL_AC
+  case MIRAGE
+  case ELITESCREENS
+  case PANASONIC_AC32
+  case MILESTAG2
+  case ECOCLIM
+  case XMP
+  case TRUMA
+  case HAIER_AC176
+  case TEKNOPOINT
+  case KELON
+  case TROTEC_3550
+  case SANYO_AC88
+  case BOSE
+  case ARRIS
+  case RHOSS
+  case AIRTON
+  case COOLIX48
+  case HITACHI_AC264
+  case KELON168
+  case HITACHI_AC296
+  case DAIKIN200
+  case HAIER_AC160
+  case CARRIER_AC128
+  case TOTO
+  case CLIMABUTLER
+  case TCL96AC
+  case BOSCH144
+  case SANYO_AC152
+  case DAIKIN312
+  case GORENJE
+  case WOWWEE
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol RGBiSmartServices {
+  func addSmart(with label: Swift.String, locationId: Swift.String, type: RogoCore.RGBSmartType, subType: RogoCore.RGBSmartSubType, ownerId: Swift.String?, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  func getAllSmart(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBSmart]?>?)
+  func updateSmartTitle(withSmartId smartUuid: Swift.String, label: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  func deleteSmart(uuid snmartUUID: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  func refreshSmartData(completion: (() -> ())?)
+  func addSmartCmd(to smart: RogoCore.RGBSmart, targetId: Swift.String, targetElementIds: [Swift.String], cmdValue: RogoCore.RGBSmartCmdValue, type: Swift.Bool, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartCmd?>?)
+  func getAllSmartCmd(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBSmartCmd]?>?)
+  func getSmartCmdDetail(with smartCmdUuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartCmd?>?)
+  func getSmartDetail(with smartUuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  func activeSmart(smart: RogoCore.RGBSmart, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  func deleteSmartCmd(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartCmd?>?)
+  func updateSmartCmd(with smart: RogoCore.RGBSmart, smartCmd: RogoCore.RGBSmartCmd, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartCmd?>?)
+  func addSmartTrigger(to smart: RogoCore.RGBSmart, trigger: RogoCore.RGBSmartTrigger, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartTrigger?>?)
+  func getAllSmartTrigger(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBSmartTrigger]?>?)
+  func getSmartTriggerDetail(with smartTriggerUuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartTrigger?>?)
+  func updateSmartTrigger(to smart: RogoCore.RGBSmart, trigger: RogoCore.RGBSmartTrigger, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartTrigger?>?)
+  func convertToSmartAutomationFrom(automation: RogoCore.RGBAutomation, smartTitle: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+  func addSmartAutomation(smartTitle: Swift.String?, automationType: RogoCore.RGBSmartAutomationType, trigger: RogoCore.RGBSmartTrigger, commands: [RogoCore.RGBSmartCmd], initSmartCompletionHandler: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?, addTriggerCompletionHandler: RogoCore.RGBCompletionObject<RogoCore.RGBSmartTrigger?>?, addCommandCompletionHandler: ((_ index: Swift.Int, _ response: RogoCore.RGBSmartCmd?, (any Swift.Error)?) -> Swift.Void)?, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmart?>?)
+}
+public struct RGBZigbeePairedDevice : Swift.Hashable {
+  public var id: Swift.String?
+  public var mac: Swift.String?
+  public var product: RogoCore.RGBProductModel? {
+    get
+  }
+  public var productType: RogoCore.RGBProductType
+  public var deviceLabel: Swift.String?
+  public var group: RogoCore.RGBGroup?
+  public var isAddFailed: Swift.Bool
+  public var isAdded: Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: RogoCore.RGBZigbeePairedDevice, rhs: RogoCore.RGBZigbeePairedDevice) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class RGBHSVColor : RogoCore.RGBCmdValue {
+  public var hsv: [CoreFoundation.CGFloat]
+  public var hsvInBytes: [CoreFoundation.CGFloat]
+  public init()
+  public init(color: UIKit.UIColor)
+  public func getIntValue(_ index: Swift.Int) -> Swift.Int
+  @objc deinit
+}
+public struct RGBScenario : Swift.Codable, Swift.Hashable {
+  public var label: Swift.String?, locationID: Swift.String?, ownerID: Swift.String?
+  public var ownerType: Swift.Int?
+  public var cmds: [Swift.String : RogoCore.RGBCmd]?
+  public var userID: Swift.String?, createdAt: Swift.String?, updatedAt: Swift.String?, uuid: Swift.String?
+  public var desc: Swift.String?
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: RogoCore.RGBScenario, rhs: RogoCore.RGBScenario) -> Swift.Bool
+  public init(label: Swift.String? = nil, locationID: Swift.String? = nil, ownerID: Swift.String? = nil, ownerType: Swift.Int? = nil, cmds: [Swift.String : RogoCore.RGBCmd]? = nil, userID: Swift.String? = nil, createdAt: Swift.String? = nil, updatedAt: Swift.String? = nil, uuid: Swift.String? = nil, desc: Swift.String? = nil)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBCmd : Swift.Codable, Swift.Hashable {
+  public var delay: Swift.Int?, fTime: Swift.Int?, mTime: Swift.Int?, rTime: Swift.Int?
+  public var tTime: Swift.Int?, deviceType: Swift.Int?
+  public var id: Swift.String?
+  public var targetTo: Swift.Int?
+  public var targets: [Swift.String : [RogoCore.RGBScenarioTarget]]?
+  public var value: RogoCore.RGBScenarioCmdValue?
+  public var smid: Swift.Int?
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: RogoCore.RGBCmd, rhs: RogoCore.RGBCmd) -> Swift.Bool
+  public init(delay: Swift.Int? = nil, fTime: Swift.Int? = nil, mTime: Swift.Int? = nil, rTime: Swift.Int? = nil, tTime: Swift.Int? = nil, deviceType: Swift.Int? = nil, id: Swift.String? = nil, targetTo: Swift.Int? = nil, targets: [Swift.String : [RogoCore.RGBScenarioTarget]]? = nil, value: RogoCore.RGBScenarioCmdValue? = nil, smid: Swift.Int? = nil)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBScenarioCmdValue : Swift.Codable, Swift.Equatable {
+  public var valueOnOff: Swift.Int?, valueOpen: Swift.Int?, val: Swift.Int?, type: Swift.Int?
+  public var b: Swift.Int?, k: Swift.Int?
+  public var hsv: [Swift.Double]?
+  public var cmdType: RogoCore.RGBSmartCmdType? {
+    get
+    set
+  }
+  public init(valueOnOff: Swift.Int?, valueOpen: Swift.Int?, val: Swift.Int?, type: Swift.Int?, b: Swift.Int?, k: Swift.Int?, hsv: [Swift.Double]?, cmdType: RogoCore.RGBSmartCmdType?)
+  public static func == (lhs: RogoCore.RGBScenarioCmdValue, rhs: RogoCore.RGBScenarioCmdValue) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class RGBDeviceServices : ObjectiveC.NSObject, RogoCore.RGBiDeviceServices {
+  public func reloadDeviceList(completion: RogoCore.RGBCompletionObject<Swift.Bool?>? = nil)
+  public func requestBluetoothPermission(statusChangedHandler: ((CoreBluetooth.CBManagerState) -> ())?)
+  public func getAllDevices(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBDevice]?>? = nil)
+  public func getDeviceWith(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>? = nil)
+  public func addDevices(devices: [RogoCore.RGBDevice], completion: RogoCore.RGBCompletionObject<[RogoCore.RGBDevice]?>? = nil)
+  public func sendControlMessage(_ device: RogoCore.RGBDevice, value: RogoCore.RGBCmdValue, elements: [Swift.Int])
+  public func sendControlMessage(_ group: RogoCore.RGBGroup, productType: RogoCore.RGBProductCategoryType, value: RogoCore.RGBCmdValue)
+  public func sendRemoteSimulatorControlMessage(_ device: RogoCore.RGBDevice, value: RogoCore.RGBValueSimulateRemoteDevice)
+  public func updateDevice(_ deviceInfo: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>?)
+  public func setGroupForDeviceWith(_ deviceInfo: RogoCore.RGBDevice, _ groupId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>?)
+  public func deleteDevice(_ device: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>?)
+  public func subscribeStateChangeOf(device: RogoCore.RGBDevice, observer: Swift.AnyObject?, statusChangedHandler: RogoCore.RGBCompletionObject<RogoCore.RGBDeviceState?>?)
+  public func subscribeStateChangeOf(devices: [RogoCore.RGBDevice], observer: Swift.AnyObject?, statusChangedHandler: RogoCore.RGBCompletionObject<RogoCore.RGBDeviceState?>?)
+  public func unSubscribeDeviceStateChangeOf(observer: Swift.AnyObject?)
+  public func subscribeGetLogOf(device: RogoCore.RGBDevice, observer: Swift.AnyObject?, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDeviceLogResponse?>?)
+  public func requestStateOf(device: RogoCore.RGBDevice)
+  public func getSensorLogOf(device: RogoCore.RGBDevice, dayToGetLog: Foundation.Date, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDeviceLogResponse?>?)
+  public func sendDeviceState(_ deviceInfo: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>?)
+  @objc deinit
+}
+public struct RGBSmartTrigger : Swift.Codable {
+  public var value: [Swift.Int]?
+  public let conditionEXT: Swift.Int?
+  public var valueEXT: [Swift.Int]?
+  public var elmEXT: Swift.Int?
+  public var timeJob: [Swift.Int]?
+  public var timeCFG: [Swift.Int]?
+  public let userID: Swift.String?
+  public var mix: Swift.Int?, cfm: Swift.Int?, condition: Swift.Int?
+  public var devID: Swift.String?
+  public var elm: Swift.Int?
+  public let locID: Swift.String?, smartID: Swift.String?
+  public let type: Swift.Int?
+  public let createdAt: Swift.String?, updatedAt: Swift.String?, uuid: Swift.String?
+  public var triggerCmdType: RogoCore.RGBCommandType? {
+    get
+  }
+  public var triggerCmdValues: [RogoCore.RGBSmartTriggerEventType] {
+    get
+  }
+  public var triggerType: RogoCore.RGBSmartTriggerType? {
+    get
+  }
+  public var triggerConditionType: RogoCore.RGBSmartTriggerCondition? {
+    get
+  }
+  public init(uuid: Swift.String? = nil, automationEventType: RogoCore.RGBAutomationEventType, triggerCmdValues: [RogoCore.RGBSmartTriggerEventType], triggerElementId: Swift.Int, extTriggerCmdType: RogoCore.RGBCommandType? = nil, extTriggerCmdValues: [RogoCore.RGBEventStateType]? = nil, extTriggerElementId: Swift.Int? = nil, deviceId: Swift.String, locationId: Swift.String? = nil, smartId: Swift.String? = nil, timeJob: [Swift.Int]? = nil, timeConfig: Swift.Int? = nil, triggerType: RogoCore.RGBSmartTriggerType)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBProductModel : Swift.Codable {
+  public let productID: Swift.String?, name: Swift.String?
+  public let rgbProductExtraInfo: RogoCore.RGBProductModelExtraInfo?
+  public let baseInfo: [Swift.Int]?, categoryInfo: [Swift.Int]?
+  public let createdAt: Swift.String?, updatedAt: Swift.String?, partnerID: Swift.String?, uuid: Swift.String?
+  public var categoryID: Swift.Int? {
+    get
+  }
+  public var subCategoryID: Swift.Int? {
+    get
+  }
+  public var rgbProductProtocol: Swift.Int? {
+    get
+  }
+  public var manufacturerID: Swift.Int? {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBProductModelExtraInfo : Swift.Codable {
+  public let model: Swift.String?
+  public var elementInfos: [Swift.String : RogoCore.RGBDeviceElementInfo]?
+  public let orientation: Swift.Int?
+  public let switchlayout: [Swift.Int]?
+  public let secureVer: Swift.Int?
+  public let kelvinRange: [Swift.Int]?
+  public let btnState: [Swift.Int]?
+  public let motionState: [Swift.Int]?
+  public let luxRange: [Swift.Int]?
+  public let knobState: [Swift.Int]?
+  public var features: [Swift.Int]?
+  public var eventFeatures: [Swift.Int]?
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public enum RGBAutomationEventType : Swift.Int, Swift.Codable {
+  case StateChange
+  case StairSwitch
+  case SwitchScene
+  case DoorState
+  case MotionEvent
+  case LuxEvent
+  case TempEvent
+  case HumidEvent
+  case SmokeEvent
+  case Notification
+  case SelfReverse
+  case DoorLock
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol RGBiUserServices {
+  var locations: [RogoCore.RGBLocation] { get }
+  var userInfo: RogoCore.RGBUser? { get }
+  var linkings: [RogoCore.RGBLinkingInfo] { get }
+  func getUserExtraInfo(completion: RogoCore.RGBCompletionObject<RogoCore.RGBUserExtraInfo?>?)
+  func getAuthenCode(completion: RogoCore.RGBCompletionObject<RogoCore.RGBActiveCode?>?)
+  func disableAccount(completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+  func reActiveAccount(completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+  func getUserLocations(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBLocation]>?)
+  func getUserLocationDetailWith(locationId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLocation?>?)
+  var selectedLocation: RogoCore.RGBLocation? { get }
+  func setSelectedLocation(location: RogoCore.RGBLocation)
+  func createLocation(label: Swift.String, desc: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLocation?>?)
+  func updateLocations(id: Swift.String, label: Swift.String, desc: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLocation?>?)
+  func deletedLocations(id: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+}
+public struct RGBActiveCode : Swift.Codable {
+  public var code: Swift.String?
+  public var expireIn: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum RGBManufacturer : Swift.Int {
+  case UNKNOWN
+  case ROGO
+  case FPT_PLAY
+  case RGB
+  case TUYA
+  case YALE
+  case RANDONG
+  case DIENQUANG
+  case HIK
+  case HONEYWELL
+  case AOSMITH
+  case APPLE
+  case OTHER
+  case XIAOMI
+  case VIVO
+  case SKYWORTH
+  case HUAWEI
+  case HINSENSE
+  case GALANZ
+  case SAMSUNG
+  case SONY
+  case LG
+  case SHARP
+  case TCL
+  case CASPER
+  case TOSHIBA
+  case PANASONIC
+  case LENOVO
+  case HITACHI
+  case DAIKIN
+  case MIDEA
+  case GREE
+  case ELECTRONUX
+  case FUJITSU
+  case HUYNDAI
+  case MITSUBISHI_ELECTRIC
+  case SANYO
+  case BEKO
+  case PHILIPS
+  case AQUA
+  case HAIER
+  case CORONA
+  case NEC
+  case NATIONAL
+  case YORK
+  case CHIGO
+  case JVC
+  case VIZIO
+  case NAGAKAWA
+  case CARRIER
+  case VESTEL
+  case DAEWOO
+  case MITSUBISHI
+  case MITSUBISHI_INDUSTRY
+  public static func getListIrTvManufacturers() -> [RogoCore.RGBManufacturer]
+  public static func getListIrAirConditionerManufacturers() -> [RogoCore.RGBManufacturer]
+  public static func getManufacturerBy(irProtocol: RogoCore.RGBIrProtocolType) -> RogoCore.RGBManufacturer?
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum RGBIrProtocolCtlType : Swift.Int, Swift.Codable {
+  case RGIrPrtc
+  case RGIrPrtcAc
+  case RGIrRawZip
+  case RGIrRaw
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum RGBProductType : Swift.CaseIterable {
+  case HubPlayBoxTv
+  case BM_Switch
+  case BM_Switching
+  case BM_SwitchScene
+  case Zigbee_Switch
+  case Zigbee_SwitchScene
+  case BM_Light_DownLight
+  case BM_Light_Bulb
+  case BM_Light_Ceilling
+  case BM_Light_Panel
+  case BM_Light_SpotLight
+  case BM_Light_Chandelier
+  case BM_Light_Tripled
+  case BM_Plug
+  case BM_Motor
+  case BM_DoorSensor
+  case Motor_Curtain
+  case Motor_Gate
+  case Zigbee_Motor
+  case Zigbee_Plug
+  case BM_MotionLightSensor
+  case Zigbee_DoorSensor
+  case Zigbee_MotionLightSensor
+  case Zigbee_SmokeSensor
+  case BM_SmokeSensor
+  case USB_Dongle
+  case IpCamera
+  case IR_TV_Remote
+  case IR_AirCondition_Remote
+  case IR_Fan_Remote
+  case Zigbee_DoorLock
+  case FPTCamera
+  case Zigbee_Temp_Hum_Sensor
+  case Wile_Plug
+  case Wile_IR_Controller
+  public var protocolType: RogoCore.RGBProtocolType? {
+    get
+  }
+  public static func getListProductIdOf(_ product: RogoCore.RGBProductType) -> [Swift.String]
+  public var productSubCategoryId: Swift.Int {
+    get
+  }
+  public var productCategoryType: RogoCore.RGBProductCategoryType {
+    get
+  }
+  public var productLogCmdType: RogoCore.RGBCommandType? {
+    get
+  }
+  public static func getProductInfosOf(type: RogoCore.RGBProductType) -> [RogoCore.RGBProductModel]
+  public static func == (a: RogoCore.RGBProductType, b: RogoCore.RGBProductType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [RogoCore.RGBProductType]
+  public static var allCases: [RogoCore.RGBProductType] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum RGBLinkingServiceType : Swift.Int {
+  case GoogleAssistant
+  case Alexa
+  case Olli
+  case FPTCamera
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension RogoCore.RGBSmartServices {
+  public func addSmartCmd(to smart: RogoCore.RGBSmart, targetId: Swift.String, targetElementIds: [Swift.String], cmdValue: RogoCore.RGBSmartCmdValue, type: Swift.Bool = false, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartCmd?>?)
+  public func updateSmartCmd(with smart: RogoCore.RGBSmart, smartCmd: RogoCore.RGBSmartCmd, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartCmd?>?)
+  public func getAllSmartCmd(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBSmartCmd]?>?)
+  public func getSmartCmdDetail(with smartCmdUuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartCmd?>?)
+  public func deleteSmartCmd(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSmartCmd?>?)
+}
+public enum RGBDeviceCDevType : Swift.Int {
+  case ONLINE
+  case OFFLINE
+  case LEARN_IR_DEVICE
+  case IR_DEVICE
+  case THIRD_PARTY
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum RGBEntityType : Swift.Int, Swift.CaseIterable {
+  case UNKNOWN
+  case DEVICE
+  case GROUP
+  case LOCATION
+  case SCENARIO
+  case SMART_SCHEDULE
+  case AUTOMATION
+  case SHARING
+  case IRDATA
+  case USEREXTRA
+  case SMART
+  case SMART_TRIGGER
+  case SMART_CMD
+  case COMMAND
+  case LINKING
+  case PRODUCT
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBEntityType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBEntityType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol RGBiAuth {
+  func isAuthenticated(_ method: RogoCore.RGBAuthMethod) -> Swift.Bool
+  func getAccessToken(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<Swift.String?>)
+  func refreshAccessToken(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<Swift.String?>)
+  func getUserInfo(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBUser?>)
+  func signIn(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  func signUp(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  func signOut(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  func resetPassword(_ email: Swift.String, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+}
+extension RogoCore.RGBiAuth {
+  public func getUserInfo(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBUser?>)
+  public func signIn(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  public func signUp(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  public func signOut(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  public func resetPassword(_ email: Swift.String, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+}
+@_hasMissingDesignatedInitializers public class RGBValueEventMotion : RogoCore.RGBCmdValue {
+  public var motionEventValue: Swift.Int
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+extension RogoCore.RGBDeviceServices {
+  public func getZigbeeDongleStatus(at location: RogoCore.RGBLocation, observer: Swift.AnyObject?, timeout: Swift.Int = 5, completion: RogoCore.RGBCompletionObject<RogoCore.RGBUsbZigbeeStatus?>?)
+  public func startScanZigbeeDevice(deviceType: RogoCore.RGBProductType, gateWay: RogoCore.RGBDevice, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBMeshScannedDevice]?>?)
+  public func stopScanZigbeeDevice(gateWay: RogoCore.RGBDevice)
+  public func addZigbeeDevice(device: RogoCore.RGBMeshScannedDevice, toHub hub: RogoCore.RGBDevice, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())?, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+}
+public struct RGBGroupMember : Swift.Codable {
+  public var elms: [Swift.Int]?
+  public var userID: Swift.String?, deviceID: Swift.String?, groupID: Swift.String?, createdAt: Swift.String?
+  public var updatedAt: Swift.String?, uuid: Swift.String?
+  public init(userID: Swift.String?, deviceID: Swift.String?, groupID: Swift.String?, createdAt: Swift.String?, updatedAt: Swift.String?, uuid: Swift.String?, elms: [Swift.Int]?)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol RGBiFptCameraServices {
+  var clientID: Swift.String? { get }
+  func config(clientId: Swift.String)
+  func authenticateWith(code: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLinkingInfo?>?)
+  func refreshTokenWith(linkingUuid: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBLinkingAuthenticateData?>?)
+  func getListCamera(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBFptCameraDetail]?>?)
+  func addCameraWith(deviceInfo: RogoCore.RGBFptCameraDetail, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  func unlinkCurrentFPTCameraAccount(completion: RogoCore.RGBCompletionObject<Swift.Bool?>?)
+}
+@_hasMissingDesignatedInitializers public class RGBValueBrightnessKelvin : RogoCore.RGBCmdValue {
+  public static let MAXB: Swift.Int
+  public static let MINK: Swift.Float
+  public static let MAXK: Swift.Float
+  public var b: Swift.Int
+  public var bSig: Swift.Int
+  public var k: Swift.Int
+  public init()
+  public init(_ b: Swift.Int, _ k: Swift.Int)
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBValueBrightness : RogoCore.RGBCmdValue {
+  public var b: Swift.Int
+  public init()
+  public init(_ b: Swift.Int)
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBValueKelvin : RogoCore.RGBCmdValue {
+  public var k: Swift.Int
+  public init()
+  public init(_ k: Swift.Int)
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+public struct RGBLogPart {
+  public var currentPart: Swift.Int?
+  public var previousPart: Swift.Int?
+  public var logs: [RogoCore.RGBLog]
+  public var dayInYear: Swift.Int?
+  public var year: Swift.Int?
+}
+public struct RGBLinkingInfo : Swift.Codable {
+  public let uuid: Swift.String?
+  public let userId: Swift.String?
+  public let label: Swift.String?
+  public var linkingType: RogoCore.RGBLinkingServiceType? {
+    get
+  }
+  public var info: RogoCore.RGBLinkingAuthenticateData?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RGBLinkingAuthenticateData : Swift.Codable {
+  public var accessToken: Swift.String?
+  public let expiresIn: Swift.Int?
+  public var tokenType: Swift.String?, refreshToken: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class RGBNetworkStatusMessage : RogoCore.RGBIotMessage {
+  public var connected: Swift.Bool?
+  public var mac: Swift.String?
+  public var isAvailable: Swift.Bool
+  public var uuid: Swift.String?
+  public init(connected: Swift.Bool? = nil, mac: Swift.String? = nil, nextAddress: Swift.Int? = nil, rssi: Swift.Int? = nil, scanning: Swift.Bool? = nil, isAvailable: Swift.Bool = false, tId: [Swift.UInt8]? = nil, uuid: Swift.String? = nil, type: Swift.Int? = nil)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBValueTempHum : RogoCore.RGBCmdValue {
+  public var temperatureValue: Swift.Double
+  public var humidityValue: Swift.Double
+  public init(tempAndHumValueBytes: [Swift.UInt8])
+  public init(temperatureValueBytes: [Swift.UInt8])
+  public init(humidityValueBytes: [Swift.UInt8])
+  @objc deinit
+}
+public enum RGBAuthResponse {
+  case success
+  case failure
+  public static func == (a: RogoCore.RGBAuthResponse, b: RogoCore.RGBAuthResponse) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum RGBWifiConnectionStateType : Swift.UInt8 {
+  case NONE
+  case CONNECTING
+  case DISCONNECTING
+  case DISCONNECTED
+  case RETRY_CONNECTING
+  public init?(rawValue: Swift.UInt8)
+  public typealias RawValue = Swift.UInt8
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+public enum RGBWifiConnectionErrorType : Swift.UInt8 {
+  case PASSWORD_WRONG
+  case SSID_NOTFOUND
+  case SOMETHING_WENT_WRONG
+  public init?(rawValue: Swift.UInt8)
+  public typealias RawValue = Swift.UInt8
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+public protocol RGBiScenarioServices {
+  func getAllScenarios(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBScenario]?>?)
+  func getListScenarioAt(location: RogoCore.RGBLocation, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBScenario]?>?)
+  func getScenarioDetailWith(scenarioId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBScenario?>?)
+  func addScenario(scenario: RogoCore.RGBScenario, completion: RogoCore.RGBCompletionObject<RogoCore.RGBScenario?>?)
+  func updateScenario(scenario: RogoCore.RGBScenario, completion: RogoCore.RGBCompletionObject<RogoCore.RGBScenario?>?)
+  func deleteScenarioWith(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  func runScenario(scenario: RogoCore.RGBScenario, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+}
+public enum RGBSmartTriggerEventType : Swift.Hashable {
+  case OPEN_CLOSE
+  case OPENCLOSE_MODE_CLOSE
+  case OPENCLOSE_MODE_OPEN
+  case OPENCLOSE_MODE_STOP
+  case OPENCLOSE_MODE_MOVING
+  case BTN_PRESS
+  case BTN_PRESS_SINGLE
+  case BTN_PRESS_DOUBLE
+  case BTN_PRESS_LONG
+  case LOCK_UNLOCK
+  case DOOR_LOCKED
+  case DOOR_UNLOCKED
+  case MOTION
+  case NO_MOTION
+  case ON_OFF
+  case ON
+  case OFF
+  case FIRE_ALARM
+  case LUX(luxValue: Swift.Int)
+  public static func getTriggerValueTypeWith(cmdTriggerType: RogoCore.RGBCommandType, condition: RogoCore.RGBSmartTriggerCondition, cmdValue: Swift.Int) -> RogoCore.RGBSmartTriggerEventType?
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: RogoCore.RGBSmartTriggerEventType, b: RogoCore.RGBSmartTriggerEventType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct RGBFptCameraDetail : Swift.Codable {
+  public let serial: Swift.String?, name: Swift.String?
+  public var deviceLabel: Swift.String?
+  public var group: RogoCore.RGBGroup?
+  public var product: RogoCore.RGBProductModel? {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum RGBIrProtocolType : Swift.Int, Swift.Codable {
+  case DAIKIN_1
+  case DAIKIN_2
+  case DAIKIN_3
+  case DAIKIN_4
+  case DAIKIN_5
+  case DAIKIN_6
+  case DAIKIN_7
+  case DAIKIN_8
+  case DAIKIN_9
+  case DAIKIN_10
+  case PANASONIC_1
+  case PANASONIC_2
+  case PANASONIC_3
+  case MITSUBISHI_1
+  case MITSUBISHI_2
+  case MITSUBISHI_3
+  case MITSUBISHI_4
+  case MITSUBISHI_5
+  case MITSUBISHI_6
+  case MITSUBISHI_7
+  case SAMSUNG_1
+  case SAMSUNG_2
+  case LG_1
+  case LG_2
+  case SONY_1
+  case SONY_2
+  case TOSHIBA_1
+  case MIDEA_1
+  case MIDEA_2
+  case GREE_1
+  case SHARP_1
+  case HITACHI_1
+  case HITACHI_2
+  case HITACHI_3
+  case HITACHI_4
+  case HITACHI_5
+  case HITACHI_6
+  case HITACHI_7
+  case HITACHI_8
+  case HAIER_1
+  case HAIER_2
+  case HAIER_3
+  case HAIER_4
+  case CASPER_1
+  case CASPER_2
+  case CASPER_3
+  case CORONA_1
+  case SANYO_1
+  case SANYO_2
+  case SANYO_3
+  case SANYO_4
+  case SANYO_5
+  case CARRIER_1
+  case CARRIER_2
+  case CARRIER_3
+  case CARRIER_4
+  case FUJITSU_1
+  case VESTEL_1
+  case SYMPHONY
+  case NEC
+  case UNKNOWN
+  case OTHER
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum RGBSmartAutomationType : Swift.Int, Swift.CaseIterable {
+  case TYPE_MIX_OR
+  case TYPE_MIX_AND
+  case TYPE_STAIR_SWITCH
+  case TYPE_NOTIFICATION
+  case TYPE_MOTION_DETECTED
+  case TYPE_NOMOTION_DETECTED_SIMULATE
+  case TYPE_NOMOTION_DETECTED
+  case TYPE_DOOR_SENSOR_DETECTED
+  case TYPE_SELF_REVERSE
+  case TYPE_SMART_AC
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBSmartAutomationType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBSmartAutomationType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol RGBiGroupServices {
+  func getUserGroups(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBGroup]>?)
+  func getUserGroupDetailWith(groupdId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBGroup?>?)
+  func createGroup(label: Swift.String, desc: Swift.String, type: RogoCore.RGBGroupType, locationId: Swift.String, completion: ((_ info: RogoCore.RGBGroup?, _ error: (any Swift.Error)?) -> ())?)
+  func updateGroup(id: Swift.String, label: Swift.String, desc: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBGroup?>?)
+  func deletedGroup(id: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Bool>?)
+  func getAllUserGroupMember(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBGroupMember]>?)
+  func updateGroupMemberElement(elementIds: [Swift.Int], of device: RogoCore.RGBDevice, to group: RogoCore.RGBGroup, observer: Swift.AnyObject?, completion: RogoCore.RGBCompletionObject<RogoCore.RGBGroupMember?>?)
+  func getGroupMemberDetailWith(groupMemberUuid: Swift.String, completion: ((_ info: RogoCore.RGBGroupMember?, _ error: (any Swift.Error)?) -> ())?)
+  func removeGroupMember(device: RogoCore.RGBDevice, from group: RogoCore.RGBGroup, observer: Swift.AnyObject?, completion: RogoCore.RGBCompletionObject<RogoCore.RGBGroupMember?>?)
+}
+public protocol RGBiScheduleServices {
+  func getAllSchedules(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBSchedule]?>?)
+  func getListSchedulesAt(location: RogoCore.RGBLocation, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBSchedule]?>?)
+  func getScheduleDetailWith(scheduleId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSchedule?>?)
+  func addSchedule(schedule: RogoCore.RGBSchedule, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSchedule?>?)
+  func addSchedule(toSmart smart: RogoCore.RGBSmart, time: Swift.Int, weekdays: [Swift.Int], completion: RogoCore.RGBCompletionObject<RogoCore.RGBSchedule?>?)
+  func updateSchedule(schedule: RogoCore.RGBSchedule, completion: RogoCore.RGBCompletionObject<RogoCore.RGBSchedule?>?)
+  func deleteScheduleWith(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+}
+@_hasMissingDesignatedInitializers public class RGBAcFanSet : RogoCore.RGBCmdValue {
+  public var fanSpeed: RogoCore.RGBIrAcFanType
+  public init(fanSpeed: RogoCore.RGBIrAcFanType)
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+public enum RGBOwnerType : Swift.Int {
+  case device
+  case group
+  case location
+  case scenario
+  case schedule
+  case automation
+  case smart
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class RGBCmdValue {
+  public var type: RogoCore.RGBCommandType
+  public var blockData: [Swift.UInt8]
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RGBAcModeSet : RogoCore.RGBCmdValue {
+  public var mode: RogoCore.RGBIrAcModeType
+  public init(mode: RogoCore.RGBIrAcModeType)
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+extension RogoCore.RGBDeviceServices {
+  public func scanAvailableBleDevices(deviceType: RogoCore.RGBProductType?, timeout: Swift.Int = 10, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBMeshScannedDevice]?>? = nil)
+  public func scanAvailableBleDevice(timeout: Swift.Int = 30, completion: RogoCore.RGBCompletionObject<RogoCore.RGBMeshScannedDevice?>?)
+  public func scanMeshBleDeviceWith(productId: Swift.String?, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<RogoCore.RGBMeshScannedDevice?>?)
+  public func stopScanBleDevice()
+  public func locateMeshDevice(device: RogoCore.RGBMeshScannedDevice, hub: RogoCore.RGBDevice, didStartLocating: (() -> ())?, didFinishLocating: (() -> ())?)
+  public func stopLocateDevice()
+  public func addMeshDevice(device: RogoCore.RGBMeshScannedDevice, toHub hub: RogoCore.RGBDevice, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())? = nil, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  public func stopMeshAddProcess()
+  public func resumeMeshAddProcess()
+  public func cancelMeshAddProcess()
+  public func scanOTADeviceWith(device: RogoCore.RGBDevice, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())? = nil, completion: RogoCore.RGBCompletionObject<CoreBluetooth.CBPeripheral?>?)
+  public func startOTAFor(device: RogoCore.RGBDevice, with detectedInfo: CoreBluetooth.CBPeripheral, otaData: Foundation.Data, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())? = nil, completion: ((_ success: Swift.Bool) -> ())?)
+  public func cancelOTAProgress()
+}
+public enum RGBCameraManufacturer {
+  case HIKVision
+  public var defaultPort: Swift.Int {
+    get
+  }
+  public static func == (a: RogoCore.RGBCameraManufacturer, b: RogoCore.RGBCameraManufacturer) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension RogoCore.RGBDeviceServices {
+  public func getCameraInfoWithType(manufacturer: RogoCore.RGBCameraManufacturer, ip: Swift.String, httpPort: Swift.String, username: Swift.String, password: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBCameraInfo?>?)
+  public func getCameraStreamUrlOf(manufacturer: RogoCore.RGBCameraManufacturer, with url: Swift.String, port: Swift.Int, username: Swift.String, password: Swift.String) -> Swift.String
+  public func addCameraWith(deviceInfo: RogoCore.RGBCameraInfo, didUpdateProgessing: ((_ completedPercent: Swift.Int) -> ())?, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+}
+extension RogoCore.RGBDeviceServices : Foundation.URLSessionTaskDelegate {
+  @objc dynamic public func urlSession(_ session: Foundation.URLSession, didReceive challenge: Foundation.URLAuthenticationChallenge, completionHandler: @escaping (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?) -> Swift.Void)
+  @objc dynamic public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge, completionHandler: @escaping (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?) -> Swift.Void)
+}
+public enum RGBIrAcModeType : Swift.Int, Swift.CaseIterable {
+  case UNKNOW
+  case AC_MODE_AUTO
+  case AC_MODE_COOLING
+  case AC_MODE_DRY
+  case AC_MODE_HEATING
+  case AC_MODE_FAN
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBIrAcModeType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBIrAcModeType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum RGBIrAcFanType : Swift.Int, Swift.CaseIterable {
+  case UNKNOW
+  case FAN_SPEED_AUTO
+  case FAN_SPEED_LOW
+  case FAN_SPEED_NORMAL
+  case FAN_SPEED_HIGH
+  case FAN_SPEED_MAX
+  case FAN_SPEED_DISABLE
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBIrAcFanType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBIrAcFanType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum RGBIrAcSwingType : Swift.Int, Swift.CaseIterable {
+  case FAN_SWING_AUTO
+  case FAN_SWING_LOW
+  case FAN_SWING_NORMAL
+  case FAN_SWING_HIGH
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBIrAcSwingType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBIrAcSwingType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class RGBAuthServices {
+  public var authMethod: RogoCore.RGBAuthMethod
+  public func isAuthenticated() -> Swift.Bool
+  public func signIn(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  public func signUp(_ method: RogoCore.RGBAuthMethod, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  public func signOut(completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  public func resetPassword(_ email: Swift.String, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  public func requestPartnerSecureCode(_ phoneNumber: Swift.String, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  public func verifyPartnerSecureCode(_ phoneNumber: Swift.String, secureCode: Swift.String, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  public func updatePartnerPassword(_ newPassword: Swift.String, completion: @escaping RogoCore.RGBCompletionObject<RogoCore.RGBAuthResponse>)
+  @objc deinit
+}
+public enum RGBIrLearningCmdType : Swift.Int, Swift.CaseIterable {
+  case POWER_ON
+  case POWER_OFF
+  case POWER_SWITCH
+  case NUM_0
+  case NUM_1
+  case NUM_2
+  case NUM_3
+  case NUM_4
+  case NUM_5
+  case NUM_6
+  case NUM_7
+  case NUM_8
+  case NUM_9
+  case FAN_SPEED
+  case MODE
+  case SLEEP
+  case SWING
+  case TIMING
+  public static func getListFanRemoteCmd() -> [RogoCore.RGBIrLearningCmdType]
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBIrLearningCmdType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBIrLearningCmdType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct RGBSchedule : Swift.Codable {
+  public var mode: Swift.Int?
+  public var ownerID: Swift.String?
+  public var userID: Swift.String?
+  public var label: Swift.String?
+  public var extraInfo: RogoCore.RGBScheduleExtraInfo?
+  public var cmd: RogoCore.RGBCmd?
+  public var smid: Swift.Int?
+  public var uuid: Swift.String?, owner: Swift.String?
+  public var ownerType: Swift.Int?
+  public var locationID: Swift.String?
+  public var timeInLocalTimeZone: Swift.Int? {
+    get
+    set
+  }
+  public var weekdaysInLocalTimeZone: [Swift.Int]? {
+    get
+    set
+  }
+  public init(mode: Swift.Int? = 0, time: Swift.Int? = nil, timeInLocalTimeZone: Swift.Int? = nil, label: Swift.String? = nil, ownerID: Swift.String? = nil, sPartitions: [Swift.Int]? = nil, userID: Swift.String? = nil, extraInfo: RogoCore.RGBScheduleExtraInfo? = nil, cmd: RogoCore.RGBCmd? = nil, uuid: Swift.String? = nil, owner: Swift.String? = nil, ownerType: Swift.Int? = nil, locationID: Swift.String? = nil, weekdays: [Swift.Int]? = nil, weekdaysInLocalTimeZone: [Swift.Int]? = nil, endpoint: Swift.String? = nil)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct RGBScheduleExtraInfo : Swift.Codable {
+  public var label: Swift.String?
+  public init(label: Swift.String?)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class RGBScenarioServices : RogoCore.RGBiScenarioServices {
+  public func getAllScenarios(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBScenario]?>?)
+  public func getListScenarioAt(location: RogoCore.RGBLocation, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBScenario]?>?)
+  public func getScenarioDetailWith(scenarioId: Swift.String, completion: RogoCore.RGBCompletionObject<RogoCore.RGBScenario?>?)
+  public func addScenario(scenario: RogoCore.RGBScenario, completion: RogoCore.RGBCompletionObject<RogoCore.RGBScenario?>?)
+  public func updateScenario(scenario: RogoCore.RGBScenario, completion: RogoCore.RGBCompletionObject<RogoCore.RGBScenario?>?)
+  public func deleteScenarioWith(uuid: Swift.String, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  @available(*, deprecated, message: "Sử dụng điều khiển đối với scenario kiểu cũ. Hệ thống mới dùng smart điều khiển bằng phương thức 'activeSmart' của RGBSmartService")
+  public func runScenario(scenario: RogoCore.RGBScenario, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  @objc deinit
+}
+extension RogoCore.RGBDeviceServices {
+  public func getIRHubAvailable(observer: Swift.AnyObject?, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<RogoCore.RGBNetworkStatusMessage?>?)
+  public func getListIrRemotesInfoOf(manufacturer: RogoCore.RGBManufacturer, deviceType: RogoCore.RGBProductCategoryType, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBIrRemoteInfo]?>?)
+  public func getIrRemoteInfoDetailOf(device: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<RogoCore.RGBIrRemoteInfo?>?)
+  public func getIrRemoteCommandDataOf(manufacturer: RogoCore.RGBManufacturer, deviceType: RogoCore.RGBProductCategoryType, remoteId: Swift.Int, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBIrRemoteCmdZipData]?>?)
+  public func getLearnedIrRemoteCommandDataOf(device: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<[RogoCore.RGBIrRemoteCmdZipData]?>?)
+  public func addIrRemote(protocolType: RogoCore.RGBIrProtocolCtlType, remoteInfo: RogoCore.RGBIrRemoteInfo, manufacturer: RogoCore.RGBManufacturer, label: Swift.String, productType: RogoCore.RGBProductType, group: RogoCore.RGBGroup?, toHub hub: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<Swift.Void?>?)
+  public func addIrFanRemote(remoteInfos: [RogoCore.RGBIrFanRemoteInfoMessage], label: Swift.String, group: RogoCore.RGBGroup?, toHub hub: RogoCore.RGBDevice, completion: RogoCore.RGBCompletionObject<RogoCore.RGBDevice?>?)
+  public func sendVerifyIrAcRemoteCommand(hub: RogoCore.RGBDevice, isSetPowerOn: Swift.Bool?, mode: RogoCore.RGBIrAcModeType?, temperature: Swift.Int?, fanSpeed: RogoCore.RGBIrAcFanType?, remoteInfo: RogoCore.RGBIrRemoteInfo)
+  public func sendVerifyIrTVCommand(hub: RogoCore.RGBDevice, commandValue: RogoCore.RGBIrRemoteCmdType, remoteInfo: RogoCore.RGBIrRemoteInfo)
+  public func setIRRemoteLearningModeFor(deviceType: RogoCore.RGBProductCategoryType, hub: RogoCore.RGBDevice, observer: Swift.AnyObject?, isEnable: Swift.Bool, timeout: Swift.Int, completion: RogoCore.RGBCompletionObject<Any?>?)
+}
+public enum RGBIrRemoteCmdType : Swift.Int {
+  case UNKNOW
+  case NUM_0
+  case NUM_1
+  case NUM_2
+  case NUM_3
+  case NUM_4
+  case NUM_5
+  case NUM_6
+  case NUM_7
+  case NUM_8
+  case NUM_9
+  case POWER
+  case POWER_ON
+  case POWER_OFF
+  case CHANNEL_UP
+  case CHANNEL_DOWN
+  case CHANNEL_LIST
+  case VOL_UP
+  case VOL_DOWN
+  case MUTE
+  case OK
+  case UP
+  case DOWN
+  case LEFT
+  case RIGHT
+  case MENU
+  case BACK
+  case HOME
+  case EXIT
+  case INPUT
+  case PLAY
+  case STOP
+  case PAUSE
+  case MODE
+  case SLEEP
+  case SWING
+  case SWING_MODE
+  case FAN_SPEED
+  case FAN_SPEED_UP
+  case FAN_SPEED_DOWN
+  case TIMING
+  case ANION_AC
+  case INSECT_REPELLENT
+  case LOW
+  case MEDIUM
+  case HIGH
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public typealias RGBEmptyBlockThrow = () throws -> Swift.Void
+public typealias RGBEmptyCompletion = () -> Swift.Void
+public typealias RGBCompletionObject<T> = (_ response: T, (any Swift.Error)?) -> Swift.Void
+public typealias RGBCompletionOptionalObject<T> = (_ response: T?) -> Swift.Void
+public typealias RGBCompletionResponse = (_ response: Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void
+public typealias RGBCompletionSubcribeTopic = (Swift.String, (any Swift.Error)?) -> Swift.Void
+public typealias RGBCompletionDeviceSetup = ((any Swift.Error)?, Swift.String?) -> Swift.Void
+@_hasMissingDesignatedInitializers public class RGBValueBattery : RogoCore.RGBCmdValue {
+  public var batteryValue: Swift.Int
+  public init(valueBytes: [Swift.UInt8])
+  @objc deinit
+}
+public enum RGBNotificationEvent : Swift.String {
+  case REFRESH_DEVICE_LIST
+  case LOCATION_UPDATED
+  case CHANGE_SELECTED_LOCATION
+  case GROUP_UPDATED
+  case HUB_STATUS_UPDATE
+  case USB_DONGLE_STATUS_UPDATE
+  case LIST_SCENARIO_UPDATED
+  case LIST_SCHEDULES_UPDATED
+  case LIST_AUTOMATION_UPDATED
+  case GROUP_MEMBER_UPDATED
+  case SCHEDULE_SMART_UPDATED
+  case LIST_SMART_UPDATED
+  case LIST_SMART_CMD_UPDATED
+  case LIST_SMART_TRIGGER_UPDATED
+  case USER_LINKING_UPDATED
+  public static func addObserverNotification(event: RogoCore.RGBNotificationEvent, observer: Any, selector: ObjectiveC.Selector)
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum RGBSmartTimeCfgType : Swift.Int, Swift.CaseIterable {
+  case GENERIC_TIME
+  case MIN_TIME
+  case REVERSE_TIME
+  case WAITING_TIME
+  case OVERRIDE_TIME
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [RogoCore.RGBSmartTimeCfgType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [RogoCore.RGBSmartTimeCfgType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol RGBiProductServices {
+  var products: [RogoCore.RGBProductModel] { get }
+  func getProductModelsList(completion: RogoCore.RGBCompletionObject<[RogoCore.RGBProductModel]?>?)
+}
+extension RogoCore.RGBSimulatorRemoteCommandType : Swift.Equatable {}
+extension RogoCore.RGBSimulatorRemoteCommandType : Swift.Hashable {}
+extension RogoCore.RGBSimulatorRemoteCommandType : Swift.RawRepresentable {}
+extension RogoCore.RGBSmartType : Swift.Equatable {}
+extension RogoCore.RGBSmartType : Swift.Hashable {}
+extension RogoCore.RGBSmartType : Swift.RawRepresentable {}
+extension RogoCore.RGBSmartSceneType : Swift.Equatable {}
+extension RogoCore.RGBSmartSceneType : Swift.Hashable {}
+extension RogoCore.RGBSmartSceneType : Swift.RawRepresentable {}
+extension RogoCore.RGBEventStateType : Swift.Equatable {}
+extension RogoCore.RGBEventStateType : Swift.Hashable {}
+extension RogoCore.RGBEventStateType : Swift.RawRepresentable {}
+extension RogoCore.RGBPowerType : Swift.Equatable {}
+extension RogoCore.RGBPowerType : Swift.Hashable {}
+extension RogoCore.RGBProtocolType : Swift.Equatable {}
+extension RogoCore.RGBProtocolType : Swift.Hashable {}
+extension RogoCore.RGBGroupType : Swift.Equatable {}
+extension RogoCore.RGBGroupType : Swift.Hashable {}
+extension RogoCore.RGBGroupType : Swift.RawRepresentable {}
+extension RogoCore.RGBNetworkEnvironment : Swift.Equatable {}
+extension RogoCore.RGBNetworkEnvironment : Swift.Hashable {}
+extension RogoCore.RGBOpenCloseValue : Swift.Equatable {}
+extension RogoCore.RGBOpenCloseValue : Swift.Hashable {}
+extension RogoCore.RGBOpenCloseValue : Swift.RawRepresentable {}
+extension RogoCore.RGBCommandType : Swift.Equatable {}
+extension RogoCore.RGBCommandType : Swift.Hashable {}
+extension RogoCore.RGBCommandType : Swift.RawRepresentable {}
+extension RogoCore.RGBProductCategoryType : Swift.Equatable {}
+extension RogoCore.RGBProductCategoryType : Swift.Hashable {}
+extension RogoCore.RGBProductCategoryType : Swift.RawRepresentable {}
+extension RogoCore.RGBSmartTriggerType : Swift.Equatable {}
+extension RogoCore.RGBSmartTriggerType : Swift.Hashable {}
+extension RogoCore.RGBSmartTriggerType : Swift.RawRepresentable {}
+extension RogoCore.RGBLockUnlockValue : Swift.Equatable {}
+extension RogoCore.RGBLockUnlockValue : Swift.Hashable {}
+extension RogoCore.RGBLockUnlockValue : Swift.RawRepresentable {}
+extension RogoCore.RGBErrorCode : Swift.Equatable {}
+extension RogoCore.RGBErrorCode : Swift.Hashable {}
+extension RogoCore.RGBErrorCode : Swift.RawRepresentable {}
+extension RogoCore.RGBSmartTriggerCondition : Swift.Equatable {}
+extension RogoCore.RGBSmartTriggerCondition : Swift.Hashable {}
+extension RogoCore.RGBSmartTriggerCondition : Swift.RawRepresentable {}
+extension RogoCore.RGBIrProtocolDecode : Swift.Equatable {}
+extension RogoCore.RGBIrProtocolDecode : Swift.Hashable {}
+extension RogoCore.RGBIrProtocolDecode : Swift.RawRepresentable {}
+extension RogoCore.RGBAutomationEventType : Swift.Equatable {}
+extension RogoCore.RGBAutomationEventType : Swift.Hashable {}
+extension RogoCore.RGBAutomationEventType : Swift.RawRepresentable {}
+extension RogoCore.RGBManufacturer : Swift.Equatable {}
+extension RogoCore.RGBManufacturer : Swift.Hashable {}
+extension RogoCore.RGBManufacturer : Swift.RawRepresentable {}
+extension RogoCore.RGBIrProtocolCtlType : Swift.Equatable {}
+extension RogoCore.RGBIrProtocolCtlType : Swift.Hashable {}
+extension RogoCore.RGBIrProtocolCtlType : Swift.RawRepresentable {}
+extension RogoCore.RGBProductType : Swift.Equatable {}
+extension RogoCore.RGBProductType : Swift.Hashable {}
+extension RogoCore.RGBLinkingServiceType : Swift.Equatable {}
+extension RogoCore.RGBLinkingServiceType : Swift.Hashable {}
+extension RogoCore.RGBLinkingServiceType : Swift.RawRepresentable {}
+extension RogoCore.RGBDeviceCDevType : Swift.Equatable {}
+extension RogoCore.RGBDeviceCDevType : Swift.Hashable {}
+extension RogoCore.RGBDeviceCDevType : Swift.RawRepresentable {}
+extension RogoCore.RGBEntityType : Swift.Equatable {}
+extension RogoCore.RGBEntityType : Swift.Hashable {}
+extension RogoCore.RGBEntityType : Swift.RawRepresentable {}
+extension RogoCore.RGBAuthResponse : Swift.Equatable {}
+extension RogoCore.RGBAuthResponse : Swift.Hashable {}
+extension RogoCore.RGBWifiConnectionStateType : Swift.Equatable {}
+extension RogoCore.RGBWifiConnectionStateType : Swift.Hashable {}
+extension RogoCore.RGBWifiConnectionStateType : Swift.RawRepresentable {}
+extension RogoCore.RGBWifiConnectionErrorType : Swift.Equatable {}
+extension RogoCore.RGBWifiConnectionErrorType : Swift.Hashable {}
+extension RogoCore.RGBWifiConnectionErrorType : Swift.RawRepresentable {}
+extension RogoCore.RGBIrProtocolType : Swift.Equatable {}
+extension RogoCore.RGBIrProtocolType : Swift.Hashable {}
+extension RogoCore.RGBIrProtocolType : Swift.RawRepresentable {}
+extension RogoCore.RGBSmartAutomationType : Swift.Equatable {}
+extension RogoCore.RGBSmartAutomationType : Swift.Hashable {}
+extension RogoCore.RGBSmartAutomationType : Swift.RawRepresentable {}
+extension RogoCore.RGBOwnerType : Swift.Equatable {}
+extension RogoCore.RGBOwnerType : Swift.Hashable {}
+extension RogoCore.RGBOwnerType : Swift.RawRepresentable {}
+extension RogoCore.RGBCameraManufacturer : Swift.Equatable {}
+extension RogoCore.RGBCameraManufacturer : Swift.Hashable {}
+extension RogoCore.RGBIrAcModeType : Swift.Equatable {}
+extension RogoCore.RGBIrAcModeType : Swift.Hashable {}
+extension RogoCore.RGBIrAcModeType : Swift.RawRepresentable {}
+extension RogoCore.RGBIrAcFanType : Swift.Equatable {}
+extension RogoCore.RGBIrAcFanType : Swift.Hashable {}
+extension RogoCore.RGBIrAcFanType : Swift.RawRepresentable {}
+extension RogoCore.RGBIrAcSwingType : Swift.Equatable {}
+extension RogoCore.RGBIrAcSwingType : Swift.Hashable {}
+extension RogoCore.RGBIrAcSwingType : Swift.RawRepresentable {}
+extension RogoCore.RGBIrLearningCmdType : Swift.Equatable {}
+extension RogoCore.RGBIrLearningCmdType : Swift.Hashable {}
+extension RogoCore.RGBIrLearningCmdType : Swift.RawRepresentable {}
+extension RogoCore.RGBIrRemoteCmdType : Swift.Equatable {}
+extension RogoCore.RGBIrRemoteCmdType : Swift.Hashable {}
+extension RogoCore.RGBIrRemoteCmdType : Swift.RawRepresentable {}
+extension RogoCore.RGBNotificationEvent : Swift.Equatable {}
+extension RogoCore.RGBNotificationEvent : Swift.Hashable {}
+extension RogoCore.RGBNotificationEvent : Swift.RawRepresentable {}
+extension RogoCore.RGBSmartTimeCfgType : Swift.Equatable {}
+extension RogoCore.RGBSmartTimeCfgType : Swift.Hashable {}
+extension RogoCore.RGBSmartTimeCfgType : Swift.RawRepresentable {}

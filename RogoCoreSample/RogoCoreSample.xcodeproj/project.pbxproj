@@ -13,11 +13,27 @@
 		027AC4E52A93106A008954E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027AC4E32A93106A008954E9 /* Main.storyboard */; };
 		027AC4E72A93106A008954E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027AC4E62A93106A008954E9 /* Assets.xcassets */; };
 		027AC4EA2A93106A008954E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027AC4E82A93106A008954E9 /* LaunchScreen.storyboard */; };
+		02A34B5A2A936DF80019AF29 /* RogoCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A34B582A936DCC0019AF29 /* RogoCore.framework */; };
+		02A34B5B2A936DF80019AF29 /* RogoCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02A34B582A936DCC0019AF29 /* RogoCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		02A9CEA92A9358F100AF0629 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9CEA72A9358F100AF0629 /* NetworkClient.swift */; };
 		02A9CEAA2A9358F100AF0629 /* FptAuthenticateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9CEA82A9358F100AF0629 /* FptAuthenticateRequest.swift */; };
 		02A9CEAD2A93591E00AF0629 /* AuthenHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9CEAC2A93591E00AF0629 /* AuthenHandler.swift */; };
 		4F8DA45323AE584E6B8251B4 /* Pods_RogoCoreSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B91258BC9F1194AD402182D3 /* Pods_RogoCoreSample.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		02623D112A936D1000BF449E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				02A34B5B2A936DF80019AF29 /* RogoCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		027AC4DA2A93106A008954E9 /* RogoCoreSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RogoCoreSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,6 +44,7 @@
 		027AC4E62A93106A008954E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		027AC4E92A93106A008954E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		027AC4EB2A93106A008954E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02A34B582A936DCC0019AF29 /* RogoCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RogoCore.framework; path = RogoCoreSample/RogoCore.framework; sourceTree = "<group>"; };
 		02A9CEA72A9358F100AF0629 /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		02A9CEA82A9358F100AF0629 /* FptAuthenticateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FptAuthenticateRequest.swift; sourceTree = "<group>"; };
 		02A9CEAC2A93591E00AF0629 /* AuthenHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenHandler.swift; sourceTree = "<group>"; };
@@ -41,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02A34B5A2A936DF80019AF29 /* RogoCore.framework in Frameworks */,
 				4F8DA45323AE584E6B8251B4 /* Pods_RogoCoreSample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +120,7 @@
 		45BA85B94370A03CEE50214C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02A34B582A936DCC0019AF29 /* RogoCore.framework */,
 				B91258BC9F1194AD402182D3 /* Pods_RogoCoreSample.framework */,
 			);
 			name = Frameworks;
@@ -127,7 +146,8 @@
 				027AC4D62A93106A008954E9 /* Sources */,
 				027AC4D72A93106A008954E9 /* Frameworks */,
 				027AC4D82A93106A008954E9 /* Resources */,
-				ECF4A7B0F03D4A3C26F240C0 /* [CP] Embed Pods Frameworks */,
+				51FEC9BAC5DCA2E2BCA5E3A3 /* [CP] Embed Pods Frameworks */,
+				02623D112A936D1000BF449E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -207,7 +227,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ECF4A7B0F03D4A3C26F240C0 /* [CP] Embed Pods Frameworks */ = {
+		51FEC9BAC5DCA2E2BCA5E3A3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -385,6 +405,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3RT7MFK4BH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RogoCoreSample",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RogoCoreSample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -414,6 +438,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3RT7MFK4BH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RogoCoreSample",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RogoCoreSample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

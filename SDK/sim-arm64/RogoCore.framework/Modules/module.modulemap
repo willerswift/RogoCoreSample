@@ -1,0 +1,11 @@
+framework module RogoCore {
+  umbrella header "RogoCore.h"
+
+  export *
+  module * { export * }
+}
+
+module RogoCore.Swift {
+  header "RogoCore-Swift.h"
+  requires objc
+}

@@ -15,8 +15,8 @@ B3: Trong hàm application(_:didFinishLaunchingWithOptions:)
 
 Thêm vào:
 
-        RGCore.shared.config(appKey: "ecde7b0323af44eb890e27c4b5a9d0a8",
-                             appSecret: "3e9e598e8a17789e3af931b9b0f8cf6f4670e2a48e38") { response, error in
+        RGCore.shared.config(appKey: String,
+                             appSecret: String) { response, error in
             guard response == true, error == nil else {
                 return
             }

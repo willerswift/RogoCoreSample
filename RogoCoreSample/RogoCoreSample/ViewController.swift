@@ -59,6 +59,7 @@ class ViewController: UIViewController {
             
             UserDefaults.standard.set(rogoToken, forKey: RG_ACCESS_TOKEN_KEY)
             RGCore.shared.refreshUserData { error in
+                
                 print(error)
             }
         }
