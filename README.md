@@ -1,7 +1,7 @@
 # RogoCoreSample
 example code for rogo core sdk
 
-###Các bước cài file RogoCore vào project sử dụng cocoapods
+### Các bước cài file RogoCore vào project sử dụng cocoapods
 
 B1: Để tích hợp RogoCore vào dự án Xcode bằng CocoaPods, thêm nó vào Podfile
 
