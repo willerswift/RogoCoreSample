@@ -21,5 +21,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Ứng dụng này sử dụng bluetooth để tìm kiếm và thêm các thiết bị bluetooth lân cận vào hệ thống mạng lưới. </string>
 </dict>
 </plist>

@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import RogoCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        RGCore.shared.setTargetEnviroment(environment: .development)
+        
+        RGCore.shared.config(appKey: "7ee8b33ed8674a4da388fad13f983424",
+                             appSecret: "ea1585f79d955b2d4987834aab023bfcf5ed37f98049",
+                             completion: nil)
         return true
     }
 

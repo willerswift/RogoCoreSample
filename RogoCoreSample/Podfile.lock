@@ -1,0 +1,34 @@
+PODS:
+  - CocoaMQTT (2.0.9):
+    - CocoaMQTT/Core (= 2.0.9)
+  - CocoaMQTT/Core (2.0.9):
+    - MqttCocoaAsyncSocket (~> 1.0.8)
+  - CryptoSwift (1.5.1)
+  - MqttCocoaAsyncSocket (1.0.8)
+  - nRFMeshProvision (3.2.0):
+    - CryptoSwift (= 1.5.1)
+  - RogoCore (1.0.1):
+    - CocoaMQTT (~> 2.0.7)
+    - nRFMeshProvision (~> 3.2.0)
+
+DEPENDENCIES:
+  - RogoCore
+
+SPEC REPOS:
+  trunk:
+    - CocoaMQTT
+    - CryptoSwift
+    - MqttCocoaAsyncSocket
+    - nRFMeshProvision
+    - RogoCore
+
+SPEC CHECKSUMS:
+  CocoaMQTT: 76904ac6102297972e1a42343dd77a6da3862a69
+  CryptoSwift: c4f2debceb38bf44c80659afe009f71e23e4a082
+  MqttCocoaAsyncSocket: 77d3b74f76228dd5a05d1f9526eab101d415b30c
+  nRFMeshProvision: 297bbda9dc44138c1b63b1ac5e4c860f0398e176
+  RogoCore: f782c262e1ca28490307c00a294a69a7a6079ec1
+
+PODFILE CHECKSUM: afed7844f44c5c7a067c3a33c043d28d7100dd56
+
+COCOAPODS: 1.12.1

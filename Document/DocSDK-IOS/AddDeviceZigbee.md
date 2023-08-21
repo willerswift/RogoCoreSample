@@ -1,28 +1,30 @@
-## Rogo-SDK-IOS
 
-#AddDeviceZigbee
+
+# AddDeviceZigbee
 
 import RogoCore
 
-B1: Scan device Zigbee
-
-RGCore.shared.device.startScanZigbeeDevice(deviceType: <#T##RGBProductType#>, gateWay: <#T##RGBDevice#>, timeout: <#T##Int#>, completion: <#T##RGBCompletionObject<[RGBMeshScannedDevice]?>?##RGBCompletionObject<[RGBMeshScannedDevice]?>?##(_ response: [RGBMeshScannedDevice]?, (Error)?) -> Void#>)
-
-<Scan các thiết bị Zigbee khả dụng>
-
-Trong đó:
--deviceType: lựa chọn kiểu thiết bị Zigbee muốn add
-<Vd: .Zigbee_Plug: ổ cắm, .Zigbee_Switch: công tắc, .Zigbee_Motor: động cơ rèm cửa,...>
--gateWay:
--timeout: set thời gian timeout nếu scan không thành công Vd: 300 -> 300 giây
--completion: check lỗi
-
-B2:
-
-#Dừng scan thiết bị Zigbee
-
-RGCore.shared.device.stopScanZigbeeDevice(gateWay: <#T##RGBDevice#>)
+### Scan device Zigbee
+```
+RGCore.shared.device.startScanZigbeeDevice(deviceType: RGBProductType, gateWay: RGBDevice, timeout: Int, completion: RGBCompletionObject<[RGBMeshScannedDevice]?>?)
+```
+- Scan các thiết bị Zigbee khả dụng
 
 Trong đó:
--gateWay: truyền vào device USBZigbee được chọn để add
+- deviceType: lựa chọn kiểu thiết bị Zigbee muốn add
+- gateWay: truyền vào device USBZigbee được chọn để add
+- timeout: set thời gian timeout nếu scan không thành công Vd: 300 -> 300 giây
+- completion: check lỗi
+###### Vd: .Zigbee_Plug: ổ cắm, .Zigbee_Switch: công tắc, .Zigbee_Motor: động cơ rèm cửa,...
 
+### Add device Zigbee vừa scan được
+```
+RGCore.shared.device.addZigbeeDevice(device: RGBMeshScannedDevice, toHub: RGBDevice, didUpdateProgessing: ((Int) -> ())?, completion: RGBCompletionObject<Void?>?)
+```
+
+#### Dừng scan thiết bị Zigbee
+```
+RGCore.shared.device.stopScanZigbeeDevice(gateWay: RGBDevice)
+```
+Trong đó:
+- gateWay: truyền vào device USBZigbee được chọn để add
