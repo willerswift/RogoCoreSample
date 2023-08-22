@@ -28,8 +28,8 @@ Thêm vào:
 
 Bên trong forder SKD sẽ có 3 SDK, trong đó:
 - iphone : SDK dành cho build trên máy thật
-- sim-arm64 : SDK dành cho máy chip M
-- sim-x86_64: SDK dành cho máy chip intel
+- sim-arm64 : SDK dành cho build máy ảo sử dụng chip Apple Silicon
+- sim-x86_64: SDK dành cho build máy ảo sử dụng chip Intel
 
 ![1](https://github.com/willerswift/RogoCoreSample/assets/116701315/cb5f26d6-09f9-4d2e-a97e-c0ee03d7d561)
 
