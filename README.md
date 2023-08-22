@@ -35,16 +35,17 @@ Bên trong forder SKD sẽ có 3 SDK, trong đó:
 
 #### Cách bước thực hiện:
 
-B1: Tuỳ vào dòng máy sử dụng mà chọn file ***RogoCore.framework*** tương ứng
-B2: Mở project muốn sử dụng SDK, sau đó kéo trực tiếp file SDK đã chọn thả vào project
+- B1: Tuỳ vào dòng máy sử dụng mà chọn file ***RogoCore.framework*** tương ứng
+
+- B2: Mở project muốn sử dụng SDK, sau đó kéo trực tiếp file SDK đã chọn thả vào project
 
 ![2](https://github.com/willerswift/RogoCoreSample/assets/116701315/7cd578c5-4d5f-48e2-b72c-93b2a388ed23)
 
-B3: Chọn như hình, rồi bấm Finish
+- B3: Chọn như hình, rồi bấm Finish
 
 ![3](https://github.com/willerswift/RogoCoreSample/assets/116701315/0aacd863-ab6b-41aa-977e-614925bdec98)
 
-B4: Vào mục ***General*** của project, tìm ***Frameworks, Libraries, and Embedded Content***, sau đó chọn ***Embed & Sign*** cho ***RogoCore.framework***
+- B4: Vào mục ***General*** của project, tìm ***Frameworks, Libraries, and Embedded Content***, sau đó chọn ***Embed & Sign*** cho ***RogoCore.framework***
 
 ![4](https://github.com/willerswift/RogoCoreSample/assets/116701315/3c98eae3-10eb-4f15-9cfb-c89b5f6f5d2e)
 
