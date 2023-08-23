@@ -2,7 +2,7 @@
 
 # AddPlayBox
 
-import RogoCore
+##### import RogoCore
 
 ### Lấy mã kích hoạt
 

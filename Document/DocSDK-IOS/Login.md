@@ -1,6 +1,7 @@
 
 # Login
 
+##### import RogoCore
 
 ### Tạo file AuthenHandler sau đó implement RGBiAuth:
 

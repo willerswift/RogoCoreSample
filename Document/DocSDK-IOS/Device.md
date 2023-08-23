@@ -2,7 +2,7 @@
 
 # Device
 
-import RogoCore
+##### import RogoCore
 
 ### Lấy ra tất cả thiết bị bên trong location
 ```
@@ -81,7 +81,7 @@ Trong đó:
 - elementIds: là id của element <Vd: trong 1 công tắc 4 nút, ngoài deviceId của công tắc, ta còn có 4 elementId của 4 nút>
 - of: truyền vào device
 - to: truyền vào nhóm ảo muốn add element
-- observer: self
+- observer: ***self***
 - completion: check lỗi
 
 ### Xoá thiết bị trong nhóm ảo

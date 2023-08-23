@@ -2,7 +2,7 @@
 
 # Lấy trạng thái của USB Dongle & Hub
 
-import RogoCore
+##### import RogoCore
 
 ### Lấy trạng thái của Hub
 
@@ -11,7 +11,7 @@ RGCore.shared.device.getHubsStatus(hubs: [RGBDevice], observer: AnyObject?, time
 ```
 Trong đó:
 - hubs: truyền vào list device Hub
-- observer: self
+- observer: ***self***
 - timeout: set thời gian timeout
 - completion: respone lấy được trạng thái device hub trả ra kiểu RGBNetworkStatusMessage?, check lỗi
 
@@ -22,6 +22,6 @@ RGCore.shared.device.getZigbeeDongleStatus(at: RGBLocation, observer: AnyObject?
 ```
 Trong đó:
 - at: truyền location đã chọn và chứa USB Zigbee muốn lấy trạng thái
-- observer: self
+- observer: ***self***
 - timeout: set thời gian timeout
 - completion: respone trả ra trạng thái của USBDonggle có kiểu RGBUsbZigbeeStatus?, check lỗi

@@ -1,7 +1,7 @@
 
 # Location
 
-import RogoCore
+##### import RogoCore
 
 ### Lấy list location:
 ```

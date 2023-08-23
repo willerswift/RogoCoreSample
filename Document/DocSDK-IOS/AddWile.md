@@ -2,7 +2,7 @@
 
 # AddDeviceWile
 
-import RogoCore
+##### import RogoCore
 
 ### Scan Wile device
 ```

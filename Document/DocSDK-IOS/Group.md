@@ -2,7 +2,7 @@
 
 # Group
 
-import RogoCore
+##### import RogoCore
 
 ### Lấy ra list group
 ```

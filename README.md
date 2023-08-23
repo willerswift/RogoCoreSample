@@ -1,5 +1,5 @@
 # RogoCoreSample
-example code for rogo core sdk
+Example code for RogoCore SDK
 
 ### Cách 1: Sử dụng CocoaPods
 
@@ -21,12 +21,21 @@ Thêm vào:
                 return
             }
         }
-
+B4: Mở file Podfile sau đó dán đoạn code này vào cuối cùng của file Pod sau đó Pod install lại
+```
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+    end
+  end
+end
+```
 ### Cách 2: Sử dụng file SDK
 
 - Kéo thả trực tiếp file RogoCore vào project
 
-Bên trong forder SKD sẽ có 3 SDK, trong đó:
+Bên trong forder SDK sẽ có 3 SDK, trong đó:
 - iphone : SDK dành cho build trên máy thật
 - sim-arm64 : SDK dành cho build máy ảo sử dụng chip Apple Silicon
 - sim-x86_64: SDK dành cho build máy ảo sử dụng chip Intel

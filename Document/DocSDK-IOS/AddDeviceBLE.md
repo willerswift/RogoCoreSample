@@ -2,7 +2,7 @@
 
 # AddDeviceBLE
 
-import RogoCore
+##### import RogoCore
 
 ### B1: Scan device BLE
 ```

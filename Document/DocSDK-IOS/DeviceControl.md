@@ -2,7 +2,7 @@
 
 # DeviceControl
 
-import RogoCore
+##### import RogoCore
 
 ### Điều khiển bật tắt tất cả thiết bị
 ```

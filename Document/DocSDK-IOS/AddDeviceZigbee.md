@@ -2,7 +2,7 @@
 
 # AddDeviceZigbee
 
-import RogoCore
+##### import RogoCore
 
 ### Scan device Zigbee
 ```

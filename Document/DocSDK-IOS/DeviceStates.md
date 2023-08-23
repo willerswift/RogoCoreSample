@@ -2,7 +2,7 @@
 
 # DeviceStates
 
-import RogoCore
+##### import RogoCore
 
 ### Lấy trạng thái của thiết bị
 
