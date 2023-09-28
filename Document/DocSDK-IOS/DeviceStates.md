@@ -7,16 +7,27 @@
 ### Lấy trạng thái của thiết bị
 
 B1: 
-```
-RGCore.shared.device.requestStateOf(device: RGBDevice)
-```
-- Truyền vào device dể yêu cầu lấy trạng thái của device đó
 
-B2: 
+#### Trường hợp lấy state của 1 thiết bị :
+
 ```
 RGCore.shared.device.subscribeStateChangeOf(device: RGBDevice, observer: AnyObject?, statusChangedHandler: RGBCompletionObject<RGBDeviceState?>?)
 ```
-- Đăng ký để lấy trạng thái của của thiết bị mỗi khi trạng thái của thiết bị có sự thay đổi
+
+- Truyền vào 1 device dể đăng ký lấy trạng thái của device đó
+
+#### Trường hợp lấy state của 1 danh sách thiết bị :
+```
+RGCore.shared.device.subscribeStateChangeOf(devices: [RGBDevice], observer: AnyObject?, statusChangedHandler: RGBCompletionObject<RGBDeviceState?>?)
+```
+- Truyền vào 1 danh sách các device dể đăng ký lấy trạng thái của các device đó
+
+B2: 
+
+- Lấy trạng thái của của thiết bị mỗi khi trạng thái của thiết bị có sự thay đổi
+```
+RGCore.shared.device.requestStateOf(device: RGBDevice)
+```
 
 Vd: 
 ```
@@ -36,6 +47,26 @@ RGCore.shared.device.subscribeStateChangeOf(device: device, observer: self) {[we
 ```
 - Trong đó sẽ trả về res viết tắt của respone sẽ lấy được trạng thái của thiết bị ở đòng 
 <let states = res?.stateValues>
+
+B3: Ép kiểu để hiển thị
+Vd:
+```
+    func updateDeviceState(states: [RGBDeviceElementState], cell: ListLightCell ) {
+        for state in states {
+            if let stateValue = state.commandValues.first(where: {$0.type == .ONOFF}) as? RGBValueOnOff {
+                
+                cell.swOnOff.isOn = stateValue.on == 1
+            }
+        }
+    }
+```
+- Trong đó:
+ 
+RGBValueOnOff : bật / tắt (biến: on)
+RGBValueBrightness : độ sáng (biến: b)
+RGBValueKelvin : độ ấm (biến: k)
+RGBValueBrightnessKelvin: cả độ sáng và độ ấm
+RGBValueOpenClose : đóng / mở
 
 ### Một số kiểu trạng thái thường xuyên sử dụng
 
