@@ -123,6 +123,29 @@ var rTime: Int = 0 (giá trị thời gian đảo ngược)
 cmdValue.reversing = rTime
 ```
 
+- Thêm trigger cho automation
+```
+RGCore.shared.automation.addSmartTrigger(toSmart: RGBSmart, automationType: RGBAutomationEventType, triggers: [RGBSmartTrigger], completion: RGBCompletionObject<RGBSmart?>?)
+```
+Trong đó:
+- toSmart: truyền vào smart Automation
+- automationType: truyền vào kiểu automation
+- triggers: smart.trigger
+- completion: trả ra 1 giá trị RGBSmart, check lỗi
+
+
+- Update trigger cho automation
+
+```
+RGCore.shared.automation.updateSmartTrigger(toSmart: RGBSmart, automationType: RGBAutomationEventType, triggers: [RGBSmartTrigger], completion: RGBCompletionObject<RGBSmart?>?)
+```
+
+Trong đó:
+- toSmart: truyền vào smart Automation
+- automationType: truyền vào kiểu automation
+- triggers: smart.trigger
+- completion: trả ra 1 giá trị RGBSmart, check lỗi
+
 ### Xoá Automation
 ```
 RGCore.shared.smart.deleteSmart(uuid: String, completion: RGBCompletionObject<RGBSmart?>?)
