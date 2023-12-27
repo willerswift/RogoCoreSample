@@ -51,5 +51,4 @@ Trong đó:
 ```
 RGCore.shared.group.deletedGroup(id: String, completion: RGBCompletionObject<Bool>?)
 ```
-
 - Tương tự như xoá nhóm phòng

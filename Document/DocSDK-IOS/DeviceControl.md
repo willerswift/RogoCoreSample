@@ -6,7 +6,7 @@
 
 ### Điều khiển bật tắt tất cả thiết bị
 ```
-RGCore.shared.device.sendControlMessage(group: RGBGroup, productType: RGBProductCategoryType, value: <#T##RGBCmdValue#>)
+RGCore.shared.device.sendControlMessage(group: RGBGroup, productType: RGBProductCategoryType, value: RGBCmdValue)
 ```
 Trong đó:
  
@@ -39,7 +39,7 @@ let value = RGBValueBrightness(1000) (giá trị của brightness là từ 0 -> 
 ```
 ### Điều khiển nhóm
 ```
-RGCore.shared.device.sendControlMessage(<#T##group: RGBGroup##RGBGroup#>, productType: <#T##RGBProductCategoryType#>, value: <#T##RGBCmdValue#>)
+RGCore.shared.device.sendControlMessage(RGBGroup, productType: RGBProductCategoryType, value: RGBCmdValue)
 ```
 Trong đó:
 - group: nhóm ảo muốn điều khiển 

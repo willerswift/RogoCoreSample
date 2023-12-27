@@ -30,23 +30,53 @@ let listOther = Array(Set(smarts).subtracting(listNotifications + listStairSwitc
 
 ### Thêm Automation
 
-- Tạo smart Automation
+##### Tạo một Trigger cho Smart Automation
+```
+let trigger = RGBSmartTrigger(automationEventType: RGBAutomationEventType,
+                              triggerCmdValues: [RGBSmartTriggerEventType],
+                              triggerElementId: Int,
+                              deviceId: String,
+                              triggerType: RGBSmartTriggerType)
+```
+##### Tạo một Cmd cho Smart Automation
 
 ```
-RGCore.shared.smart.addSmart(with: String, 
-                             locationId: String,
-                             type: RGBSmartType,
-                             subType: RGBSmartSubType,
-                             ownerId: String?,
-                             completion: RGBCompletionObject<RGBSmart?>?)
+let cmd = RGBSmartCmd(extra: [String],
+                      cmds: [String : RGBSmartCmdValue]?,
+                      filter: Int?,
+                      smartID: String?,
+                      target: Int?,
+                      targetID: String?,
+                      type: Int?,
+                      userID: String?,
+                      createdAt: String?,
+                      updatedAt: String?,
+                      uuid: String?)
+```
+
+Trong đó:
+- cmds: String truyền vào id của element bên phải truyền vào cmdValue
+
+##### Tạo smart Automation
+```
+RGCore.shared.smart.addSmartAutomation(smartTitle: String?,
+                                       automationType: RGBSmartAutomationType,
+                                       trigger: RGBSmartTrigger,
+                                       commands: [RGBSmartCmd],
+                                       initSmartCompletionHandler: RGBCompletionObject<RGBSmart?>?,
+                                       addTriggerCompletionHandler: RGBCompletionObject<RGBSmartTrigger?>?,
+                                       addCommandCompletionHandler: ((Int, RGBSmartCmd?, (Error)?) -> Void)?,
+                                       completion: RGBCompletionObject<RGBSmart?>?
 ```
 Trong đó:
-- with: truyền vào 1 ***String*** là tên của Automation muốn tạo
-- locationId: truyền vào ***uuid*** của location
-- type: ***.automation***
-- subTupe: ***RGBSmartSubType.defaultType***
-- ownerId: ***nil***
-- completion: response trả ra ***RGBSmart***, check lỗi
+- smartTitle: tên của Smart Automation
+- automationTyoe: kiểu automation
+- [RGBSmartCmd]: list lệnh
+- initSmartCompletionHandler: tiến trình add Smart
+- addTriggerCompletionHandler: tiến trình add Trigger
+- addCommandCompletionHandler: tiền trình add Cmd
+
+#### Một số hàm có thể sử dụng
 
 - Lấy ra được list thiết bị hỗ trợ cho loại automation mà người dùng chọn
 
@@ -94,47 +124,8 @@ Vd: RGBAutomationEventType trong automation .SelfReverse có .StateChange và .S
         return lstType
     }
 ```
-- Tạo Cmd cho smart Automation
-```
-RGCore.shared.smart.addSmartCmd(to: RGBSmart,
-                                targetId: String,
-                                targetElementIds: [String],
-                                cmdValue: RGBSmartCmdValue,
-                                type: Bool,
-                                completion: RGBCompletionObject<RGBSmartCmd?>?)
-```
-Trong đó:
-- to: truyền vào Automation muốn tạo lệnh
-- targetId: deviceId của thiết bị
-- targetElementIds: list ElementId của thiết bị
-- cmdValue: truyền vào RGBSmartCmdValue
-- completion: trả ra 1 giá trị kiểu RGBSmartCmd, check lỗi
 
-- Kiểu giá trị về thời gian trong automation
-
-Trong đó : .delay (độ trễ), reversing (thời gian đảo ngược trạng thái) - RGBSmartCmdValue 
-
-Vd:
-```
-var cmdValue: RGBSmartCmdValue
-var rTime: Int = 0 (giá trị thời gian đảo ngược)
-)
-
-cmdValue.reversing = rTime
-```
-
-- Thêm trigger cho automation
-```
-RGCore.shared.automation.addSmartTrigger(toSmart: RGBSmart, automationType: RGBAutomationEventType, triggers: [RGBSmartTrigger], completion: RGBCompletionObject<RGBSmart?>?)
-```
-Trong đó:
-- toSmart: truyền vào smart Automation
-- automationType: truyền vào kiểu automation
-- triggers: smart.trigger
-- completion: trả ra 1 giá trị RGBSmart, check lỗi
-
-
-- Update trigger cho automation
+### Update trigger cho automation
 
 ```
 RGCore.shared.automation.updateSmartTrigger(toSmart: RGBSmart, automationType: RGBAutomationEventType, triggers: [RGBSmartTrigger], completion: RGBCompletionObject<RGBSmart?>?)
@@ -142,17 +133,9 @@ RGCore.shared.automation.updateSmartTrigger(toSmart: RGBSmart, automationType: R
 
 Trong đó:
 - toSmart: truyền vào smart Automation
-- automationType: truyền vào kiểu automation
+- automationType: truyền vào kiểu automation người dùng chọn
 - triggers: smart.trigger
 - completion: trả ra 1 giá trị RGBSmart, check lỗi
-
-### Xoá Automation
-```
-RGCore.shared.smart.deleteSmart(uuid: String, completion: RGBCompletionObject<RGBSmart?>?)
-```
-Trong đó: 
-- uuid: uuid của Smart Automation muốn xoá
-- completion: check lỗi
 
 ### Sửa tên Automation
 ```
@@ -162,4 +145,12 @@ Trong đó:
 - withSmartId: uuid của Smart Automation muốn đổi tên
 - label: điền tên mới của Automation
 - completion: response trả ra ***RGBSmart*** chính là Automation sau khi được đổi tên, check lỗi
-### 
+
+### Xoá Automation
+```
+RGCore.shared.smart.deleteSmart(uuid: String, completion: RGBCompletionObject<RGBSmart?>?)
+```
+Trong đó: 
+- uuid: uuid của Smart Automation muốn xoá
+- completion: check lỗi
+
