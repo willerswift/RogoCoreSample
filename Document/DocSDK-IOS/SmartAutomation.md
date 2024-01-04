@@ -30,38 +30,28 @@ let listOther = Array(Set(smarts).subtracting(listNotifications + listStairSwitc
 
 ### Thêm Automation
 
-##### Tạo một Trigger cho Smart Automation
-```
-let trigger = RGBSmartTrigger(automationEventType: RGBAutomationEventType,
-                              triggerCmdValues: [RGBSmartTriggerEventType],
-                              triggerElementId: Int,
-                              deviceId: String,
-                              triggerType: RGBSmartTriggerType)
-```
-##### Tạo một Cmd cho Smart Automation
+###Thêm automation theo tính năng sử dụng
+
+### 1: Loại automation Công tắc cầu thang
+
+#### Các hàm sử dụng khi tạo automation Công tắc cầu thang:
+
+##### Hàm lấy ra list thiết bị hỗ trợ loại automation công tắc cầu thang:
 
 ```
-let cmd = RGBSmartCmd(extra: [String],
-                      cmds: [String : RGBSmartCmdValue]?,
-                      filter: Int?,
-                      smartID: String?,
-                      target: Int?,
-                      targetID: String?,
-                      type: Int?,
-                      userID: String?,
-                      createdAt: String?,
-                      updatedAt: String?,
-                      uuid: String?)
+RGCore.shared.automation.getListDevicesSupport(animationType: RGBAutomationEventType, from: [RGBDevice])
 ```
-
 Trong đó:
-- cmds: String truyền vào id của element bên phải truyền vào cmdValue
+- animationType: .StairSwitch ( chọn type công tắc cầu thang ), .Notification (thông báo - thông báo khi có sự thay đổi), .SelfReverse (đảo ngược trạng thái - đảo ngược trạng thái hiện tại của công tắc ổ cắm), .Advance (nâng cao - tạo tự động hoá tuỳ chỉnh)
 
-##### Tạo smart Automation
+- from: lấy ra những RGBDevice có uuid không trùng devId của RGBSmartTrigger
+
+##### Hàm tạo smart automation Công tắc cầu thang:
+
 ```
 RGCore.shared.smart.addSmartAutomation(smartTitle: String?,
                                        automationType: RGBSmartAutomationType,
-                                       trigger: RGBSmartTrigger,
+                                       trigger: [RGBSmartTrigger],
                                        commands: [RGBSmartCmd],
                                        initSmartCompletionHandler: RGBCompletionObject<RGBSmart?>?,
                                        addTriggerCompletionHandler: RGBCompletionObject<RGBSmartTrigger?>?,
@@ -69,12 +59,48 @@ RGCore.shared.smart.addSmartAutomation(smartTitle: String?,
                                        completion: RGBCompletionObject<RGBSmart?>?
 ```
 Trong đó:
-- smartTitle: tên của Smart Automation
-- automationTyoe: kiểu automation
-- [RGBSmartCmd]: list lệnh
-- initSmartCompletionHandler: tiến trình add Smart
-- addTriggerCompletionHandler: tiến trình add Trigger
-- addCommandCompletionHandler: tiền trình add Cmd
+
+- smartTitle: tên Smart
+- automationType: .StairSwitch
+- trigger: Đối với loại công tắc cầu thang sẽ truyền vào 2 trigger
+
+Vd: Tạo 1 trigger Công tắc cầu thang
+```
+let trigger = RGBSmartTrigger(automationEventType: .StairSwitch,
+                             triggerCmdValues: [],
+                             triggerElementId: elementId,
+                             deviceId: deviceId,
+                             locationId: locationId,
+                             smartId: nil,
+                             triggerType: .OWNER)
+```
+- 3 closure còn lại truyền nil
+
+### 2: Loại automation Thông báo
+
+```
+let trigger = RGBSmartTrigger(automationEventType: .Notification,
+                             triggerCmdValues: [eventType],
+                             triggerElementId: elementId,
+                             deviceId: deviceId,
+                             timeJob: timeJob,
+                             timeConfig: timeConfig,
+                             triggerType: .OWNER)
+```
+Trong đó:
+
+- triggerCmdValues: type RGBSmartTriggerEventType. là sự kiện vd như bấm 1 lần <.BTN_PRESS_SINGLE>, bấm 2 lần <.BTN_PRESS_DOUBLE> ...
+- timeJob: truyền vào startTime và endTime, là thời gian hiệu lực của automation này
+- timeConfig: Type timeConfig của .Notification là loại .MIN_TIME<thời gian tối thiểu giữa các lần thông báo>  còn của selfReverse là .WAITTING_TIME<set thời gian đảo ngược trạng thía của thiết bị sau 1 khoảng thời gian được cài đặt>
+
+Sau đó gọi hàm addSmartAutomation tương tự
+
+### 3: Loại automation Đảo ngược trạng thái
+
+Loại automation đảo ngược trạng thái cũng tạo trigger tương tự như thông báo khác ở type của timeConfig là WAITTING_TIME, sau đó cũng thực hiện việc gọi hàm addSmartAutomation tương tự
+
+### 4: Loại automation Nâng cao
+
 
 #### Một số hàm có thể sử dụng
 
