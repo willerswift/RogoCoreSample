@@ -63,6 +63,7 @@ Trong đó:
 - smartTitle: tên Smart
 - automationType: .StairSwitch
 - trigger: Đối với loại công tắc cầu thang sẽ truyền vào 2 trigger
+- 3 closure còn lại truyền nil
 
 Vd: Tạo 1 trigger Công tắc cầu thang
 ```
@@ -74,7 +75,7 @@ let trigger = RGBSmartTrigger(automationEventType: .StairSwitch,
                              smartId: nil,
                              triggerType: .OWNER)
 ```
-- 3 closure còn lại truyền nil
+
 
 ### 2: Loại automation Thông báo
 
