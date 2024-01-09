@@ -30,7 +30,7 @@ let listOther = Array(Set(smarts).subtracting(listNotifications + listStairSwitc
 
 ### Thêm Automation
 
-###Thêm automation theo tính năng sử dụng
+### Thêm automation theo tính năng sử dụng
 
 ### 1: Loại automation Công tắc cầu thang
 
@@ -92,7 +92,7 @@ Trong đó:
 
 - triggerCmdValues: type RGBSmartTriggerEventType. là sự kiện vd như bấm 1 lần <.BTN_PRESS_SINGLE>, bấm 2 lần <.BTN_PRESS_DOUBLE> ...
 - timeJob: truyền vào startTime và endTime, là thời gian hiệu lực của automation này
-- timeConfig: Type timeConfig của .Notification là loại .MIN_TIME<thời gian tối thiểu giữa các lần thông báo>  còn của selfReverse là .WAITTING_TIME<set thời gian đảo ngược trạng thía của thiết bị sau 1 khoảng thời gian được cài đặt>
+- timeConfig: Type timeConfig của .Notification là loại .MIN_TIME<thời gian tối thiểu giữa các lần thông báo>  còn của selfReverse là .WAITTING_TIME<set thời gian đảo ngược trạng thái của thiết bị sau 1 khoảng thời gian được cài đặt>, tất cả các loại còn lại là .REVERSE_TIME<giữ trạng thái của thiết bị trong khoảng thời gian được set> 
 
 Sau đó gọi hàm addSmartAutomation tương tự
 
@@ -102,6 +102,38 @@ Loại automation đảo ngược trạng thái cũng tạo trigger tương tự
 
 ### 4: Loại automation Nâng cao
 
+Phần automation nâng cao cũng tương tự như các phần còn lại vẫn phải tạo trigger, tạo Cmd rồi thả vào hàm addSmartAutomation, trong phần chủ yếu cần chú ý có các loại time:
+
+#### Phần set thời gian trong trigger
+
+1. timeJob: Khoảng thời gian hoạt động
+2. timeConfig: Type của nó là REVERSE_TIME<giữ trạng thái của thiết bị trong khoảng thời gian được set> 
+
+#### Phần set thời gian trong Cmd
+
+##### Bên trong RGBSmartCmd:
+
+```
+                            RGBSmartCmd(deviceId: String,
+                                        elementIds: [String],
+                                        cmdValue: RGBSmartCmdValue?)
+```
+Trong đó:
+
+- Ngoài việc truyền vào deviceId và elementIds thì ta còn cần truyền vào cả RGBSmartCmdValue:
+
+```
+                            RGBSmartCmdValue(cmdType: RGBSmartCmdType,
+                                             delay: Int?,
+                                             reversing: Int?)
+```
+
+Trong đó: 
+
+- cmdType: Vd: RGBSmartCmdValue(cmdType: .onOff(isOn: true))
+
+3. delay: Phần time delay này có trong bất kì Cmd nào, dùng để set thời gian trễ là bao lâu khi thực thi Cmd này
+4. reversing: Là thời gian đảo nguợc trạng thái, Vd: khi bật 1 công tắc thì trong khoảng thời gian cài đặt reversing thì công tắc sẽ đảo ngược thành bật
 
 #### Một số hàm có thể sử dụng
 
@@ -164,6 +196,13 @@ Trong đó:
 - triggers: smart.trigger
 - completion: trả ra 1 giá trị RGBSmart, check lỗi
 
+### Update Smart Cmd
+
+```
+                RGCore.shared.smart.updateSmartCmd(with: RGBSmart,
+                                                   smartCmd: RGBSmartCmd,
+                                                   completion: RGBCompletionObject<RGBSmartCmd?>)
+```
 ### Sửa tên Automation
 ```
 RGCore.shared.smart.updateSmartTitle(withSmartId: String, label: String, completion: RGBCompletionObject<RGBSmart?>?)
