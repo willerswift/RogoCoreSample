@@ -102,7 +102,24 @@ Loại automation đảo ngược trạng thái cũng tạo trigger tương tự
 
 ### 4: Loại automation Nâng cao
 
+Type của automationEventType trong trigger nâng cao
+```
+automationEventType: .StateChange
+```
 Phần automation nâng cao cũng tương tự như các phần còn lại vẫn phải tạo trigger, tạo Cmd rồi thả vào hàm addSmartAutomation, trong phần chủ yếu cần chú ý có các loại time:
+
+Trong trường hợp automation Nâng cao: 
+
+```
+let type = trigger.triggerCmdValues.contains.NO_MOTION) ? RGBSmartAutomationType.TYPE_NOMOTION_DETECTED_SIMULATE: RGBSmartAutomationType. TYPE_MIX_OR
+RCore. shared. smart.addSmartAutomation(smartTitle: smartTitle,
+automationType: type, trigger: trigger,
+commands: 1stCommands) { response, error in...
+```
+
+Trong đó:
+
+- Trong hàm addSmartAutomation thì RGBSmartAutomationType của automation Nâng cao : .TYPE_MIX_OR, chỉ trong trường hợp trigger có value là không phát hiện truyển động thì RGBSmartAutomationType: .TYPE_NOMOTION_DETECTED_SIMULATE
 
 #### Phần set thời gian trong trigger
 
@@ -184,6 +201,24 @@ Vd: RGBAutomationEventType trong automation .SelfReverse có .StateChange và .S
     }
 ```
 
+### Lấy Id của device và lấy Id của element trong 1 RGBSmart
+
+```
+smart.cmds?.first.targetID
+```
+Trong đó:
+
+- smart chứa 1 list cmd. ví dụ trên lấy ra id của device trong cmd đầu tiên của list
+
+### lấy ra element id của 1 RGBSmart
+
+```
+smart.cmds?.first?.cmds
+```
+Trong đó:
+
+- cmds: [String: RGBSmartCmdValue]?, tương ứng mỗi 1 element sẽ có 1 cmd đi kèm
+
 ### Update trigger cho automation
 
 ```
@@ -202,7 +237,8 @@ Trong đó:
                 RGCore.shared.smart.updateSmartCmd(with: RGBSmart,
                                                    smartCmd: RGBSmartCmd,
                                                    completion: RGBCompletionObject<RGBSmartCmd?>)
-```
+``` 
+
 ### Sửa tên Automation
 ```
 RGCore.shared.smart.updateSmartTitle(withSmartId: String, label: String, completion: RGBCompletionObject<RGBSmart?>?)
