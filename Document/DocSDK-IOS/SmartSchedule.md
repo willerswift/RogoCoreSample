@@ -55,6 +55,15 @@ Trong đó:
 - cmdValue: truyền vào RGBSmartCmdValue
 - completion: trả ra 1 giá trị kiểu RGBSmartCmd, check lỗi
 
+### Update, sửa thời gian cho Schedule
+```
+RGCore.shared.schedule.updateSchedule(schedule: RGBSchedule, completion: RGBCompletionObject<RGBSchedule?>?)
+```
+Trong đó:
+
+- schedule: init lại giá trị time và weekdays mới vào RGBSchedule rồi gọi hàm update
+- completion: res trả ra RGBSchedule đã update, check lỗi
+
 ### Update, sửa lệnh cho Schedule
 ```
  RGCore.shared.smart.updateSmartCmd(with: RGBSmart,
