@@ -14,18 +14,21 @@
 
 ### Add Wile device
 ```
+                                        
 RGCore.shared.device.startConfigWileDevice(device: RGBMeshScannedDevice,
                                            didUpdateProgessing: ((Int) -> ())?,
+                                           wifiScanCompletedHandler: (([RGBWifiInfo]) -> ())?,
                                            wifiSelectionHandler: &((String, String) -> ())?,
                                            wifiConnectErrorHandler: ((String?, String?,
                                            RGBWifiConnectionErrorType) -> ())?,
-                                           didCompletedHandler:((RGBDevice?) -> ())?
+                                           didCompletedHandler: ((RGBDevice?) -> ()))
 ```
 
 Trong đó:
 - device: Truyền vào wile device đã scan ra được
 - didUpdateProgessing : trả ra ***completedPercent*** hiển thị phần trăm tiến trình add thiết bị
-- wifiSelectionHandler : lấy được ***list SSID***
+- wifiScanCompletedHandler: lấy ra được list RGBWifiInfo, bên trong nó có các trường ssid: tên Wifi, rssi: độ mạnh yếu của tín hiệu, authType: kiểu bảo mật, khi nó thuộc kiểu .WIFI_AUTH_OPEN là wifi không pass
+- wifiSelectionHandler : lấy được ***SSID***
 - wifiConnectErrorHandler : hiển thị phần ***thông báo lỗi*** cho wifi
 - didCompletedHandler : trả ra ***device*** vừa được add
 

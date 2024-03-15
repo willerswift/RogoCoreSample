@@ -61,7 +61,7 @@ RGCore.shared.smart.addSmartAutomation(smartTitle: String?,
 Trong đó:
 
 - smartTitle: tên Smart
-- automationType: .StairSwitch
+- automationType: .TYPE_STAIR_SWITCH
 - trigger: Đối với loại công tắc cầu thang sẽ truyền vào 2 trigger
 - 3 closure còn lại truyền nil
 
