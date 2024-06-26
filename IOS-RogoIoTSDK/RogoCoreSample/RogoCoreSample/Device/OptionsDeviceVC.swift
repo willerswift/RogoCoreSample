@@ -14,7 +14,7 @@ class OptionsDeviceVC: UIBaseVC {
     
     //MARK: - Properties
     
-    var selectedLocation: RGBLocation? = nil
+    var selectedLocation: RGBLocation?
     
     //MARK: - Life Cycle
     

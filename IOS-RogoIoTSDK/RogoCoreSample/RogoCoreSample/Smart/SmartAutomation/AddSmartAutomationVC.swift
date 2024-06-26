@@ -19,7 +19,7 @@ class AddSmartAutomationVC: UIBaseVC {
     
     var selectedLocation: RGBLocation?
     
-    let listSmartAutomationType: [RGBAutomationEventType] = [.StairSwitch, .Notification, .SelfReverse, .SwitchScene]
+    let listSmartAutomationType: [RGBAutomationEventType] = [.StairSwitch, .Notification, .SelfReverse, .StateChange]
     
     let dropDownAutomationType = DropDown()
     
@@ -27,13 +27,13 @@ class AddSmartAutomationVC: UIBaseVC {
     
     var listDeviceSupport: [RGBDevice] = []
     
-    let listAllDevice: [RGBDevice] = RGCore.shared.user.selectedLocation!.allDevicesInLocation
+    var listAllDevice = RGCore.shared.user.selectedLocation?.allDevicesInLocation
     
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
     }
    // With smart Automation, they are divided into 4 types, you will use 1 of those 4 types to proceed with Smart Automation.
     func selectCommandTypeDropDown() {
@@ -51,8 +51,8 @@ class AddSmartAutomationVC: UIBaseVC {
     func getListDeviceSupport () {
         guard let selectedAutomationType = selectedAutomationType else {return}
         //MARK: - getListDevicesSupport
+        guard let listAllDevice = listAllDevice else {return}
         listDeviceSupport = RGCore.shared.automation.getListDevicesSupport(animationType: selectedAutomationType, from: listAllDevice)
-//        listDeviceSupport.append(contentsOf: )
         print("automation type: \(selectedAutomationType), device support count: \(listDeviceSupport.count)")
     }
   

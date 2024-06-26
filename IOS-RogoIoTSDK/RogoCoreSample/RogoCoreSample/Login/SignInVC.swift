@@ -42,14 +42,20 @@ class SignInVC: UIBaseVC {
         viewSelectedEmail.backgroundColor = UIColor.green
         tfEmail.isEnabled = true
         tfUserName.text = nil
-        tfEmail.text = "nhacxuan1415@gmail.com"
+        self.lbError.text = "Selected: Sign in by Email"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.lbError.text = ""
+        }
     }
     @IBAction func btnSelecUserName(_ sender: Any) {
         viewSelectedUserName.backgroundColor = UIColor.green
         viewSelectedEmail.backgroundColor = UIColor.white
         tfEmail.isEnabled = false
         tfEmail.text = nil
-        tfUserName.text = "nx1415"
+        self.lbError.text = "Selected: Sign in by User name"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.lbError.text = ""
+        }
     }
     @IBAction func btnSignIn(_ sender: Any) {
         DispatchQueue.main.async {
