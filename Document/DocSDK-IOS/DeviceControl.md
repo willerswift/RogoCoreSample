@@ -6,11 +6,11 @@
 
 ### Điều khiển bật tắt tất cả thiết bị
 ```
-RGCore.shared.device.sendControlMessage(group: RGBGroup, productType: RGBProductCategoryType, value: RGBCmdValue)
+RGCore.shared.device.sendControlLocationMessageWith(locationUUID: String, productType: RGBProductCategoryType, value: RGBCmdValue)
 ```
 Trong đó:
  
-- group: group = RGBGroup(elementID: 49152) <dùng để bật/tắt tất cả thiết bị, hoặc 1 loạt các thiết bị cùng loại, ví dụ như trong trường hợp ta muốn tắt tất cả đèn>
+- locationUUID: truyền vào id của location đang được chọn <dùng để bật/tắt tất cả thiết bị, hoặc 1 loạt các thiết bị cùng loại, ví dụ như trong trường hợp ta muốn tắt tất cả đèn>
 
 - productType: Kiểu thiết bị muốn bật tắt tất cả
         
@@ -22,11 +22,11 @@ Trong đó:
 
 ### Điều khiển đơn
 ```
-RGCore.shared.device.sendControlMessage(device: RGBDevice, value: RGBCmdValue, elements: [Int])
+RGCore.shared.device.sendControlMessage(deviceUUID: String, value: RGBCmdValue, elements: [Int])
 ```
 Trong đó:
 
-- device: truyền vào device lẻ muốn điểu khiển
+- deviceUUID: truyền vào uuid của device lẻ muốn điểu khiển
 - element: device.elementIDS ( lấy được list element của thiết bị, vd như công tắc 4 nút thì sẽ có 4 element )
 - value: có thể là bật/tắt cũng có thể là gửi 1 giá trị về độ sáng/tông màu cho đèn
 ###### Vd: 
@@ -39,10 +39,10 @@ let value = RGBValueBrightness(1000) (giá trị của brightness là từ 0 -> 
 ```
 ### Điều khiển nhóm
 ```
-RGCore.shared.device.sendControlMessage(RGBGroup, productType: RGBProductCategoryType, value: RGBCmdValue)
+RGCore.shared.device.sendControlMessage(groupUUID: String, productType: RGBProductCategoryType, value: RGBCmdValue)
 ```
 Trong đó:
-- group: nhóm ảo muốn điều khiển 
+- groupUUID: id nhóm ảo muốn điều khiển 
 ###### Vd lấy ra list nhóm ảo : 
 ```
 RGCore.shared.user.selectedLocation?.groups.filter{$0.groupType == .VirtualGroup}

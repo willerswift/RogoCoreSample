@@ -11,10 +11,10 @@ RGCore.shared.user.locations
 
 ### Chọn location:
 ```
-RGCore.shared.user.setSelectedLocation(location: RGBLocation)
+RGCore.shared.user.setSelectedLocation(locationId: String)
 ```
 
-- Truyền vào location mà người dùng chọn
+- Truyền vào id location mà người dùng chọn
 
 ### Thêm location mới:
 ```

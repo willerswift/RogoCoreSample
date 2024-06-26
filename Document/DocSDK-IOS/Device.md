@@ -38,15 +38,17 @@ if device.productType?.productCategoryType == .PLUG
 
 #### Cập nhật tên của thiết bị
 ```
-RGCore.shared.device.updateDevice(deviceInfo: RGBDevice, completion: RGBCompletionObject<RGBDevice?>?)
+RGCore.shared.device.updateDevice(deviceId: String, label: String?, elementLabels: [String: String]?, completion: RGBCompletionObject<RGBDevice?>?)
 ```
 Trong đó:
-- deviceInfo: truyền vào device được chọn để đổi tên
+- deviceId: truyền vào uuid của device được chọn để đổi tên
+- label: truyền vào tên mới cho thiết bị
+- elementLabels: đối với những thiết bị có nhiều elements VD: Công tắc 4 nút, ta có thể tiến hành đặt tên cho từng nút, String phía bên trái truyền vào elementId bên phải truyền vào tên muốn đặt, trong trường hợp không muốn đặt tên cho các element trong device ta có thể truyền nil vào đây
 - completion: check lỗi
 
 ###### Vd:
 ```
- RGCore.shared.device.updateDevice(device!) { response, error in
+ RGCore.shared.device.updateDevice(device.uuid, label: "newName", elementLabels: nil) { response, error in
             if error == nil {
             //Thành công
             } else {
@@ -57,36 +59,36 @@ Trong đó:
 
 ### Xoá thiết bị
 ```
-RGCore.shared.device.deleteDevice(device: RGBDevice, completion: RGBCompletionObject<RGBDevice?>?)
+RGCore.shared.device.deleteDeviceWith(deviceUUID: String, completion: RGBCompletionObject<RGBDevice?>?)
 ```
 Trong đó:
-- device: truyền vào device muốn xoá
+- deviceUUID: truyền vào uuid của device muốn xoá
 - completion: check lỗi
 
 ### Cập nhật nhóm cho thiết bị
 ```
-RGCore.shared.device.setGroupForDeviceWith(deviceInfo: RGBDevice, groupId: String, completion: RGBCompletionObject<RGBDevice?>?)
+RGCore.shared.device.setGroupForDeviceWith(deviceId: String, groupId: String, completion: RGBCompletionObject<RGBDevice?>?)
 ```
 Trong đó:
 
-- deviceInfo: truyền vào device muốn cập nhật nhóm
+- deviceId: truyền vào uuid của device muốn cập nhật nhóm
 - groupId: truyền vào uuid của group (Vd: groupId = group?.uuid)
 - completion: check lỗi
 
 ### Thêm thiết bị trong nhóm ảo
 ```
-RGCore.shared.group.updateGroupMemberElement(elementIds: [Int], of: RGBDevice, to: RGBGroup, observer: AnyObject?, completion: RGBCompletionObject<RGBGroupMember?>?)
+RGCore.shared.group.updateGroupMemberElement(elementIds: [Int], ofDeviceWith: String, toGroupdWith: String, observer: AnyObject?, completion: RGBCompletionObject<RGBGroupMember?>?)
 ```
 Trong đó: 
 - elementIds: là id của element <Vd: trong 1 công tắc 4 nút, ngoài deviceId của công tắc, ta còn có 4 elementId của 4 nút>
-- of: truyền vào device
-- to: truyền vào nhóm ảo muốn add element
+- ofDeviceWith: truyền vào uuid của device
+- ofDeviceWith: truyền vào id nhóm ảo muốn add element
 - observer: ***self***
 - completion: check lỗi
 
 ### Xoá thiết bị trong nhóm ảo
 ```
-RGCore.shared.group.removeGroupMember(device: RGBDevice, from: RGBGroup, observer: AnyObject?, completion: RGBCompletionObject<RGBGroupMember?>?)
+RGCore.shared.group.removeGroupMember(deviceWithUUID: String, fromGroupWith: RGBGroup, observer: AnyObject?, completion: RGBCompletionObject<RGBGroupMember?>?)
 ```
 
 

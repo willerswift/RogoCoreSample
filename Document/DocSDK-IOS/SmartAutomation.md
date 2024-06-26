@@ -62,7 +62,7 @@ Trong đó:
 
 - smartTitle: tên Smart
 - automationType: .TYPE_STAIR_SWITCH
-- trigger: Đối với loại công tắc cầu thang sẽ truyền vào 2 trigger
+- trigger: Đối với loại công tắc cầu thang sẽ truyền vào 2 trigger, trigger dầu tiên sẽ có triggerType: .OWNER, còn trigger thứ 2 triggerType: .EXT
 - 3 closure còn lại truyền nil
 
 Vd: Tạo 1 trigger Công tắc cầu thang
@@ -91,7 +91,7 @@ let trigger = RGBSmartTrigger(automationEventType: .Notification,
 Trong đó:
 
 - triggerCmdValues: type RGBSmartTriggerEventType. là sự kiện vd như bấm 1 lần <.BTN_PRESS_SINGLE>, bấm 2 lần <.BTN_PRESS_DOUBLE> ...
-- timeJob: truyền vào startTime và endTime, là thời gian hiệu lực của automation này
+- timeJob: truyền vào startTime và endTime, là thời gian hiệu lực của automation này, khi timeJob truyền vào là nil : hoạt động bất cứ khi nào
 - timeConfig: Type timeConfig của .Notification là loại .MIN_TIME<thời gian tối thiểu giữa các lần thông báo>  còn của selfReverse là .WAITTING_TIME<set thời gian đảo ngược trạng thái của thiết bị sau 1 khoảng thời gian được cài đặt>, tất cả các loại còn lại là .REVERSE_TIME<giữ trạng thái của thiết bị trong khoảng thời gian được set> 
 
 Sau đó gọi hàm addSmartAutomation tương tự
@@ -210,7 +210,7 @@ Trong đó:
 
 - smart chứa 1 list cmd. ví dụ trên lấy ra id của device trong cmd đầu tiên của list
 
-### lấy ra element id của 1 RGBSmart
+### Lấy ra element id của 1 RGBSmart
 
 ```
 smart.cmds?.first?.cmds

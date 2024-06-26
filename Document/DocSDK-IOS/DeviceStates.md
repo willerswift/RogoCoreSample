@@ -11,10 +11,10 @@ B1:
 #### Trường hợp lấy state của 1 thiết bị :
 
 ```
-RGCore.shared.device.subscribeStateChangeOf(device: RGBDevice, observer: AnyObject?, statusChangedHandler: RGBCompletionObject<RGBDeviceState?>?)
+RGCore.shared.device.subscribeStateChangeOfDeviceWith(deviceUUID: String, observer: AnyObject?, statusChangedHandler: RGBCompletionObject<RGBDeviceState?>?)
 ```
 
-- Truyền vào 1 device dể đăng ký lấy trạng thái của device đó
+- Truyền vào 1 id của device dể đăng ký lấy trạng thái của device đó
 
 #### Trường hợp lấy state của 1 danh sách thiết bị :
 ```
