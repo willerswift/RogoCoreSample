@@ -35,7 +35,7 @@ end
 
 - Kéo thả trực tiếp file RogoCore vào project
 
-Bên trong forder SDK sẽ có 3 SDK, trong đó:
+Bên trong forder SDK sẽ có 3 SDK, trong đó: (hiện tại cả 3 file đã được hợp lại thành ***RogoCore.xcframework*** )
 - iphone : SDK dành cho build trên máy thật
 - sim-arm64 : SDK dành cho build máy ảo sử dụng chip Apple Silicon
 - sim-x86_64: SDK dành cho build máy ảo sử dụng chip Intel
@@ -44,7 +44,7 @@ Bên trong forder SDK sẽ có 3 SDK, trong đó:
 
 #### Cách bước thực hiện:
 
-- B1: Tuỳ vào dòng máy sử dụng mà chọn file ***RogoCore.framework*** tương ứng
+- B1: Chọn file ***RogoCore.xcframework*** 
 
 - B2: Mở project muốn sử dụng SDK, sau đó kéo trực tiếp file SDK đã chọn thả vào project
 
