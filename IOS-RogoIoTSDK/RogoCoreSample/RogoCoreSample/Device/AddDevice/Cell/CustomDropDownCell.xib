@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomDropDownCell" customModule="RogoCoreSample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="66"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lig-uT-MuB">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="66"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SSID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETm-BM-6Yj">
+                    <rect key="frame" x="15" y="13" width="363" height="20"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WPA2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FT6-A6-dRT">
+                    <rect key="frame" x="15" y="35" width="363" height="15"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ETm-BM-6Yj" secondAttribute="trailing" constant="15" id="DPh-pl-cX7"/>
+                <constraint firstItem="ETm-BM-6Yj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-10" id="PQT-39-NbN"/>
+                <constraint firstItem="FT6-A6-dRT" firstAttribute="top" secondItem="ETm-BM-6Yj" secondAttribute="bottom" constant="2" id="SMV-3N-fbw"/>
+                <constraint firstItem="FT6-A6-dRT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="f7U-ah-Hdu"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="FT6-A6-dRT" secondAttribute="trailing" constant="15" id="s02-Z0-CDq"/>
+                <constraint firstItem="FT6-A6-dRT" firstAttribute="top" secondItem="ETm-BM-6Yj" secondAttribute="bottom" constant="2" id="swS-dY-iYz"/>
+                <constraint firstItem="ETm-BM-6Yj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="wII-og-lj3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="lbWiFiProtectedAccess" destination="FT6-A6-dRT" id="EJM-Ca-9xn"/>
+                <outlet property="optionLabel" destination="ETm-BM-6Yj" id="V8t-us-dnA"/>
+            </connections>
+            <point key="canvasLocation" x="127.48091603053435" y="244.36619718309859"/>
+        </view>
+    </objects>
+</document>

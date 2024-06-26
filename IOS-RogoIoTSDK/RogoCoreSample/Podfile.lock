@@ -1,0 +1,38 @@
+PODS:
+  - CocoaMQTT (2.0.9):
+    - CocoaMQTT/Core (= 2.0.9)
+  - CocoaMQTT/Core (2.0.9):
+    - MqttCocoaAsyncSocket (~> 1.0.8)
+  - CryptoSwift (1.5.1)
+  - DropDown (2.3.13)
+  - MqttCocoaAsyncSocket (1.0.8)
+  - nRFMeshProvision (3.2.0):
+    - CryptoSwift (= 1.5.1)
+  - SwiftEntryKit (2.0.0)
+
+DEPENDENCIES:
+  - CocoaMQTT (~> 2.0.9)
+  - DropDown
+  - nRFMeshProvision
+  - SwiftEntryKit
+
+SPEC REPOS:
+  trunk:
+    - CocoaMQTT
+    - CryptoSwift
+    - DropDown
+    - MqttCocoaAsyncSocket
+    - nRFMeshProvision
+    - SwiftEntryKit
+
+SPEC CHECKSUMS:
+  CocoaMQTT: 76904ac6102297972e1a42343dd77a6da3862a69
+  CryptoSwift: c4f2debceb38bf44c80659afe009f71e23e4a082
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  MqttCocoaAsyncSocket: 77d3b74f76228dd5a05d1f9526eab101d415b30c
+  nRFMeshProvision: 297bbda9dc44138c1b63b1ac5e4c860f0398e176
+  SwiftEntryKit: 61b5fa36f34a97dd8013e48a7345bc4c4720be9a
+
+PODFILE CHECKSUM: 893c04ceaf1fe0da4d73412b3d3d317258e9d71b
+
+COCOAPODS: 1.12.1
