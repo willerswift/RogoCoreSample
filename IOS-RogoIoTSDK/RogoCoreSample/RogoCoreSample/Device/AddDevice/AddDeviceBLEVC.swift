@@ -31,7 +31,7 @@ class AddDeviceBLEVC: UIBaseVC {
     var listGroup = RGCore.shared.user.selectedLocation?.groups.filter {$0.groupType != .VirtualGroup}
     var detectedDevice: RGBMeshScannedDevice?
     var selectedLocation: RGBLocation?
-    var listHubs = RGCore.shared.user.selectedLocation?.allDevicesInLocation.filter{$0.productType?.productCategoryType == .MEDIA_BOX} ?? []
+    var listHubs = (RGCore.shared.user.selectedLocation?.allDevicesInLocation.filter {$0.productType?.productCategoryType == .MEDIA_BOX} ?? []) + (RGCore.shared.user.selectedLocation?.allDevicesInLocation.filter {$0.productType == .Wile_Plug} ?? [])
     let dropDownSelectHub = DropDown()
     @Published var selectedHub: RGBDevice?
     var selectedGroup: RGBGroup?
@@ -73,25 +73,47 @@ class AddDeviceBLEVC: UIBaseVC {
         
     }
     private func getHubStatus() {
-        RGCore.shared.device.getHubsStatus(hubs: listHubs,
-                                           observer: self,
-                                           timeout: 5) {[weak self] status, error in
-            
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else {
-                    return
+        if listHubs.contains(where: { $0.productType?.productCategoryType == .MEDIA_BOX }) {
+            RGCore.shared.device.getHubsStatus(hubs: listHubs,
+                                               observer: self,
+                                               timeout: 5) {[weak self] status, error in
+                
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    if let status = status,
+                       let findIndex = self.listHubs.firstIndex(where: {
+                           $0.uuid?.uppercased() == status.uuid?.uppercased()
+                           || $0.mac?.uppercased() == status.mac?.uppercased()
+                           
+                       }) {
+                        var device = self.listHubs[findIndex]
+                        device.meshStatus = status
+                        self.listHubs[findIndex] = device
+                    }
+                    //
                 }
-                if let status = status,
-                   let findIndex = self.listHubs.firstIndex(where: {
-                       $0.uuid?.uppercased() == status.uuid?.uppercased()
-                       || $0.mac?.uppercased() == status.mac?.uppercased()
-                       
-                   }) {
-                    var device = self.listHubs[findIndex]
-                    device.meshStatus = status
-                    self.listHubs[findIndex] = device
+            }
+        }
+        if listHubs.contains(where:  { $0.productType == .Wile_Plug }) {
+            RGCore.shared.device.getIRHubAvailable(observer: nil,
+                                                   timeout: 5) {[weak self] status, error in
+                DispatchQueue.main.async { [weak self] in
+                    
+                    guard let self = self else {
+                        return
+                    }
+                    if let status = status,
+                       let findIndex = self.listHubs.firstIndex(where: {
+                           $0.uuid?.uppercased() == status.uuid?.uppercased()
+                           || $0.mac?.uppercased() == status.mac?.uppercased()
+                       }) {
+                        var device = self.listHubs[findIndex]
+                        device.meshStatus = status
+                        self.listHubs[findIndex] = device
+                    }
                 }
-                //
             }
         }
     }
