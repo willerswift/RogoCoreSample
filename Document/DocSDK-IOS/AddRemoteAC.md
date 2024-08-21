@@ -120,6 +120,8 @@ Vd:
             protocol: .RGIrPrtcAc
 }
 ```
+Trong đó:
+
 - remoteInfo: truyền vào remoteInfo vừa chọn để điều khiển thử
 - manufacturer: truyền vào hãng điều hoà
 - label: tên điều khiển điều hoà
