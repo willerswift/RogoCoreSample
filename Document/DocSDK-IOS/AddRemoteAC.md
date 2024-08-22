@@ -118,6 +118,19 @@ Vd:
             
             raw: .RGIrRawZip
             protocol: .RGIrPrtcAc
+            
+            Riêng đối với trường hợp mã Protocol trước khi gọi addIrRemote ta làm thêm bước truyền vào nhiệt độ thấp nhất nhiệt độ cao nhất và các mode điều hoà cũng như quạt:
+            
+                var minTemp: Int = 16
+                var maxTemp: Int = 30
+                let listAcModes = RGBIrAcModeType.allCases.filter{$0.rawValue >= 0}
+                let listAcFanModes = RGBIrAcFanType.allCases.filter{$0.rawValue >= 0}
+            
+                remoteInfo.setValueInfo(tempRange: [minTemp, maxTemp],
+                                          acModes: listAcModes,
+                                          availableFanValues: listAcFanModes,
+                                          tempAllowInModes: listAcModes,
+                                          fanAllowInModes: listAcModes)
 }
 ```
 Trong đó:
