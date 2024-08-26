@@ -44,6 +44,7 @@ Trong đó:
 ### Lấy ra list lệnh điều khiển
 
 Bước này check xem mã remoteInfo hiện tại nếu là kiểu raw thì cần gọi hàm get còn nếu là mã protocol thì không cần
+Trong khâu này: loại mã raw sẽ được lấy từ trên cloud về còn mã protocol được lấy trực tiếp từ thiết bị qua
 ```
             if self.remoteInfo?.protocolCtlType == .RGIrRawZip {
             RGCore.shared.device.getIrRemoteCommandDataOf(manufacturer: RGBManufacturer,
