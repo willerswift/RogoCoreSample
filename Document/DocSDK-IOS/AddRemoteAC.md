@@ -42,14 +42,18 @@ Trong đó:
 - completion: trả ra 1 list có kiểu [RGBIrRemoteInfo] 
 
 ### Lấy ra list lệnh điều khiển
+
+Bước này check xem mã remoteInfo hiện tại nếu là kiểu raw thì cần gọi hàm get còn nếu là mã protocol thì không cần
 ```
+            if self.remoteInfo?.protocolCtlType == .RGIrRawZip {
             RGCore.shared.device.getIrRemoteCommandDataOf(manufacturer: RGBManufacturer,
                                                           deviceType: RGBProductCategoryType,
                                                           remoteId: Int,
                                                           completion: RGBCompletionObject<[RGBIrRemoteCmdZipData]?)
+                                                          ...
+            }
 ```
 Trong đó:
-
 - manufacturer: truyền vào 1 trong những manufacturer trong listACManufacture
 - deviceType: .AC
 - remoteId: truyền vào rid của 1 phần từ remoteInfo trong danh sách [RGBIrRemoteInfo]
