@@ -76,7 +76,7 @@ Trong đó:
 ```
 Trong đó:
 
-- protocolType: .RGIrRaw
+- protocolType: .RGIrRawZip
 - remoteInfo: truyền vào remoteInfo vừa chọn để điều khiển thử
 - manufacturer: truyền vào hãng TV
 - label: tên điều khiển TV
