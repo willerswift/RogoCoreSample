@@ -88,3 +88,14 @@ Trong đó:
 ```
 RGCore.shared.device.stopScanBleDevice()
 ```
+### Trường hợp khi thêm thiết bị là .MOTOR_CONTROLLER
+
+Trong trường hợp thiết bị được quét ra có kiểu là 
+
+```
+device.productType?.productCategoryType == .MOTOR_CONTROLLER
+```
+Trong đó:
+- nếu muốn add device có loại là rèm thì truyền device.productType = .Motor_Curtain
+- còn nếy muốn add device có loại là cổng thì truyền device.productType = .Motor_Gate
+sau đó gọi hàm addDevice và truyền device đã được gán productType vào
