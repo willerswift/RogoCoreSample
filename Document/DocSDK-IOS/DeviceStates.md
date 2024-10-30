@@ -128,3 +128,79 @@ var date = Date()
 Trong đó:
 - device: truyền vào thiết bị muốn lấy log
 - date: giá trị về thời gian
+
+### Đối với các thiết bị có hỗ trợ khoá cảm ứng:
+
+Được chia làm 2 loại:
+
+1. Đối với các thiết bị sử dụng bản tin setting cũ nhưng chưa update firm bao gồm:
+
+```
+        if self.productID == "000128104C0C009B"
+            || self.productID == "RDMTBM1301010001"
+            || self.productID == "DQMTZB01000102"
+
+```
+
+Trong đó:
+- Đối với các thiết bị này sử dụng hàm:
+
+```
+RGCore.shared.device.requestStateAndSettingOf(device: device)
+```
+2. Đối với các thiết bị mới đang được sử dụng thì sử dụng hàm:
+
+```
+RGCore.shared.device.requestStateOfDeviceWith(deviceUUID: device.uuid)
+
+```
+
+### Phần setup để hứng trạng thái của khoá cảm ứng
+
+#### Phần này vẫn subcribe trạng thái của các thiết bị có khoá cảm ứng tương tự như các thiết bị khác, có thêm phần lấy trạng thái khoá cảm ứng từ bên trong setting được response trả về 
+
+Vd:
+```
+    private func setSubscribeDeviceStateChange() {
+        
+        if device.productID == "000128104C0C009B"
+            || device.productID == "RDMTBM1301010001"
+            || device.productID == "DQMTZB01000102" {
+            RGCore.shared.device.subscribeStateChangeAndSettingsOf(device: device,
+                                                                   observer: self,
+                                                                   statusChangedHandler: nil) {[weak self] res, error in
+                guard let self = self,
+                      res != nil,
+                      res!.deviceUUID?.uppercased() == self.device.uuid?.uppercased(),
+                      let settings = res?.settings,
+                      settings.count > 0 else {
+                    return
+                }
+                
+                settings.forEach { setting in
+                    switch setting.settingType {
+                    case .TouchAllow:
+                        if let settingValue = (setting.settingValue as? RGBDeviceTouchSetting) {
+                            self.deviceSettingLockTouch = settingValue
+                        }
+                    default:
+                        break
+                    }
+                }
+            }
+        } else {
+            RGCore.shared.device.subscribeStateChangeOf(devices: [device],
+                                                        observer: self,
+                                                        statusChangedHandler: {[weak self] res, error in
+                guard let self = self,
+                      res != nil,
+                      res!.deviceUUID?.uppercased() == self.device.uuid?.uppercased(),
+                let settingLockButton = res?.stateValues.first(where: {$0.commandValues.first(where: {$0.type == .SETTING_LOCK_BUTTON}) != nil}) else {
+                    return
+                }
+                self.deviceSettingLockButton = settingLockButton.commandValues.first(where: {$0.type == .SETTING_LOCK_BUTTON}) as? RGBDeviceSettingLockButton
+            })
+        }
+        
+    }
+```
