@@ -47,15 +47,15 @@ Cách bước thực hiện:
 
 #### B2: Mở project muốn sử dụng SDK, sau đó kéo trực tiếp file SDK đã chọn thả vào project
 
-/var/folders/wv/g9h6sr117mj6x8ctwc65q6f40000gn/T/TemporaryItems/NSIRD_screencaptureui_Yor09L/Screenshot 2024-11-07 at 11.47.49.png
+![1](https://github.com/user-attachments/assets/cfd4e23b-9ffd-4173-9b88-7f07122c3560)
 
 #### B3: Chọn như hình, rồi bấm Finish
 
-/var/folders/wv/g9h6sr117mj6x8ctwc65q6f40000gn/T/TemporaryItems/NSIRD_screencaptureui_SHYxHT/Screenshot 2024-11-07 at 11.49.45.png
-
+![2](https://github.com/user-attachments/assets/7faf358b-08d5-4484-b22d-94aabdd65a8d)
 
 #### B4: Vào mục General của project, tìm Frameworks, Libraries, and Embedded Content, sau đó chọn Embed & Sign cho RogoCore.framework
 
-/var/folders/wv/g9h6sr117mj6x8ctwc65q6f40000gn/T/TemporaryItems/NSIRD_screencaptureui_rIgCnS/Screenshot 2024-11-07 at 11.50.26.png
+![3](https://github.com/user-attachments/assets/eee162e5-5223-493a-875c-8c691510bf35)
+
 
 
