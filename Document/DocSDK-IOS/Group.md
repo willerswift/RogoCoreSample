@@ -8,7 +8,7 @@
 ```
 RGCore.shared.user.selectedLocation?.groups
 ```
-- Lấy ra toàn bộ group có mặt bên trong location đã chọn, trong đó sẽ có cả group nhóm ảo, do đó có thể filter các group nhóm ảo đi
+- Lấy ra toàn bộ group có mặt bên trong location đã chọn, trong đó sẽ có cả group nhóm ảo (.VirtualGroup) và group nhóm phòng (.Room), do đó có thể filter các group để bỏ nhóm ảo đi
 ###### Vd: 
 ```
 .filter {$0.groupType != .VirtualGroup}   or  .filter {$0.groupType == .Room}

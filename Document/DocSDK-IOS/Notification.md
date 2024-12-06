@@ -14,4 +14,5 @@ RGBNotificationEvent.addObserverNotification(event: .REFRESH_DEVICE_LIST, observ
 - .REFRESH_DEVICE_LIST : có sự thay đổi danh sách thiết bị
 - .LOCATION_UPDATED: có sự thay đổi về Location
 - .GROUP_UPDATED: có sự thay đổi nhóm
+- .LIST_SMART_UPDATED: có sự thay đổi về danh sách smart
 - ...

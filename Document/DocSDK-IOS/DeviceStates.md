@@ -6,7 +6,7 @@
 
 ### Lấy trạng thái của thiết bị
 
-B1: 
+B1: Khi khởi tạo view bạn cần gọi hàm subscribeStateChangeOfDeviceWith, hàm này là nơi sẽ nhận trạng thái của thiết bị mỗi khi trạng thái được trả về
 
 #### Trường hợp lấy state của 1 thiết bị :
 
@@ -22,16 +22,16 @@ RGCore.shared.device.subscribeStateChangeOf(devices: [RGBDevice], observer: AnyO
 ```
 - Truyền vào 1 danh sách các device dể đăng ký lấy trạng thái của các device đó
 
-B2: 
+B2: Hàm này cũng là hàm cần gọi luôn khi khởi tạo view, khi hàm này được gọi thì bên phía subscribeStateChangeOfDeviceWith sẽ có 1 response được trả về kiểu RGBDeviceState chính là trạng thái của thiết bị
 
-- Lấy trạng thái của của thiết bị mỗi khi trạng thái của thiết bị có sự thay đổi
+- Lấy trạng thái của của thiết bị
 ```
 RGCore.shared.device.requestStateOf(device: RGBDevice)
 ```
 
 Vd: 
 ```
-RGCore.shared.device.subscribeStateChangeOf(device: device, observer: self) {[weak self] res , error in
+RGCore.shared.device.subscribeStateChangeOfDeviceWith(deviceUUID: String, observer: self) {[weak self] res , error in
             guard let self = self,
                   res != nil,
                   res!.deviceUUID?.uppercased() == device.uuid?.uppercased(),
@@ -45,7 +45,7 @@ RGCore.shared.device.subscribeStateChangeOf(device: device, observer: self) {[we
             self.getLog()
         }
 ```
-- Trong đó sẽ trả về res viết tắt của respone sẽ lấy được trạng thái của thiết bị ở đòng 
+- Trong đó sẽ trả về res viết tắt của respone sẽ lấy được trạng thái của thiết bị ở dòng 
 <let states = res?.stateValues>
 
 B3: Ép kiểu để hiển thị
@@ -66,7 +66,7 @@ RGBValueOnOff : bật / tắt (biến: on)
 RGBValueBrightness : độ sáng (biến: b)
 RGBValueKelvin : độ ấm (biến: k)
 RGBValueBrightnessKelvin: cả độ sáng và độ ấm
-RGBValueOpenClose : đóng / mở
+RGBValueOpenClose : đóng / mở / dừng (0,1,2)
 
 ### Một số kiểu trạng thái thường xuyên sử dụng
 
@@ -107,7 +107,7 @@ for state in states {
 ```
 ### Đối với các thiết bị có log, vd về lấy log thiết bị cảm biến cửa:
 
-        RGCore.shared.device.getSensorLogOf(device: RGBDevice, dayToGetLog: Date, completion: RGBCompletionObject<RGBDeviceLogResponse?>?)
+        RGCore.shared.device.getSensorLogOf(deviceUUID: String, dayToGetLog: Date, completion: RGBCompletionObject<RGBDeviceLogResponse?>?)
 
 ###### Vd:     
 ```
@@ -115,18 +115,23 @@ var date = Date()
         
         date = Calendar.current.date(byAdding: .day, value: 0, to: date)!
         
-        RGCore.shared.device.getSensorLogOf(device: RGBDevice,
-                                            dayToGetLog: date) { [weak self] response, error in
+        RGCore.shared.device.getSensorLogOf(deviceUUID: device.uuid,
+                                            dayToGetLog: date,
+                                            timeOut: nil) { [weak self] response, error in
             
           // Lấy được list log của thiết bị như sau:
-           
-                let logs = response?.deviceLogParts.flatMap({$0.logs}),
-                self.listLogs = logs
+                guard let self = self,
+                  error == nil,
+                  let logs = response else {
+                return
+            }
+            self.logs = logs
+            collectionViewLogs.reloadData()
                 
         }
  ```
 Trong đó:
-- device: truyền vào thiết bị muốn lấy log
+- deviceUUID: truyền vào uuid thiết bị muốn lấy log
 - date: giá trị về thời gian
 
 ### Đối với các thiết bị có hỗ trợ khoá cảm ứng:

@@ -22,7 +22,7 @@ Trong đó:
 
 ### Điều khiển đơn
 ```
-RGCore.shared.device.sendControlMessage(deviceUUID: String, value: RGBCmdValue, elements: [Int])
+RGCore.shared.device.sendControlDeviceMessageWith(deviceUUID: String, value: RGBCmdValue, elements: [Int])
 ```
 Trong đó:
 
@@ -39,10 +39,22 @@ let value = RGBValueBrightness(1000) (giá trị của brightness là từ 0 -> 
 ```
 ### Điều khiển nhóm
 ```
-RGCore.shared.device.sendControlMessage(groupUUID: String, productType: RGBProductCategoryType, value: RGBCmdValue)
+RGCore.shared.device.sendControlGroupMessageWith(groupUUID: String, productType: RGBProductCategoryType, value: RGBCmdValue)
 ```
 Trong đó:
 - groupUUID: id nhóm ảo muốn điều khiển 
+- productType: truyền vào loại thiết bị cần điều khiển (Vd: .LIGHT)
+- value: truyền vào lệnh điều khiển
+
+### Điều khiển theo location
+```
+RGCore.shared.device.sendControlLocationMessageWith(locationUUID: String, productType: RGBProductCategoryType, value: RGBCmdValue)
+```
+Trong đó:
+- locationUUID: uuid của location muốn gửi lệnh điều khiển theo location
+- productType: truyền vào loại thiết bị cần điều khiển (Vd: .LIGHT)
+- value: truyền vào lệnh điều khiển
+
 ###### Vd lấy ra list nhóm ảo : 
 ```
 RGCore.shared.user.selectedLocation?.groups.filter{$0.groupType == .VirtualGroup}
