@@ -1,4 +1,4 @@
-![configApp](https://github.com/user-attachments/assets/2ea1dc68-65f8-46a0-86e0-e18e286ac4f8)
+
 # Authenticate
 
 ##### import RogoCore
