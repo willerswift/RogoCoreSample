@@ -5,7 +5,7 @@
 
 ### Luồng cài đặt môi trường và cấu hình partner
 
-![configApp](https://github.com/user-attachments/assets/7215510d-2483-4a8d-93cf-75316a5c2d4d)
+![configAppKeyandSecret](https://github.com/user-attachments/assets/eb6689e8-bf9f-4033-8517-a7bfcd5e1058)
 
 Trong hàm application(_:didFinishLaunchingWithOptions:) của AppDelegate gọi hàm set môi trường sau đó gọi hàm cofig 
 
