@@ -82,7 +82,7 @@ RGCore.shared.group.updateGroupMemberElement(elementIds: [Int], ofDeviceWith: St
 Trong đó: 
 - elementIds: là id của element <Vd: trong 1 công tắc 4 nút, ngoài deviceId của công tắc, ta còn có 4 elementId của 4 nút>
 - ofDeviceWith: truyền vào uuid của device
-- ofDeviceWith: truyền vào id nhóm ảo muốn add element
+- toGroupdWith: truyền vào id nhóm ảo muốn add element
 - observer: ***self***
 - completion: check lỗi
 
