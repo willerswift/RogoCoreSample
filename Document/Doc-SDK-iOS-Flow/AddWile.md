@@ -2,6 +2,10 @@
 
 ##### import RogoCore
 
+### Luồng thêm thiết bị Wile
+
+![addDeviceWileFlow](https://github.com/user-attachments/assets/e8f3a58f-b20d-48f6-82d2-c2e18c293a84)
+
 ### Scan Wile device
 ```
  RGCore.shared.device.scanAvailableWileDevice(timeout: Int, completion: RGBCompletionObject<RGBMeshScannedDevice?>?)
