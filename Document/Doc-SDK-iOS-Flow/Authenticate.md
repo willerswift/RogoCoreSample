@@ -1,11 +1,11 @@
-
+![configApp](https://github.com/user-attachments/assets/2ea1dc68-65f8-46a0-86e0-e18e286ac4f8)
 # Authenticate
 
 ##### import RogoCore
 
 ### Luồng cài đặt môi trường và cấu hình partner
 
-![config](https://github.com/user-attachments/assets/afa86710-6d8c-44fa-852d-d8ebe128a9b2)
+![configApp](https://github.com/user-attachments/assets/7215510d-2483-4a8d-93cf-75316a5c2d4d)
 
 Trong hàm application(_:didFinishLaunchingWithOptions:) của AppDelegate gọi hàm set môi trường sau đó gọi hàm cofig 
 
