@@ -88,8 +88,12 @@ Trong đó:
 
 ### Xoá thiết bị trong nhóm ảo
 ```
-RGCore.shared.group.removeGroupMember(deviceWithUUID: String, fromGroupWith: RGBGroup, observer: AnyObject?, completion: RGBCompletionObject<RGBGroupMember?>?)
+RGCore.shared.group.removeGroupMember(deviceWithUUID: String, fromGroupWith: String, observer: AnyObject?, completion: RGBCompletionObject<RGBGroupMember?>?)
 ```
-
+Trong đó: 
+- deviceWithUUID: truyền vào uuid của device
+- fromGroupWith: truyền vào uuid của nhóm ảo
+- observer: ***self***
+- completion: check lỗi
 
 
