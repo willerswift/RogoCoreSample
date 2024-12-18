@@ -4,7 +4,7 @@
 
 ### Luồng thêm thiết bị Wile
 
-![addDeviceWileFlow](https://github.com/user-attachments/assets/e8f3a58f-b20d-48f6-82d2-c2e18c293a84)
+![addDeviceWile](https://github.com/user-attachments/assets/dd8c678a-a607-4909-9f68-e8f843588046)
 
 ### Scan Wile device
 ```
