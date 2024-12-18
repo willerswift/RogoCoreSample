@@ -43,4 +43,4 @@ Trong đó:
 - id: truyền vào uuid của location được chọn để xoá 
 - completion: check lỗi
 
-- Nếu bên trong location có device thì khi xoá location sẽ luôn trả về là có lỗi
+- Nếu error != nil -> xoá thất bại (hiển thị thông báo xoá thất bại) <trong location còn thiết bị sẽ không cho phép xoá location>
