@@ -6,7 +6,7 @@
 
 ### Luồng thêm thiết bị RF
 
-
+![addDeviceRF](https://github.com/user-attachments/assets/9a5ef94d-75a9-4b30-9bcb-448ad451bdad)
 
 ### Kiểm tra trạng thái thiết bị hub RF
 
