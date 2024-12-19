@@ -91,8 +91,10 @@ let trigger = RGBSmartTrigger(automationEventType: .Notification,
 Trong đó:
 
 - triggerCmdValues: type RGBSmartTriggerEventType. là sự kiện vd như bấm 1 lần <.BTN_PRESS_SINGLE>, bấm 2 lần <.BTN_PRESS_DOUBLE> ...
-- timeJob: truyền vào startTime và endTime, là thời gian hiệu lực của automation này, khi timeJob truyền vào là nil : hoạt động bất cứ khi nào
-- timeConfig: Type timeConfig của .Notification là loại .MIN_TIME<thời gian tối thiểu giữa các lần thông báo>  còn của selfReverse là .WAITTING_TIME<set thời gian đảo ngược trạng thái của thiết bị sau 1 khoảng thời gian được cài đặt>, tất cả các loại còn lại là .REVERSE_TIME<giữ trạng thái của thiết bị trong khoảng thời gian được set> 
+- timeJob: truyền vào startTime và endTime, là thời gian hiệu lực của automation này, khi timeJob truyền vào là nil : hoạt động bất cứ khi nào Vd:  timeJob = [startTime, endTime] <xtime =  hourTime * 60 + minuteTime> 
+Vd: 6h40' => xtime = 6*60 + 40
+- timeConfig: truyền vào 1 value kiểu Int <tính bắng giây> 
+Type timeConfig của .Notification là loại .MIN_TIME<thời gian tối thiểu giữa các lần thông báo>  còn của selfReverse là .WAITTING_TIME<set thời gian đảo ngược trạng thái của thiết bị sau 1 khoảng thời gian được cài đặt>, tất cả các loại còn lại là .REVERSE_TIME<giữ trạng thái của thiết bị trong khoảng thời gian được set> 
 
 Sau đó gọi hàm addSmartAutomation tương tự
 
@@ -151,6 +153,30 @@ Trong đó:
 
 3. delay: Phần time delay này có trong bất kì Cmd nào, dùng để set thời gian trễ là bao lâu khi thực thi Cmd này
 4. reversing: Là thời gian đảo nguợc trạng thái, Vd: khi bật 1 công tắc thì trong khoảng thời gian cài đặt reversing thì công tắc sẽ đảo ngược thành bật
+
+###### Vd: Bên trong RGBSmartCmd sẽ có cmdValue: RGBSmartCmdValue chính là lệnh điều khiển cho thiết bị
+
+```
+var cmd1: RGBSmartCmdValue?
+cmd1?.cmdType = .onOff(isOn: true) 
+```
+cmd1 chính là 1 RGBSmartCmdValue, có các loại cmd 
+
+.brightnessKelvin(b: Int?, k: Int?): truyền vào giá trị b (độ sáng): 0 -> 1000, k (độ ấm): 2700 -> 6500
+.openClose(value: .open): lệnh mở
+.openClose(value: .close): lệnh đóng
+.onOff(isOn: true): lệnh bật
+.onOff(isOn: false): lệnh tắt
+...
+
+Vd: 1 RGBSmartCmd
+
+```
+let newCmd = RGBSmartCmd(deviceId: String,
+                         elementIds: [String],
+                         cmdValue: RGBSmartCmdValue?)
+```
+- completion: trả ra giá trị RGBSmartCmd mới, check lỗi
 
 #### Một số hàm có thể sử dụng
 

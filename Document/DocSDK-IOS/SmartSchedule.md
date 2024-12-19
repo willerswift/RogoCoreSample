@@ -36,7 +36,7 @@ RGCore.shared.schedule.addSchedule(toSmart: RGBSmart,
 Trong đó:
 - toSmart: truyền vào smart kiểu ***RGBSmart***  ( chính là ***response*** được trả ra ở trên )
 - time: giá trị kiểu ***Int***, định dạng cho ***giờ*** và ***phút*** ( Vd: 3h40p => 3*60 + 40  )
-- weekdays: truyền vào 1 mảng ***[Int]***, định dạng cho số ngày trong tuần được chọn ( Vd: từ CN-T2. mỗi thứ sẽ được đánh số tag từ 0-6 )
+- weekdays: truyền vào 1 mảng ***[Int]***, định dạng cho số ngày trong tuần được chọn ( Vd: từ CN-T2. mỗi thứ sẽ được đánh số tag từ 0-6 <Cn: 0, t2: 1, t3:2, t4: 3, t5: 4, t6: 5, t7: 6> ) Vd: muốn truyền vào t2,t3,CN: [1, 2, 0]
 - completion: response trả ra ***RGBSchedule***, check lỗi
 
 ### Tạo Cmd cho Smart Schedule
@@ -74,11 +74,28 @@ Trong đó:
 - with: truyền vào Smart Schedule muốn cập nhật lệnh
 - smartCmd: truyền vào 1 giá trị RGBSmartCmd
 
-###### Vd:
+###### Vd: Bên trong RGBSmartCmd sẽ có cmdValue: RGBSmartCmdValue chính là lệnh điều khiển cho thiết bị
+
+```
+var cmd1: RGBSmartCmdValue?
+cmd1?.cmdType = .onOff(isOn: true) 
+```
+cmd1 chính là 1 RGBSmartCmdValue, có các loại cmd 
+
+.brightnessKelvin(b: Int?, k: Int?): truyền vào giá trị b (độ sáng): 0 -> 1000, k (độ ấm): 2700 -> 6500
+.openClose(value: .open): lệnh mở
+.openClose(value: .close): lệnh đóng
+.onOff(isOn: true): lệnh bật
+.onOff(isOn: false): lệnh tắt
+...
+
+Vd: 1 RGBSmartCmd
+
+```
 let newCmd = RGBSmartCmd(deviceId: String,
                          elementIds: [String],
                          cmdValue: RGBSmartCmdValue?)
-                         
+```
 - completion: trả ra giá trị RGBSmartCmd mới, check lỗi
 
 ### Đổi tên Smart Schedule

@@ -15,4 +15,9 @@ RGBNotificationEvent.addObserverNotification(event: .REFRESH_DEVICE_LIST, observ
 - .LOCATION_UPDATED: có sự thay đổi về Location
 - .GROUP_UPDATED: có sự thay đổi nhóm
 - .LIST_SMART_UPDATED: có sự thay đổi về danh sách smart
-- ...
+- .CHANGE_SELECTED_LOCATION: có sự thay đổi về location được chọn
+- .LIST_SCENARIO_UPDATED: có sự thay đổi về danh sách các kịch bản
+- .LIST_SMART_CMD_UPDATED: có sự thay đổi về lệnh của smart
+- .SCHEDULE_SMART_UPDATED: có sự thay đổi về lập lịch trong smart
+- .LIST_SMART_TRIGGER_UPDATED: có sự thay đổi về trigger của smart
+
