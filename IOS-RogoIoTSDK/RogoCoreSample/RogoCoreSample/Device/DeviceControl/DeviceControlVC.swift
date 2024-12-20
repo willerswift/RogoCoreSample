@@ -57,9 +57,9 @@ class DeviceControlVC: UIBaseVC, UICollectionViewDelegate, UICollectionViewDataS
         guard let device = device else {return}
         // requestStateOf and subscribeStateChangeOf are used to check the current state of the device, for example simply checking if it is on or off
         //TODO: - requestStateOf
-        RGCore.shared.device.requestStateOf(device: device)
+        RGCore.shared.device.requestStateOfDeviceWith(deviceUUID: device.uuid ?? "")
         //TODO: - subscribeStateChangeOf
-        RGCore.shared.device.subscribeStateChangeOf(device: device, observer: self) {[weak self] res , error in
+        RGCore.shared.device.subscribeStateChangeOfDeviceWith(deviceUUID: device.uuid ?? "", observer: self) {[weak self] res , error in
             guard let self = self,
                   res != nil,
                   res!.deviceUUID?.uppercased() == device.uuid?.uppercased(),
@@ -79,7 +79,9 @@ class DeviceControlVC: UIBaseVC, UICollectionViewDelegate, UICollectionViewDataS
             if finished == true {
                 let valueColor = RGBHSVColor(color: newColor)
                 //TODO: - sendControlMessage
-                RGCore.shared.device.sendControlMessage(device, value: valueColor, elements: device.elementIDS!)
+                RGCore.shared.device.sendControlDeviceMessageWith(device.uuid ?? "", value: valueColor, elements: device.elementIDS!) { response, error in
+                    
+                }
             }
         }
         guard let numberElement = device.elementInfos?.count else {return}
@@ -89,9 +91,9 @@ class DeviceControlVC: UIBaseVC, UICollectionViewDelegate, UICollectionViewDataS
             collectionvViewElement.register(UINib.init(nibName: "SmartElementCell", bundle: nil),
                                            forCellWithReuseIdentifier: "SmartElementCell")
             viewControlElement.isHidden = false
-            RGCore.shared.device.requestStateOf(device: device)
+            RGCore.shared.device.requestStateOfDeviceWith(deviceUUID: device.uuid ?? "")
             // subscribe device state change
-            RGCore.shared.device.subscribeStateChangeOf(device: device, observer: self) {[weak self] res , error in
+            RGCore.shared.device.subscribeStateChangeOfDeviceWith(deviceUUID: device.uuid ?? "" , observer: self) {[weak self] res , error in
                 guard let self = self,
                       res != nil,
                       res!.deviceUUID?.uppercased() == device.uuid?.uppercased(),
@@ -188,9 +190,8 @@ class DeviceControlVC: UIBaseVC, UICollectionViewDelegate, UICollectionViewDataS
         let value = RGBValueOnOff(on: onValue)
         collectionvViewElement.reloadItems(at: [indexPath])
         guard let device = device else {return}
-        RGCore.shared.device.sendControlMessage(device,
-                                                value: value,
-                                                elements: [elements[indexPath.row].elementId])
+        RGCore.shared.device.sendControlDeviceMessageWith(device.uuid ?? "", value: value, elements: [elements[indexPath.row].elementId]) { response, error in
+        }
     }
     //MARK: - Action
     
@@ -203,7 +204,8 @@ class DeviceControlVC: UIBaseVC, UICollectionViewDelegate, UICollectionViewDataS
         let valueBrightness = prgBrightness.value
         let value = RGBValueBrightnessKelvin(Int(valueBrightness), Int(valueKelvin))
         //TODO: - sendControlMessage
-        RGCore.shared.device.sendControlMessage(device, value: value, elements: elementIDS)
+        RGCore.shared.device.sendControlDeviceMessageWith(device.uuid ?? "", value: value, elements: elementIDS) { response, error in
+        }
     }
     @IBAction func prgKelvinHandle(_ sender: UISlider) {
         guard let device = device else { return }
@@ -212,7 +214,8 @@ class DeviceControlVC: UIBaseVC, UICollectionViewDelegate, UICollectionViewDataS
         let valueKelvin = prgKelvin.value
         let value = RGBValueBrightnessKelvin(Int(valueBrightness), Int(valueKelvin))
         //TODO: - sendControlMessage
-        RGCore.shared.device.sendControlMessage(device, value: value, elements: elementIDS)
+        RGCore.shared.device.sendControlDeviceMessageWith(device.uuid ?? "", value: value, elements: elementIDS) { response, error in
+        }
     }
     @IBAction func switchOnOffDevice(_ sender: UISwitch) {
         guard let device = device, let elementIDS = device.elementIDS else {return}
@@ -221,11 +224,14 @@ class DeviceControlVC: UIBaseVC, UICollectionViewDelegate, UICollectionViewDataS
                 //For TV devices, there is only a power button, not On or Off
                 let valueObj = RGBIrTVRemoteCommand(command: .POWER)
                 //TODO: - sendControlMessage
-                RGCore.shared.device.sendControlMessage(device, value: valueObj, elements: elementIDS)
+                RGCore.shared.device.sendControlDeviceMessageWith(device.uuid ?? "", value: valueObj, elements: elementIDS) { response, error in
+                }
             } else {
                 let value = RGBValueOnOff(on: onValue)
                 //TODO: - sendControlMessage
-                RGCore.shared.device.sendControlMessage(device, value: value, elements: elementIDS)
+                RGCore.shared.device.sendControlDeviceMessageWith(device.uuid ?? "", value: value, elements: elementIDS) { response, error in
+                    
+                }
             }
         }
     }

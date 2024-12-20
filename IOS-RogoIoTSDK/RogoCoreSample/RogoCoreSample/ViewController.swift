@@ -7,12 +7,13 @@
 
 import UIKit
 import RogoCore
+
+@available(iOS 16.0, *)
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        RGCore.shared.setCustomAuthenticate(customAuth: AuthenHandler.shared)
     }
     @IBOutlet weak var tfUsername: UILabel!
     

@@ -248,7 +248,7 @@ class EditSmartAutomationAdvanceVC: UIBaseVC, UICollectionViewDelegate, UICollec
                                      createdAt: oldCmd.createdAt,
                                      updatedAt: oldCmd.updatedAt,
                                      uuid: oldCmd.uuid)
-            RGCore.shared.smart.updateSmartCmd(smartId: smartID, smartCmd: newCmd) { response, error in
+            RGCore.shared.smart.updateSmartCmd(with: smartID, smartCmd: newCmd) { response, error in
                 self.checkError(error: error, dismiss: true)
             }
         }

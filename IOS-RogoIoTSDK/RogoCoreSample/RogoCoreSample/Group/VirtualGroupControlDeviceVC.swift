@@ -70,7 +70,7 @@ class VirtualGroupControlDeviceVC: UIBaseVC {
         let value = RGBValueBrightnessKelvin(Int(valueBrightness), Int(valueKelvin))
         guard let selectedGroup = selectedGroup else {return}
         //TODO: - sendControlMessage
-        RGCore.shared.device.sendControlMessage(selectedGroup, productType: .LIGHT, value: value)
+        RGCore.shared.device.sendControlGroupMessageWith(selectedGroup.uuid ?? "", productType: .LIGHT, value: value)
     }
     @IBAction func prgKelvinHandle(_ sender: UISlider) {
         let valueBrightness = prgBrightness.value
@@ -78,15 +78,14 @@ class VirtualGroupControlDeviceVC: UIBaseVC {
         let value = RGBValueBrightnessKelvin(Int(valueBrightness), Int(valueKelvin))
         guard let selectedGroup = selectedGroup else {return}
         //TODO: - sendControlMessage
-        RGCore.shared.device.sendControlMessage(selectedGroup, productType: .LIGHT, value: value)
+        RGCore.shared.device.sendControlGroupMessageWith(selectedGroup.uuid ?? "", productType: .LIGHT, value: value)
     }
     @IBAction func switchOnOffDevice(_ sender: UISwitch) {
         if let onValue = sender.isOn == true ? 1 : 0 {
             let value = RGBValueOnOff(on: onValue)
             guard let selectedGroup = selectedGroup else {return}
             //TODO: - sendControlMessage
-            RGCore.shared.device.sendControlMessage(selectedGroup, productType: .ALL, value: value)
-            
+            RGCore.shared.device.sendControlGroupMessageWith(selectedGroup.uuid ?? "", productType: .ALL, value: value)
         }
     }
 }

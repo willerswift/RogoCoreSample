@@ -250,7 +250,7 @@ class AddSmartScheduleVC: UIBaseVC {
                         } else {
                             targetElementIds = self.targetElementIds
                         }
-                        RGCore.shared.smart.addSmartCmd(smartId: smartID,
+                        RGCore.shared.smart.addSmartCmd(toSmartWithUUID: smartID,
                                                         targetId: selectedDeviceID,
                                                         targetElementIds: targetElementIds,
                                                         cmdValue: RGBSmartCmdValue(cmdType: cmdType, delay: nil,reversing: nil)) { response, error in

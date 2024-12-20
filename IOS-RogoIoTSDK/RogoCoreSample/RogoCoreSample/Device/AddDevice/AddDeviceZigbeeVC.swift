@@ -104,7 +104,7 @@ class AddDeviceZigbeeVC: UIBaseVC {
             return
         }
         //TODO: - stopScanZigbeeDevice
-        RGCore.shared.device.stopScanZigbeeDevice(gateWay: selectedHub)
+        RGCore.shared.device.stopScanZigbeeDevice(gateWay: selectedHub, observer: self)
     }
     //MARK: - Action
 
@@ -131,7 +131,7 @@ class AddDeviceZigbeeVC: UIBaseVC {
         self.btnDropDownSelectedHub.isEnabled = false
         self.btnDropDownSelectedZigbeeDeviceType.isEnabled = false
         //TODO: - startScanZigbeeDevice
-        RGCore.shared.device.startScanZigbeeDevice(deviceType: selectedZigbeeDeviceType, gateWay: selectedHub, timeout: 60) { response, error in
+        RGCore.shared.device.startScanZigbeeDevice(deviceType: selectedZigbeeDeviceType, gateWay: selectedHub, timeout: 60, observer: self) { response, error in
             if error == nil {
                 self.viewScanningDevice.isHidden = true
                 self.viewDetectDevice.isHidden = false

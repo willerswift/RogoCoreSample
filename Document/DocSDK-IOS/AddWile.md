@@ -4,10 +4,12 @@
 
 ### Scan Wile device
 ```
- RGCore.shared.device.scanAvailableWileDevice(timeout: Int, completion: RGBCompletionObject<RGBMeshScannedDevice?>?)
+ RGCore.shared.device.scanAvailableWileDevice(timeout: Int, limitRssi: Int?, completion: RGBCompletionObject<RGBMeshScannedDevice?>?)
  ```
  Trong đó: 
  - timeout: set thời gian time out
+ - limitRssi: giới hạn cường độ tín hiệu của các thiết bị có thể quét được (có thể truyền nil: là không giới hạn cường độ tín hiệu)
+ rssi là số âm thể hiện độ mạnh yếu của tín hiệu bluetooth, số âm càng nhỏ thì tín hiệu càng mạnh càng ở gần thiết bị, ngược lại số âm càng lớn thì tín hiệu càng yếu và càng ở xa
  - completion: check lỗi
 
 ### Add Wile device

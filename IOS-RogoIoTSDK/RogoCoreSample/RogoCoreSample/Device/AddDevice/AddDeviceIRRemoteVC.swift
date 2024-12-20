@@ -143,11 +143,11 @@ class AddDeviceIRRemoteVC: UIBaseVC {
             return
         }
         //TODO: - setIRRemoteLearningModeFor
-        RGCore.shared.device.setIRRemoteLearningModeFor(deviceType: .AC,
-                                                        hub: selectedHub,
-                                                        observer: self,
-                                                        isEnable: true,
-                                                        timeout: 3) { [self] response, error in
+        RGCore.shared.device.setIRDetectModeFor(deviceType: .AC,
+                                                hub: selectedHub,
+                                                observer: self,
+                                                isEnable: true,
+                                                timeout: 3) { [self] response, error in
             if let res = response as? RGBIrRemoteInfo,
                let irAcProtocol = res.acProtocol,
                let manufacture = RGBManufacturer.getManufacturerBy(irProtocol: irAcProtocol) {

@@ -146,3 +146,30 @@ Trong đó:
 - productType: .IR_AirCondition_Remote
 - group: truyền vào nhóm phòng muốn thêm điều khiển điều hoà vào
 - toHub: truyền vào thiết bị hub
+
+### Phát hiện điều khiển điều hoà
+
+Sau khi gọi hàm này, hướng điều khiển điều hoà vào thiết bị IR rồi bấm điều khiển để thiết bị IR tiến hành phát hiện loại điều khiển điều hoà
+
+```
+        RGCore.shared.device.setIRDetectModeFor(deviceType: RGBProductCategoryType,
+                                                hub: RGBDevice,
+                                                observer: AnyObject?,
+                                                isEnable: Bool,
+                                                timeout: Int?,
+                                                completion: (_ response: RGBIrRemoteInfo?, (any Error)?) -> Void)
+```
+Trong đó:
+
+- deviceType: truyền vào loại thiết bị Vd: .AC
+- hub: truyền vào thiết bị IR đang sử dụng để phát hiện lệnh điều khiển
+- observer: self
+- isEnable: true
+- timeout: set thời gian timeOut khi gọi lệnh này Vd: 5 (5 giây)
+- completion: response trả ra RGBIrRemoteInfo?, ta có thể lấy ra được tên hãng điều hoà phát hiện ra bằng cách
+```
+               let irAcProtocol = res.acProtocol
+               let manufacture = RGBManufacturer.getManufacturerBy(irProtocol: irAcProtocol)
+               // manufacture chính là hãng điều hoà mà thiết bị IR vừa phát hiện được
+```
+Sau đó có thể gọi .addIrRemote để thêm điều khiển vừa phát hiện được

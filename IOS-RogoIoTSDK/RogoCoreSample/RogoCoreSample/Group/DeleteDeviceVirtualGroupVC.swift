@@ -86,9 +86,7 @@ class DeleteDeviceVirtualGroupVC: UIBaseVC {
         //TODO: - updateGroupMemberElement
         // Delete a device within a virtual group
         guard let device = selectedDevice, let group = selectedGroup else {return}
-        RGCore.shared.group.removeGroupMember(device: device,
-                                              from: group,
-                                              observer: self) { response, error in
+        RGCore.shared.group.removeGroupMember(deviceWithUUID: device.uuid ?? "", fromGroupWith: group.uuid ?? "", observer: self) { response, error in
             self.checkError(error: error, dismiss: true)
         }
     }

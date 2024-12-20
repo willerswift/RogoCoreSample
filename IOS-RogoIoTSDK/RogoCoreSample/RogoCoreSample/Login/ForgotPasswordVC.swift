@@ -31,7 +31,7 @@ class ForgotPasswordVC: UIBaseVC {
     @IBAction func btnResetPassword(_ sender: Any) {
         guard let code = tfCodeResetPass.text, let newPass = tfNewPassword.text else {return}
         //TODO: - resetRogoPasswordWith
-        RGCore.shared.auth.resetRogoPasswordWith(code: code, newPassword: newPass) { response, error in
+        RGCore.shared.auth.resetPasswordWith(code: code, newPassword: newPass) { response, error in
             self.checkError(error: error, dismiss: true)
         }
     }
@@ -42,7 +42,7 @@ class ForgotPasswordVC: UIBaseVC {
         }
         guard let email = tfEmail.text else {return}
         // TODO: - resetPassword
-        RGCore.shared.auth.requestRogoVerifyCode(email: email) { response, error in
+        RGCore.shared.auth.requestVerifyCode(email: email) { response, error in
             self.checkError(error: error, dismiss: false)
             DispatchQueue.main.async {
                 self.viewCodeResetPass.isHidden = false

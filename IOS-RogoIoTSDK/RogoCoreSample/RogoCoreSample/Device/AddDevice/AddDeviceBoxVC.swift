@@ -62,7 +62,7 @@ class AddDeviceBoxVC: UIBaseVC {
         if timeRemaining > 0 {
             // We will create a code and then enter that code into the Box app to proceed with adding the device box to the account
             //TODO: - generatePlayboxActiveCode
-            RGCore.shared.device.generatePlayboxActiveCode(locationId: selectedLocationId) { activeCode, error in
+            RGCore.shared.device.generatePlayboxActiveCode(locationId: selectedLocationId, observer: self) { activeCode, error in
                 
                 guard let pinCode = activeCode?.code else {
                     return

@@ -11,10 +11,10 @@ PODS:
   - SwiftEntryKit (2.0.0)
 
 DEPENDENCIES:
-  - CocoaMQTT (~> 2.0.9)
+  - CocoaMQTT
   - DropDown
-  - nRFMeshProvision
-  - SwiftEntryKit
+  - nRFMeshProvision (~> 3.0)
+  - SwiftEntryKit (~> 2.0)
 
 SPEC REPOS:
   trunk:
@@ -33,6 +33,6 @@ SPEC CHECKSUMS:
   nRFMeshProvision: 297bbda9dc44138c1b63b1ac5e4c860f0398e176
   SwiftEntryKit: 61b5fa36f34a97dd8013e48a7345bc4c4720be9a
 
-PODFILE CHECKSUM: 893c04ceaf1fe0da4d73412b3d3d317258e9d71b
+PODFILE CHECKSUM: 3a2f2f7329f319463c9e725c8ce1830dacc1dbf8
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.15.2

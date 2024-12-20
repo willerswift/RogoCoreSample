@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/RogoCore-Swift.h</key>
 		<data>
-		My4queBdhkol+XFCwKDqNIpKF9U=
+		8XOuOhyUGwSqnwi9vwYOtKbb2U4=
 		</data>
 		<key>Headers/RogoCore.h</key>
 		<data>
@@ -14,31 +14,39 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		wIbU+nUZBDGYBZYe0qi4dmtrx9o=
+		fHNKYN11z+RpPYEZKhBXmfdgz54=
 		</data>
 		<key>Modules/RogoCore.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		fHl3f1bfi6pSFkKpULEX9RJPcdE=
+		uE/lLX5HZNXzges2XitOgKI0XGc=
 		</data>
 		<key>Modules/RogoCore.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		Qm98t64CqlRHS0XzBmikdjnaviA=
+		rgHpIC1ebNwPtfqQtMkM3xuG7kw=
 		</data>
 		<key>Modules/RogoCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		7tbOc/ZvGMKGQNgC2mHl9a3QoJ0=
+		Y1t3RSKWRMlB+qlLMkoLsWS0IZY=
 		</data>
 		<key>Modules/RogoCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		Qm98t64CqlRHS0XzBmikdjnaviA=
+		rgHpIC1ebNwPtfqQtMkM3xuG7kw=
 		</data>
 		<key>Modules/RogoCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		UYXUMittE7vp++ZgDd7ZxYiUFss=
+		Iupo36H1I6rcRYY+xoPDxb/Zutk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		iRNhqb4xlKGB0pWK332a+1+pPx0=
+		</data>
+		<key>ROGO_CORE_BASE_DATA_MODEL.momd/ROGO_CORE_BASE_DATA_MODEL.mom</key>
+		<data>
+		7lGatxmhLdFKcwSiNHJpWD3b370=
+		</data>
+		<key>ROGO_CORE_BASE_DATA_MODEL.momd/VersionInfo.plist</key>
+		<data>
+		CottN6pOJWXGFLKG/FmLLJOudIQ=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -47,7 +55,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FzWKyMr8OMRwgxQuvZ7hH+rlE3drecANAD2np8FY4Dk=
+			BZFII+F8Yje+wQxdmL+d2IEgSDzMsyH0/KsqL5CKOrY=
 			</data>
 		</dict>
 		<key>Headers/RogoCore.h</key>
@@ -61,35 +69,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0zVw5b+4CISK3kYQ6TqC+tnA1nRiwphKA4fBYhvBbnk=
+			24fjMqBWNut2UP1fJ/dD0qkTuEKsoj2mEDbEKsZqMxI=
 			</data>
 		</dict>
 		<key>Modules/RogoCore.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DQmI8gy5etlWekPfR2BfuH3XjpAmoUpjXOx44+Po7o0=
+			oNau+cfYUNDaGE8sHO7dG2Gz0XENk3WpbMGrrvFj054=
 			</data>
 		</dict>
 		<key>Modules/RogoCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Yj4kfqXOQ6zvYNVwjP1tKUsyLSl1rZOUVSTmsHD4Lus=
+			rgI6A0FDw9rwFHajZBpw4ouTGwZ5P4KeObyMcd/3cqc=
 			</data>
 		</dict>
 		<key>Modules/RogoCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DQmI8gy5etlWekPfR2BfuH3XjpAmoUpjXOx44+Po7o0=
+			oNau+cfYUNDaGE8sHO7dG2Gz0XENk3WpbMGrrvFj054=
 			</data>
 		</dict>
 		<key>Modules/RogoCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9FlD69674bUdYZ4rWHUbmDsRAyqJ6EPNiDZT02xvjtQ=
+			H15DLvFmUT31NFHLzkEFDXcAqW577B9WYQAWb4nQv1g=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -97,6 +105,20 @@
 			<key>hash2</key>
 			<data>
 			RExR+0j+a3fUlKMubE7pVDJKooqxUqROffb0SzVYsMo=
+			</data>
+		</dict>
+		<key>ROGO_CORE_BASE_DATA_MODEL.momd/ROGO_CORE_BASE_DATA_MODEL.mom</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			VBPYUgdH+sKIj5zlOCN+ES49TaDaW0+6Y5mp7GZGPig=
+			</data>
+		</dict>
+		<key>ROGO_CORE_BASE_DATA_MODEL.momd/VersionInfo.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			fBTbyVtBBxQ//ifjiaoERu5nLONJM2vuUdb8ZrVzA7E=
 			</data>
 		</dict>
 	</dict>

@@ -10,6 +10,7 @@ import CryptoKit
 
 let fptDomainUrl = URL(string: "https://api-fptlife-stag.fptsmarthome.vn/api/v1.2/public/")!
 let fptApiKey = "VcCQiu6@wenQ>4w|5ri@a"
+@available(iOS 16.0, *)
 extension NetworkClient {
     func login(phone: String,
                password: String,

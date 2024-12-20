@@ -52,7 +52,7 @@ class AddSmartAutomationVC: UIBaseVC {
         guard let selectedAutomationType = selectedAutomationType else {return}
         //MARK: - getListDevicesSupport
         guard let listAllDevice = listAllDevice else {return}
-        listDeviceSupport = RGCore.shared.automation.getListDevicesSupport(animationType: selectedAutomationType, from: listAllDevice)
+        listDeviceSupport = RGCore.shared.automation.getListDevicesSupport(automationType: selectedAutomationType, from: listAllDevice)
         print("automation type: \(selectedAutomationType), device support count: \(listDeviceSupport.count)")
     }
   

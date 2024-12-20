@@ -63,20 +63,36 @@ class SignInVC: UIBaseVC {
             RGUIPopup.showPopupWith(contentView: viewLoading)
         }
         // This part can use one of two things: email or username to complete the login. As for the phone number, we don't need to use it, so here I will pass it as nil.
-        RGCore.shared.auth.signIn(.withRogoAuthenticate(email: tfEmail.text,
-                                                        username: tfUserName.text,
-                                                        phone: nil,
-                                                        password: tfPassword.text ?? "")) { response, error in
-            self.checkError(error: error, dismiss: false)
-            DispatchQueue.main.async {
-                if error == nil {
-                    self.viewSignInSuccess.isHidden = false
-                    self.didSignIn!()
-                } else {
-                    self.viewSignInSuccess.isHidden = true
+        if tfEmail.isEnabled == true {
+            // SignIn with Email
+            RGCore.shared.auth.signInWithEmail(email: tfEmail.text ?? "" , password: tfPassword.text ?? "") { response, error in
+                self.checkError(error: error, dismiss: false)
+                DispatchQueue.main.async {
+                    if error == nil {
+                        self.viewSignInSuccess.isHidden = false
+                        self.didSignIn!()
+                    } else {
+                        self.viewSignInSuccess.isHidden = true
+                    }
+                }
+            }
+        } else {
+            // SignIn with Username
+            RGCore.shared.auth.signInWithUsername(username: tfUserName.text ?? "", password: tfPassword.text ?? "") { response, error in
+                self.checkError(error: error, dismiss: false)
+                DispatchQueue.main.async {
+                    if error == nil {
+                        self.viewSignInSuccess.isHidden = false
+                        self.didSignIn!()
+                    } else {
+                        self.viewSignInSuccess.isHidden = true
+                    }
                 }
             }
         }
+        
+        // Email
+//        RGCore.shared.auth.signInWithEmail(email: email ?? "", password: password) { response, error in
     }
     
     @IBAction func btnLoadToOptionsLocation(_ sender: Any) {

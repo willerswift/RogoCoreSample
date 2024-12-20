@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zpD-Ej-u9D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zpD-Ej-u9D">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -38,7 +38,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -367,7 +367,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -459,7 +459,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czZ-ei-gpU">
-                                <rect key="frame" x="116.66666666666669" y="389" width="160" height="40"/>
+                                <rect key="frame" x="116.66666666666669" y="414" width="160" height="40"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ID1-Ng-zz8"/>
@@ -478,7 +478,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uKQ-zE-B7h">
-                                <rect key="frame" x="15" y="159" width="363" height="34"/>
+                                <rect key="frame" x="15" y="184" width="363" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -496,18 +496,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="830-mX-3gq">
-                                <rect key="frame" x="15" y="325" width="363" height="34"/>
+                                <rect key="frame" x="15" y="350" width="363" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDo-fl-7ad">
-                                <rect key="frame" x="15" y="135" width="65.333333333333329" height="16"/>
+                                <rect key="frame" x="15" y="160" width="65.333333333333329" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWu-01-QOu">
-                                <rect key="frame" x="15" y="301" width="363" height="16"/>
+                                <rect key="frame" x="15" y="326" width="363" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -521,7 +521,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -529,18 +529,18 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YC7-we-8KX">
-                                <rect key="frame" x="15" y="242" width="363" height="34"/>
+                                <rect key="frame" x="15" y="267" width="363" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Tn-To-WIw">
-                                <rect key="frame" x="15" y="218" width="32.666666666666664" height="16"/>
+                                <rect key="frame" x="15" y="243" width="32.666666666666664" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqJ-Vz-ZF7">
-                                <rect key="frame" x="85.333333333333329" y="138" width="10" height="10"/>
+                                <rect key="frame" x="85.333333333333329" y="163" width="10" height="10"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="gcx-Eo-6eV"/>
@@ -553,7 +553,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Mw-dq-zv8">
-                                <rect key="frame" x="52.666666666666664" y="221" width="10" height="10"/>
+                                <rect key="frame" x="52.666666666666664" y="246" width="10" height="10"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="Y06-Lq-hso"/>
@@ -566,23 +566,23 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ype-dn-8SW">
-                                <rect key="frame" x="78.333333333333329" y="136" width="24" height="14"/>
+                                <rect key="frame" x="78.333333333333329" y="161" width="24" height="14"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
+                                <buttonConfiguration key="configuration" style="plain" title=" "/>
                                 <connections>
                                     <action selector="btnSelecUserName:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I9f-d3-1gW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUR-Vu-nfg">
-                                <rect key="frame" x="45.666666666666664" y="219" width="23.999999999999993" height="14"/>
+                                <rect key="frame" x="45.666666666666664" y="244" width="23.999999999999993" height="14"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
+                                <buttonConfiguration key="configuration" style="plain" title=" "/>
                                 <connections>
                                     <action selector="btnSelecEmail:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qn0-r4-dHI"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48x-ue-GUi">
-                                <rect key="frame" x="15" y="459" width="363" height="30"/>
+                                <rect key="frame" x="15" y="484" width="363" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="AqN-sJ-wDz"/>
                                 </constraints>
@@ -591,7 +591,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vgx-ck-wry">
-                                <rect key="frame" x="0.0" y="504" width="393" height="304"/>
+                                <rect key="frame" x="0.0" y="529" width="393" height="279"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XeL-bA-QXi">
                                         <rect key="frame" x="116.66666666666669" y="46" width="160" height="40"/>
@@ -649,6 +649,12 @@
                                     <constraint firstAttribute="trailing" secondItem="w4B-QC-fUa" secondAttribute="trailing" constant="15" id="vXH-tZ-LRg"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Username or Email in the check box" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKR-vB-G6y">
+                                <rect key="frame" x="15" y="125.66666666666669" width="363" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.18196699020000001" green="0.18196699020000001" blue="0.18196699020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -665,7 +671,7 @@
                             <constraint firstItem="Ype-dn-8SW" firstAttribute="height" secondItem="fqJ-Vz-ZF7" secondAttribute="height" multiplier="1.4" id="CBk-FY-1OU"/>
                             <constraint firstItem="fqJ-Vz-ZF7" firstAttribute="leading" secondItem="XDo-fl-7ad" secondAttribute="trailing" constant="5" id="EFs-mT-AXN"/>
                             <constraint firstItem="7Tn-To-WIw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="EiD-wO-jIM"/>
-                            <constraint firstItem="XDo-fl-7ad" firstAttribute="top" secondItem="69g-bW-ovb" secondAttribute="bottom" constant="25" id="HIB-NY-LDW"/>
+                            <constraint firstItem="XDo-fl-7ad" firstAttribute="top" secondItem="69g-bW-ovb" secondAttribute="bottom" constant="50" id="HIB-NY-LDW"/>
                             <constraint firstItem="0Mw-dq-zv8" firstAttribute="centerY" secondItem="7Tn-To-WIw" secondAttribute="centerY" id="IjF-aK-Pva"/>
                             <constraint firstItem="YUR-Vu-nfg" firstAttribute="height" secondItem="0Mw-dq-zv8" secondAttribute="height" multiplier="1.4" id="KeA-5u-gP3"/>
                             <constraint firstAttribute="trailing" secondItem="BgY-ak-J3L" secondAttribute="trailing" constant="15" id="Kq3-q8-CqX"/>
@@ -676,6 +682,7 @@
                             <constraint firstItem="69g-bW-ovb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="PeC-f2-Rtv"/>
                             <constraint firstItem="1DV-0v-ued" firstAttribute="centerY" secondItem="69g-bW-ovb" secondAttribute="centerY" id="PtC-q0-XqY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vgx-ck-wry" secondAttribute="trailing" id="QAI-1L-BCy"/>
+                            <constraint firstItem="zKR-vB-G6y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="Qcd-4U-ydJ"/>
                             <constraint firstItem="Ype-dn-8SW" firstAttribute="width" secondItem="fqJ-Vz-ZF7" secondAttribute="width" multiplier="2.4" id="Qge-hL-ZSM"/>
                             <constraint firstItem="YC7-we-8KX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="WJp-Zu-vFd"/>
                             <constraint firstItem="Ype-dn-8SW" firstAttribute="centerY" secondItem="fqJ-Vz-ZF7" secondAttribute="centerY" id="YzG-so-Mhw"/>
@@ -696,8 +703,10 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="48x-ue-GUi" secondAttribute="trailing" constant="15" id="syp-Ez-256"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="830-mX-3gq" secondAttribute="trailing" constant="15" id="uGC-ZD-oLd"/>
                             <constraint firstItem="BgY-ak-J3L" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="40" id="uHJ-PH-EZ7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zKR-vB-G6y" secondAttribute="trailing" constant="15" id="wJJ-DY-aQK"/>
                             <constraint firstItem="uKQ-zE-B7h" firstAttribute="top" secondItem="XDo-fl-7ad" secondAttribute="bottom" constant="8" id="yVL-bx-P59"/>
                             <constraint firstItem="48x-ue-GUi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="ymc-bB-B7A"/>
+                            <constraint firstItem="zKR-vB-G6y" firstAttribute="top" secondItem="1DV-0v-ued" secondAttribute="bottom" constant="15" id="zZG-c8-qMY"/>
                         </constraints>
                     </view>
                     <connections>
@@ -783,7 +792,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -1084,7 +1093,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -1164,7 +1173,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -1575,7 +1584,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -1783,7 +1792,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -2030,7 +2039,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -2146,7 +2155,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -2309,7 +2318,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -2621,7 +2630,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -2793,7 +2802,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -2942,7 +2951,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -3067,7 +3076,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -3216,7 +3225,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -3275,7 +3284,7 @@
                                 <rect key="frame" x="76.666666666666686" y="426" width="240" height="300"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PyI-B2-Y09">
-                                        <rect key="frame" x="0.0" y="1" width="240" height="128.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.6666666666666714" width="240" height="128.66666666666669"/>
                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="130" id="oeS-BO-Cqi"/>
@@ -3629,7 +3638,7 @@
                                 <rect key="frame" x="76.666666666666686" y="426" width="240" height="300"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eXh-z3-7Iy">
-                                        <rect key="frame" x="0.0" y="1" width="240" height="128.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.6666666666666714" width="240" height="128.66666666666669"/>
                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="130" id="vgw-aR-TYm"/>
@@ -4108,7 +4117,7 @@
                                 <rect key="frame" x="76.666666666666686" y="476" width="240" height="300"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hns-vR-rJc">
-                                        <rect key="frame" x="0.0" y="1" width="240" height="128.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.6666666666666714" width="240" height="128.66666666666669"/>
                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="130" id="NJJ-SY-Uj6"/>
@@ -6190,7 +6199,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -6347,7 +6356,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -6489,7 +6498,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -6629,7 +6638,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -6804,7 +6813,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -7389,7 +7398,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -7557,7 +7566,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -7860,7 +7869,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -8180,7 +8189,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -8592,7 +8601,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -9360,7 +9369,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -9442,7 +9451,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -9748,7 +9757,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -10111,7 +10120,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -10165,7 +10174,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -10551,7 +10560,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -10945,7 +10954,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -11147,7 +11156,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -11323,7 +11332,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -11499,7 +11508,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -11889,7 +11898,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -12016,7 +12025,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -12185,7 +12194,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
+                                <buttonConfiguration key="configuration" style="plain" title=" ">
                                     <backgroundConfiguration key="background" image="arrowshape.turn.up.backward.circle" catalog="system"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -14276,6 +14285,9 @@
         <image name="tray" catalog="system" width="128" height="88"/>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

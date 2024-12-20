@@ -135,7 +135,7 @@ class AddSmartScenarioVC: UIBaseVC {
                     targetElementIds = self.targetElementIds
                 }
                 guard let smartID = response?.uuid, let selectedDeviceID = self.selectedDevice?.uuid, let cmdType = self.selectedCommandType else {return}
-                RGCore.shared.smart.addSmartCmd(smartId: smartID,
+                RGCore.shared.smart.addSmartCmd(toSmartWithUUID: smartID,
                                                 targetId: selectedDeviceID,
                                                 targetElementIds: targetElementIds,
                                                 cmdValue: RGBSmartCmdValue(cmdType: cmdType, delay: nil,reversing: nil)) { response, error in

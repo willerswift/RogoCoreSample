@@ -93,8 +93,8 @@ class DeviceVC: UIBaseVC, UITableViewDelegate, UITableViewDataSource {
             let value = RGBValueOnOff(on: onValue)
             // This part is used to send control commands to all
             //TODO: - sendControlMessage
-            let groupAllDevice = RGBGroup(elementID: 49152)
-            RGCore.shared.device.sendControlMessage(groupAllDevice, productType: .ALL, value: value)
+            guard let locationId = RGCore.shared.user.selectedLocation?.uuid else {return}
+            RGCore.shared.device.sendControlLocationMessageWith(locationId, productType: .LIGHT, value: value)
         }
     }
     

@@ -28,7 +28,7 @@ Các loại lệnh điều khiển Quạt trong chế độ học lệnh quạt:
         .NUM_5: Nút 5
 
 ```
-RGCore.shared.device.setIRRemoteLearningModeFor(deviceType: RGBProductCategoryType, hub: RGBDevice, observer: AnyObject?, isEnable: Bool, timeout: Int, completion: RGBCompletionObject<Any?>?)
+RGCore.shared.device.setIRLearningModeFor(deviceType: RGBProductCategoryType, hub: RGBDevice, observer: AnyObject?, isEnable: Bool, timeout: Int, completion: RGBCompletionObject<Any?>?)
 ```
 Trong đó:
 
@@ -47,12 +47,12 @@ Sau khi gọi hàm này hướng điều khiển của bạn vào thiết bị �
 
 ```
 
-sau đó append response đó vào list có type là remoteInfos: [RGBIrFanRemoteInfoMessage], rồi tiếp tục lặp lại công đoạn trên để add các nút còn lại, nếu không còn nút nào muốn add nữa tiến hành add remote
+sau đó append response đó vào list có type là remoteInfos: [RGBIrRemoteRawInfo], rồi tiếp tục lặp lại công đoạn trên để add các nút còn lại, nếu không còn nút nào muốn add nữa tiến hành add remote
 
 ### Add remote Fan
 
 ```
-RGCore.shared.device.addIrFanRemote(remoteInfos: [RGBIrFanRemoteInfoMessage],
+RGCore.shared.device.addIrFanRemote(remoteInfos: [RGBIrRemoteRawInfo],
                                     label: String,
                                     group: RGBGroup?,
                                     toHub: RGBDevice,

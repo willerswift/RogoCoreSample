@@ -53,7 +53,7 @@ class DeleteDeviceVC: UIBaseVC {
     @IBAction func btnDeleteDevice(_ sender: Any) {
         //TODO: - deleteDevice
         guard let selectedDevice = selectedDevice else {return}
-        RGCore.shared.device.deleteDevice(selectedDevice) { response, error in
+        RGCore.shared.device.deleteDeviceWith(selectedDevice.uuid ?? "") { response, error in
             self.checkError(error: error, dismiss: true)
         }
     }

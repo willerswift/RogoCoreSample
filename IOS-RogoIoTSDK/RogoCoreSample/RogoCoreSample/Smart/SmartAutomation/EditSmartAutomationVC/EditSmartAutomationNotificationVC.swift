@@ -78,7 +78,7 @@ class EditSmartAutomationNotificationVC: UIBaseVC {
                 }
             }.store(in: &self.subscriptions)
         guard let listAllDevice = RGCore.shared.user.selectedLocation?.allDevicesInLocation else {return}
-        listDeviceSupport = RGCore.shared.automation.getListDevicesSupport(animationType: .Notification, from: listAllDevice)
+        listDeviceSupport = RGCore.shared.automation.getListDevicesSupport(automationType: .Notification, from: listAllDevice)
         for rgbSmart in listNotification {
             listSmartName.append(rgbSmart.label ?? "")
         }

@@ -69,8 +69,8 @@ class ControlVirtualGroupVC: UIBaseVC {
         guard let device = selectedDevice, let group = selectedGroup, let elmIDs = device.elementIDS else {return}
         //TODO: - updateGroupMemberElement
         RGCore.shared.group.updateGroupMemberElement(elementIds: elmIDs,
-                                                     of: device,
-                                                     to: group,
+                                                     ofDeviceWith: device.uuid ?? "",
+                                                     toGroupdWith: group.uuid ?? "",
                                                      observer: self) { response, error in
             self.checkError(error: error, dismiss: true)
         }

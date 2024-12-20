@@ -8,10 +8,11 @@ target 'RogoCoreSample' do
   # Pods for RogoCoreSample
 
 #  pod 'RogoCore', "~> 1.0.2"
-
-pod 'CocoaMQTT',"~> 2.0.9"
-pod 'nRFMeshProvision'
-pod 'SwiftEntryKit'
+#
+#pod 'CocoaMQTT',"~> 2.0.9"
+pod 'CocoaMQTT'
+pod 'nRFMeshProvision', '~> 3.0'
+pod 'SwiftEntryKit', '~> 2.0'
 pod 'DropDown'
 
 end

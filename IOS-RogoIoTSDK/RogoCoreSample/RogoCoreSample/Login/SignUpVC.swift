@@ -43,10 +43,10 @@ class SignUpVC: UIBaseVC {
         }
         //TODO: - signUp
         // When registering, I entered my email, username, phone number and password, then there will be another step to verify the email so I can use the email to log in.
-        RGCore.shared.auth.signUp(.withRogoAuthenticate(email: tfEmail.text,
-                                                        username: tfUserName.text,
-                                                        phone: tfPhoneNumber.text,
-                                                        password: tfPassword.text ?? "")) { response, error in
+        RGCore.shared.auth.signUp(tfEmail.text ?? "",
+                                  username: tfUserName.text ?? "",
+                                  phone: tfPhoneNumber.text,
+                                  password: tfPassword.text ?? "") { response, error in
             self.checkError(error: error, dismiss: false)
             if error == nil {
                 DispatchQueue.main.async {
@@ -66,7 +66,7 @@ class SignUpVC: UIBaseVC {
         }
         //TODO: - verifyRogoAuthenCode
         // The verification code will be sent to the email you are using to register, enter it and verify.
-        RGCore.shared.auth.verifyRogoAuthenCode(code: "\(verifyCode)") { response, error in
+        RGCore.shared.auth.verifyAuthenCode(code: "\(verifyCode)") { response, error in
             self.checkError(error: error, dismiss: false)
             if error == nil {
                 DispatchQueue.main.async {
@@ -84,7 +84,7 @@ class SignUpVC: UIBaseVC {
     @IBAction func btnResendVerify(_ sender: Any) {
         //TODO: - requestRogoVerifyCode
         // In case verification fails or there is an error that you want to verify again, use this function
-        RGCore.shared.auth.requestRogoVerifyCode(email: tfEmail.text ?? "") { response, error in
+        RGCore.shared.auth.requestVerifyCode(email: tfEmail.text ?? "") { response, error in
             if error == nil {
                 DispatchQueue.main.async {
                     self.lbErrorVerify.text = "Resend verify success"

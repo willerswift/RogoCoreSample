@@ -348,13 +348,13 @@ class EditSmartScenarioVC: UIBaseVC {
                     schedule.timeInLocalTimeZone = self.workTimeValue
                     RGCore.shared.schedule.updateSchedule(schedule: schedule) { response, error in
                         if error == nil {
-                            RGCore.shared.smart.updateSmartCmd(smartId: smartID, smartCmd: newCmd) { response, error in
+                            RGCore.shared.smart.updateSmartCmd(with: smartID, smartCmd: newCmd) { response, error in
                                 self.checkError(error: error, dismiss: true)
                             }
                         }
                     }
                 } else {
-                    RGCore.shared.smart.updateSmartCmd(smartId: smartID, smartCmd: newCmd) { response, error in
+                    RGCore.shared.smart.updateSmartCmd(with: smartID, smartCmd: newCmd) { response, error in
                         self.checkError(error: error, dismiss: true)
                     }
                 }

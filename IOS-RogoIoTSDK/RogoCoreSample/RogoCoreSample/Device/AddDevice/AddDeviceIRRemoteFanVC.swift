@@ -33,7 +33,9 @@ class AddDeviceIRRemoteFanVC: UIBaseVC, UICollectionViewDelegate, UICollectionVi
     
     //MARK: - Properties
     
-    var lstDetectedRemoteCommand: [RGBIrFanRemoteInfoMessage] = []
+    var remoteCmdType: RGBIrLearningCmdType?
+    
+    var lstDetectedRemoteCommand: [RGBIrRemoteRawInfo] = []
     
     @Published var selectedModes: [RGBIrLearningCmdType] = []
     
@@ -120,7 +122,7 @@ class AddDeviceIRRemoteFanVC: UIBaseVC, UICollectionViewDelegate, UICollectionVi
     @IBAction func btnClickedAddRemoteFan(_ sender: Any) {
         guard let selectedHub = selectedHub else {return}
         //TODO: - addIrFanRemote
-        RGCore.shared.device.addIrFanRemote(remoteInfos: lstDetectedRemoteCommand, label: "Remote Fan", group: nil, toHub: selectedHub) { response, error in
+        RGCore.shared.device.addIrFanRemote(remoteInfos: lstDetectedRemoteCommand, label: "Remote Fan", group: nil, toHub: selectedHub, observer: self) { response, error in
             self.checkError(error: error, dismiss: true)
         }
     }
@@ -144,6 +146,7 @@ class AddDeviceIRRemoteFanVC: UIBaseVC, UICollectionViewDelegate, UICollectionVi
         dropDownSelectMode.anchorView = btnDropDownSelectedMode
         dropDownSelectMode.dataSource = selectedModes.map{"\($0)"}
         dropDownSelectMode.selectionAction = { [weak self] (index, item) in
+            self?.remoteCmdType = self?.selectedModes[index]
             self?.btnDropDownSelectedMode.setTitle(item, for: .normal)
             self?.viewDetectCmd.isHidden = false
             self?.startDetectingIrCmd()
@@ -197,15 +200,16 @@ class AddDeviceIRRemoteFanVC: UIBaseVC, UICollectionViewDelegate, UICollectionVi
     fileprivate func startDetectingIrCmd() {
         guard let selectedHub = selectedHub else {return}
         //TODO: - setIRRemoteLearningModeFor
-        RGCore.shared.device.setIRRemoteLearningModeFor(deviceType: .FAN,
-                                                        hub: selectedHub,
-                                                        observer: self,
-                                                        isEnable: true,
-                                                        timeout: 3) { [weak self] response, error in
+        RGCore.shared.device.setIRLearningModeFor(deviceType: .FAN,
+                                                  hub: selectedHub,
+                                                  observer: self,
+                                                  isEnable: true,
+                                                  timeout: 3) { [weak self] response, error in
             guard let self = self,
-                  let res = response as? RGBIrFanRemoteInfoMessage else {
+                  let res = response as? RGBIrRemoteRawInfo else {
                 return
             }
+            res.remoteCmdType = remoteCmdType
             lstDetectedRemoteCommand.append(res)
             lbNoti.text = "Control command detected, select next control command"
             
@@ -216,7 +220,7 @@ class AddDeviceIRRemoteFanVC: UIBaseVC, UICollectionViewDelegate, UICollectionVi
     }
 }
 
-public enum RGBIrLearningCmdType: Int, CaseIterable {
+public enum RGSampleIrLearningCmdType: Int, CaseIterable {
 
     case POWER_ON = 1
     case POWER_OFF = 0

@@ -22,13 +22,14 @@ Trong đó:
 
 ### Điều khiển đơn
 ```
-RGCore.shared.device.sendControlDeviceMessageWith(deviceUUID: String, value: RGBCmdValue, elements: [Int])
+RGCore.shared.device.sendControlDeviceMessageWith(deviceUUID: String, value: RGBCmdValue, elements: [Int], completion: (_ response: Bool, (any Error)?) -> Void)
 ```
 Trong đó:
 
 - deviceUUID: truyền vào uuid của device lẻ muốn điểu khiển
 - element: device.elementIDS ( lấy được list element của thiết bị, vd như công tắc 4 nút thì sẽ có 4 element )
 - value: có thể là bật/tắt cũng có thể là gửi 1 giá trị về độ sáng/tông màu cho đèn
+- completion: trả ra true/ false: kiểm tra điều khiển thiết bị thành công hay thất bại
 ###### Vd: 
 ```
 let value = RGBValueBrightness(1000) (giá trị của brightness là từ 0 -> 1000)

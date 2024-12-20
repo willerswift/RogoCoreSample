@@ -36,10 +36,10 @@ class LogSensorDeviceVC: UIBaseVC, UITableViewDataSource, UITableViewDelegate {
                                      forCellReuseIdentifier: "DoorSensorCell")
         guard let selectedDevice = device else {return}
         lbNameDeviceDoorSensor.text = selectedDevice.label
-        RGCore.shared.device.requestStateOf(device: selectedDevice)
+        RGCore.shared.device.requestStateOfDeviceWith(deviceUUID: selectedDevice.uuid ?? "")
 
         // subscribe device state change
-        RGCore.shared.device.subscribeStateChangeOf(device: selectedDevice, observer: self) {[weak self] res , error in
+        RGCore.shared.device.subscribeStateChangeOfDeviceWith(deviceUUID: selectedDevice.uuid ?? "", observer: self){ [weak self] res , error in
             guard let self = self,
                   res != nil,
                   res!.deviceUUID?.uppercased() == selectedDevice.uuid?.uppercased(),
@@ -95,7 +95,7 @@ class LogSensorDeviceVC: UIBaseVC, UITableViewDataSource, UITableViewDelegate {
         
         date = Calendar.current.date(byAdding: .day, value: 0, to: date)!
         guard let device = device else {return}
-        RGCore.shared.device.getSensorLogOf(device: device, dayToGetLog: date) { response, error in
+        RGCore.shared.device.getSensorLogOf(deviceUUID: device.uuid ?? "", dayToGetLog: date, timeOut: nil) { response, error in
             if error == nil,
                let logs = response, logs.count > 0 {
                 self.listLogs = logs

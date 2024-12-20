@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RGCore.shared.config(appKey: "fa751d67ddcf4e0dabe03d29ec81bac5",
                              appSecret: "1de6ed021df6a4cf4d3a178f918a414df1f290da20ef",
                              completion: nil)
-        RGCore.shared.setCustomAuthenticate()
         return true
     }
 

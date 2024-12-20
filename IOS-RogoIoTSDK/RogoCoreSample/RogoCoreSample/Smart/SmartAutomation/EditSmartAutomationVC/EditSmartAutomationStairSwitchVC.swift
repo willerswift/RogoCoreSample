@@ -57,7 +57,7 @@ class EditSmartAutomationStairSwitchVC: UIBaseVC {
                 self.collectionViewElement.reloadData()
             }.store(in: &self.subscriptions)
         guard let listAllDevice = RGCore.shared.user.selectedLocation?.allDevicesInLocation else {return}
-        listDeviceSupport = RGCore.shared.automation.getListDevicesSupport(animationType: .StairSwitch, from: listAllDevice)
+        listDeviceSupport = RGCore.shared.automation.getListDevicesSupport(automationType: .StairSwitch, from: listAllDevice)
     }
     func selectSmartAutomationDropDown() {
         selectSmartDropDown.backgroundColor = .darkGray

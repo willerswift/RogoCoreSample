@@ -65,7 +65,7 @@ class AddDeviceIRVC: UIBaseVC {
         btnScanDevice.isHidden = true
         viewScanningDevice.isHidden = false
         //TODO: - scanAvailableWileDevice
-        RGCore.shared.device.scanAvailableWileDevice(timeout: 60) { response, error in
+        RGCore.shared.device.scanAvailableWileDevice(timeout: 60, limitRssi: nil) { response, error in
             if error == nil {
                 self.viewDetectingDevice.isHidden = false
                 self.viewScanningDevice.isHidden = true
