@@ -9,31 +9,7 @@ Các bước cài file *RogoCore* vào project sử dụng *Cocoapods*
 
 pod 'RogoCore'
 
-#### B2: Thêm module RogoCore vào AppDelegate
-
-#### B3: Trong hàm application(_:didFinishLaunchingWithOptions:)
-
-Thêm vào:
-
-```
-    RGCore.shared.config(appKey: String,
-                         appSecret: String) { response, error in
-        guard response == true, error == nil else {
-            return
-        }
-    }
-```
-
-#### B4: Mở file Podfile sau đó dán đoạn code này vào cuối cùng của file Pod sau đó Pod install lại
-```
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
-    end
-  end
-end
-```
+#### B2: Sau đó pod install
 
 ### Cách 2: Sử dụng file SDK
 
