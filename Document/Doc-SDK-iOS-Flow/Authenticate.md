@@ -164,3 +164,11 @@ Trong đó:
 - code: truyền vào code được gửi tới email
 - newPassword: truyền vào password mới
 - completion: check lỗi để đẩy popUp phù hợp
+
+### Hàm đăng xuất tài khoản
+
+```
+RGCore.shared.auth.signOut(completion: response: RGBAuthResponse, (any Error)?) -> Void)
+```
+Trong đó:
+- completion: if error == nil { hiển thị signOut success }
