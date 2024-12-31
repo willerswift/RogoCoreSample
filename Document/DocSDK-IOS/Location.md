@@ -9,6 +9,27 @@ RGCore.shared.user.locations
 ```
 - Lấy được toàn bộ locations bên trong tài khoản
 
+Vd:
+```
+var listLocation: [RGBLocation]
+
+// Khi bạn muốn lấy tên và uuid của 1 location trong danh sách listLoaction, ví dụ lấy tên và uuid của location đầu tiên trong listLocation
+
+let firstLocation = listLocation.first
+
+let name = firstLocation.label
+
+let uuid = firstLocation.uuid
+
+```
+// Ngoài ra còn có những trường có thể sử dụng như:
+
+- allDevicesInLocation: tất cả thiết bị bên trong location
+
+- allSmartInLocation: tất cả smart bên trong location
+
+- groups: tất cả nhóm phòng bên trong location
+
 ### Chọn location:
 ```
 RGCore.shared.user.setSelectedLocation(locationId: String)
