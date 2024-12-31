@@ -20,4 +20,4 @@ response.latestVersion : trả ra ver mới nhất của thiết bị có thể 
 
 Trong đó:
 - deviceId: Truyền vào deviceId của thiết bị
-- completion: true - gửi request thành công, ngược lại với trường hợp false
+- completion: true - gửi request thành công, ngược lại với trường hợp false - có in ra lỗi print(error) để xem thêm thông tin về lỗi
