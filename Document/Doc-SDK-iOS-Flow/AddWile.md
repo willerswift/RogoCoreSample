@@ -13,6 +13,7 @@
  Trong đó: 
  - timeout: set thời gian time out
  - completion: check lỗi
+ - Để lấy được tên của thiết bị được trả ra ở response : response.product?.name
 
 ### Add Wile device
 ```
