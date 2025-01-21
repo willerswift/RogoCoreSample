@@ -83,3 +83,35 @@ RGCore.shared.device.stopScanRFDevice(gateWay: RGBDevice)
 ```
 Trong đó:
 - gateWay: truyền vào device hub được chọn để add <RGBDevice>
+
+#### Sử dụng hàm test cho thiết bị RF
+
+##### Sử dụng hàm test cho tất cả thiết bị RF
+```
+RGCore.shared.device.sendRFSelfTestCommandToAllDevices(inGatewayUuid: String, completion: (_ response: Bool, (any Error)?) -> Void)
+```
+Trong đó:
+- inGatewayUuid: truyền vào uuid của device gateWay
+
+##### Sử dụng hàm test cho 1 thiết bị RF
+```
+RGCore.shared.device.sendRFSelfTestCommandToDevice(deviceUuid: String, completion: (_ response: Bool, (any Error)?) -> Void)
+```
+Trong đó:
+- deviceUuid: truyền vào uuid của thiết bị cảm biến
+
+#### Sử dụng hàm locate cho thiết bị RF
+```
+RGCore.shared.device.sendRFDeviceLocateLocationCommand(rootUuid: String, isLocate: Bool, completion: (_ response: Bool, (any Error)?) -> Void)
+```
+Trong đó:
+- rootUuid: truyền vào uuid của device gateWay
+- isLocate: truyền true
+
+#### Sử dụng hàm test network cho thiết bị RF
+```
+RGCore.shared.device.sendRFSelfTestNetworkCommand(rootUuid: String, timeOut: Int?, completion: (_ response: [String : Bool]?, (any Error)?) -> Void)
+```
+Trong đó:
+- rootUuid: truyền vào uuid của device gateWay
+- timeOut: truyền vào thời gian timeOut
