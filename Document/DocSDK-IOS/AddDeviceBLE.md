@@ -13,7 +13,7 @@ RGCore.shared.device.scanAvailableBleDevice(timeout: Int, completion: RGBComplet
 
 Trong đó:
 - timeout: set thời gian timeout Vd: 60 -> 60 giây
-- completion: check lỗi
+- completion: check lỗi, khi scan được thiết bị trong completion sẽ trả ra response có kiểu là RGBMeshScannedDevice (chính là thiết bị BLE vừa scan được), ta sẽ lấy nó để truyền vào trong hàm addMeshDevice ở bước kế tiếp
 
 Vd: 
 ```
