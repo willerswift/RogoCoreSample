@@ -115,3 +115,12 @@ RGCore.shared.device.sendRFSelfTestNetworkCommand(rootUuid: String, timeOut: Int
 Trong đó:
 - rootUuid: truyền vào uuid của device gateWay
 - timeOut: truyền vào thời gian timeOut
+
+#### Lấy ra tất cả các thiết bị cảm biến khói đang được gắn với Gateway
+
+```
+self.listDeviceSmokeSensor = RGCore.shared.user.selectedLocation?.allDevicesInLocation.filter {$0.rootUUID == gatewayUuid} ?? []
+
+```
+Trong đó:
+- gatewayUuid: truyền vào uuid của device gateWay, sau đó count listDeviceSmokeSensor là đã có thể lấy được số lượng cảm biến đang được gắn vào Gateway
