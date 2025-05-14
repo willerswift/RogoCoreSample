@@ -68,6 +68,28 @@ Trong đó:
             }
 Bước này kiểm tra xem key bạn vừa tạo có bị trùng với key đã có sẵn trong list không, nếu key bị trùng thì sẽ thay thế ở vị trí đó, còn nếy key không bị trùng thì sẽ được thêm vào list để chuẩn bị cho việc add
 
+
+### Gửi lệnh xác minh cho thiết bị IR AC bằng lệnh IR thô cụ thể.
+Hàm cho phép kiểm tra một lệnh IR đã học (`testRawInfo`) duy nhất trên một thiết bị AC thông qua hub đã chỉ định.
+Hàm này cũng lấy danh sách tất cả các lệnh IR đã học (`learnedRawCommands`) để kiểm tra chéo hoặc tham chiếu.
+Sử dụng phương pháp này trong quá trình học mã raw hoặc để xác thực tính chính xác và phản hồi của từng lệnh IR.
+
+```
+            RGCore.shared.device.sendVerifyIrRawRemoteCommand(hub: RGBDevice,
+                                                              testRawInfo: RGBIrRemoteRawInfo,
+                                                              learnedRawCommands: [RGBIrRemoteRawInfo],
+                                                              observer: AnyObject?,
+                                                              timeout: Int?,
+                                                              completion: (_ response: RGBIrRemoteRawInfo?, (any Error)?) -> Void)
+```
+Trong đó: 
+- hub: thiết bị hub IR chịu trách nhiệm truyền tín hiệu IR
+- testRawInfo: tệnh IR thô cần được xác minh
+- learnedRawCommands: anh sách tất cả các lệnh IR thô đã học trước đó cho thiết bị
+- observer: self
+- timeOut: set thời gian timeOut (có thể truyền nil)
+- completion: check lỗi, trả ra RGBIrRemoteRawInfo
+
 ### Add điều khiển vừa được học
 
 ```

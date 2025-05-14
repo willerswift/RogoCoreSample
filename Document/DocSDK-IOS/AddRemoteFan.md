@@ -52,15 +52,19 @@ sau đó append response đó vào list có type là remoteInfos: [RGBIrRemoteRa
 ### Add remote Fan
 
 ```
-RGCore.shared.device.addIrFanRemote(remoteInfos: [RGBIrRemoteRawInfo],
-                                    label: String,
-                                    group: RGBGroup?,
-                                    toHub: RGBDevice,
-                                    completion: RGBCompletionObject<RGBDevice?>?)
+RGCore.shared.device.addAcRemoteFromLearnedRaws(remoteInfos: [RGBIrRemoteRawInfo],
+                                               label: String,
+                                               group: RGBGroup?,
+                                               toHub: RGBDevice,
+                                               timeOut: Int?,
+                                               observer: AnyObject?,
+                                               completion: RGBCompletionObject<RGBDevice?>?)
 ```
 - remoteInfos: truyền vào list vừa được append ở bên trên
 - label: tên điều khiển
 - group: truyền vào group để add điều khiển vào nó
-- toHub; truyền vào device IR được chọn làm hub
+- toHub: truyền vào device IR được chọn làm hub
+- timeOut: set thời gian timeOut (có thể truyền nil)
+- observer: self
 - completion: check lỗi
 
