@@ -126,10 +126,11 @@ Tiếp theo lấy ra các lệnh điều khiển:
 ```
         if let cmd = device.getLearnedAcRemoteRawCmds()?.first(where: {$0.irCmdKey != 0}) {
         // irCmdKey == 0 (Nút tắt nguồn)
-            self.currentTemperature = minTemp
-            self.fanSpeed = cmd.irCmdValues?.fanSpeed ?? .FAN_SPEED_AUTO
-            self.mode = cmd.irCmdValues?.mode ?? .AC_MODE_AUTO
+            self.currentTemperature = cmd.irCmdValues?.temperature
+            self.fanSpeed = cmd.irCmdValues?.fanSpeed
+            self.mode = cmd.irCmdValues?.mode
         }
 
 ```
 Bằng cách sử dụng getLearnedAcRemoteRawCmds ta lấy được thông tin về nhiệt độ, mode điều hoà và mode quạt 
+
