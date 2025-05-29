@@ -6,7 +6,7 @@
 
 ### B1: Scan device BLE cần OTA
 ```
-            RGCore.shared.device.scanBleMeshProxyDevice(deviceUUID: String,
+            RGCore.shared.device.scanBleMeshProxyDeviceWith(deviceId: String,
                                                         excludeUUIDs: [UUID]?,
                                                         timeout: Int?,
                                                         didUpdateProgessing: (_ completedPercent: Int) -> (),
@@ -16,7 +16,7 @@
 - Scan các thiết bị BLE khả dụng
 
 Trong đó:
-- deviceUUID: truyền vào UUID của thiết bị đang được chọn (từ UUID trong core sẽ suy ra ProductID chỉ để quét đúng những loại thiết bị đó)
+- deviceId: truyền vào UUID của thiết bị đang được chọn (từ UUID trong core sẽ suy ra ProductID chỉ để quét đúng những loại thiết bị đó)
 - excludeUUIDs: có thể truyền nil và không nhất thiết phải truyền vào (phần này được sử dụng trong trường hợp khi completion response trả ra CBPeripheral không đúng con thiết bị mà bạn cần OTA thì có thể ném phần res đó vào excludeUUIDs này thì lần sau scan hàm này sẽ bỏ qua thiết bị đó)
 - timeout: Set thời gian timeOut (có thể truyền nil)
 - didUpdateProgessing: đây là 1 closure mục đích dùng để cập nhật trạng thái tiến trình VD:
